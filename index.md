@@ -1,5 +1,16 @@
 ## Welcome to GitHub Pages
 
+## [IE 550 Dynamics of Socio Economic Systems](IE_550_Syllabus.pdf) 
+_Instructor: Prof. Yaman Barlas_
+
+**Project Description:** Dynamic Modelling of Harmful Algal Blooms and an Analysis on Potential Mitigation Strategies
+
+**Softwares Used:** Stella Student Version (Simulation)
+### Links
+[Project report](IE_550_Report.pdf)
+
+[Stella Model](IE_550_Model.stmx)
+
 ## [IE 588 Agent-based Modeling and Simulation](IE_588_Syllabus.PDF) 
 _Instructor: Assoc. Prof. Gönenç Yücel_
 
@@ -12,7 +23,7 @@ _Instructor: Assoc. Prof. Gönenç Yücel_
 [NetLogo Code](IE_588_Project_code.nlogo)
 
 
-## [ESC 578 Systems and Sustainability](https://esc.boun.edu.tr/tr/graduate-courses) 
+## [ESC 578 Systems and Sustainability](http://web.boun.edu.tr/ali.saysel/ESc578.html) 
 _Instructor: Prof. Ali Kerem Saysel_
 
 **Project Description:** Evaluating effectiveness of land-based carbon mitigation strategies for Turkey using Nexus approach
