@@ -1,0 +1,1184 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xmile version="1.0" level="3" xmlns="http://www.systemdynamics.org/XMILE" xmlns:isee="http://iseesystems.com/XMILE">
+    <header>
+        <smile version="1.0" namespace="std, isee" />
+        <name>Final1623</name>
+        <uuid>6e793712-f1b6-48a4-ad94-a47f73a81c32</uuid>
+        <vendor>isee systems, inc.</vendor>
+        <product version="10.0.6" lang="en">STELLA</product>
+    </header>
+    <style>
+        <model font-family="Arial" font-size="9" />
+        <interface font-family="Arial" font-size="9" />
+    </style>
+    <sim_specs method="Euler" time_units="Days">
+        <start>0</start>
+        <stop>1500</stop>
+        <dt reciprocal="true">0.0625</dt>
+    </sim_specs>
+    <model_units />
+    <isee:prefs layer="model" grid_width="20" grid_height="50" divide_by_zero_alert="true" hide_taskbar="true" show_module_prefix="true">
+        <isee:window width="1902" height="955" />
+        <isee:security />
+        <isee:print_setup width="814" height="567" />
+    </isee:prefs>
+    <isee:equation_prefs order_by="module" />
+    <model>
+        <stock name="Cyanobacterias">
+            <eqn>10000</eqn>
+            <inflow>Cyano__Regen</inflow>
+            <outflow>Cyano_Death</outflow>
+            <outflow>ZooConsum</outflow>
+            <outflow>Clean</outflow>
+            <non_negative />
+            <display x="339" y="201" color="blue" label_side="center" />
+        </stock>
+        <stock name="Oxygen_Level">
+            <eqn>2500</eqn>
+            <inflow>Oxygen__Intake</inflow>
+            <outflow>Oxygen_Consumption</outflow>
+            <non_negative />
+            <display x="560" y="245" color="blue" label_side="center" />
+        </stock>
+        <stock name="Zooplanktons">
+            <eqn>10000</eqn>
+            <inflow>Zoo__Regen</inflow>
+            <outflow>Zoo__Death</outflow>
+            <outflow>ZooConsump</outflow>
+            <non_negative />
+            <display x="364" y="430" color="blue" label_side="center" />
+        </stock>
+        <stock name="Fish">
+            <eqn>100</eqn>
+            <inflow>Fish__Regen</inflow>
+            <outflow>Fish__Death</outflow>
+            <non_negative />
+            <display x="479" y="669" color="blue" label_side="center" />
+        </stock>
+        <stock name="Decomposing\n_Biomass">
+            <eqn>8700*4</eqn>
+            <inflow>DeathOf_Organisms</inflow>
+            <outflow>Nutrition_Production</outflow>
+            <non_negative />
+            <display x="805" y="358" color="blue" label_side="center" />
+        </stock>
+        <stock name="Toxin_Concenration">
+            <eqn>20000</eqn>
+            <inflow>Toxin__Production</inflow>
+            <outflow>Toxin__Elimination</outflow>
+            <non_negative />
+            <display x="575" y="782" color="blue" />
+        </stock>
+        <stock name="Nutrition_Level">
+            <eqn>25000</eqn>
+            <inflow>Chemical_Runoff</inflow>
+            <inflow>Nutrition_Production</inflow>
+            <outflow>Nutrition_Decay</outflow>
+            <outflow>Nutrition_Consumption</outflow>
+            <outflow>CleanN</outflow>
+            <non_negative />
+            <display x="804" y="235" color="blue" label_side="center" />
+        </stock>
+        <flow name="Cyano_\nRegen">
+            <eqn>Cyanobacterias*NormalCyano_RegenCoef*EffectOfNutrition_ConsumptionOnCyanoRegen</eqn>
+            <non_negative />
+            <display x="285" y="200" color="blue">
+                <pts>
+                    <pt x="253" y="200" />
+                    <pt x="317" y="200" />
+                </pts>
+            </display>
+        </flow>
+        <flow name="Cyano\nDeath">
+            <eqn>Cyanobacterias*NormalCyano_DeathCoef*EffectOfOxygenLevel_OnBiomassDeath*EffectofChemicalsonCyanoDeath*EffectofBAonCyanoDeath</eqn>
+            <non_negative />
+            <display x="392" y="200" color="blue" label="Cyano_Death">
+                <pts>
+                    <pt x="361" y="200" />
+                    <pt x="424" y="200" />
+                </pts>
+            </display>
+        </flow>
+        <flow name="Oxygen_\nIntake">
+            <eqn>220+(ReferenceLevelOf_Oxygen-Oxygen_Level)/OxygenAdjTime</eqn>
+            <display x="512" y="243" color="blue" label="Oxygen__Intake">
+                <scale min="50" max="120" />
+                <pts>
+                    <pt x="486" y="243" />
+                    <pt x="538" y="243" />
+                </pts>
+            </display>
+        </flow>
+        <flow name="Oxygen\nConsumption">
+            <eqn>0.01*Cyanobacterias+Zooplanktons*0.002+Fish</eqn>
+            <non_negative />
+            <display x="617" y="243" color="blue" label_angle="259" label="Oxygen_Consumption">
+                <scale min="100" max="120" />
+                <pts>
+                    <pt x="582" y="243" />
+                    <pt x="652" y="243" />
+                </pts>
+            </display>
+        </flow>
+        <flow name="Zoo_\nRegen">
+            <eqn>Zooplanktons*NormalZoo_RegenCoef*EffectOfCyano__OnZooRegen</eqn>
+            <non_negative />
+            <display x="317" y="431" color="blue">
+                <pts>
+                    <pt x="293" y="431" />
+                    <pt x="342" y="431" />
+                </pts>
+            </display>
+        </flow>
+        <flow name="Zoo\n_Death">
+            <eqn>Zooplanktons*NormalZoo_DeathCoef*EffectOf_ToxinConcentration_OnBiomassDeath*EffectOfOxygenLevel_OnBiomassDeath*EffectofChemicalsonOtherBiomass</eqn>
+            <non_negative />
+            <display x="426" y="434" color="blue">
+                <pts>
+                    <pt x="386" y="434" />
+                    <pt x="467" y="434" />
+                </pts>
+            </display>
+        </flow>
+        <flow name="Fish_\nRegen">
+            <eqn>Fish*NormalFishRegenCoef*EffectOfZooOn_FishRegen</eqn>
+            <non_negative />
+            <display x="430" y="667" color="blue">
+                <pts>
+                    <pt x="404" y="667" />
+                    <pt x="457" y="667" />
+                </pts>
+            </display>
+        </flow>
+        <flow name="Fish_\nDeath">
+            <eqn>Fish*NormalFishDeathCoef*EffectOf_ToxinConcentration_OnBiomassDeath*EffectOfOxygenLevel_OnBiomassDeath*EffectofChemicalsonOtherBiomass</eqn>
+            <non_negative />
+            <display x="533" y="667" color="blue">
+                <pts>
+                    <pt x="501" y="667" />
+                    <pt x="565" y="667" />
+                </pts>
+            </display>
+        </flow>
+        <flow name="Toxin\n_Production">
+            <eqn>Cyanobacterias*AvgToxin_Production_perCyanobacteria</eqn>
+            <non_negative />
+            <display x="530" y="784" color="blue">
+                <pts>
+                    <pt x="507" y="784" />
+                    <pt x="553" y="784" />
+                </pts>
+            </display>
+        </flow>
+        <flow name="Toxin__Elimination">
+            <eqn>EffeOfConcentrationOnEliminaion*Toxin_Concenration/Toxin_Elimination_Delay</eqn>
+            <non_negative />
+            <display x="634" y="783" color="blue">
+                <pts>
+                    <pt x="597" y="783" />
+                    <pt x="671" y="783" />
+                </pts>
+            </display>
+        </flow>
+        <flow name="Nutrition\nDecay">
+            <eqn>Nutrition_Level/NutritionDecay_Delay</eqn>
+            <non_negative />
+            <display x="743" y="236" color="blue" label="Nutrition_Decay">
+                <pts>
+                    <pt x="782" y="236" />
+                    <pt x="705" y="236" />
+                </pts>
+            </display>
+        </flow>
+        <flow name="Chemical\nRunoff">
+            <eqn>FetilizerUse</eqn>
+            <non_negative />
+            <display x="858" y="237" color="blue" label="Chemical_Runoff">
+                <pts>
+                    <pt x="891" y="237" />
+                    <pt x="826" y="237" />
+                </pts>
+            </display>
+        </flow>
+        <flow name="Nutrition\nConsumption">
+            <eqn>Cyanobacterias*AvgNutritionConsumption_PerCyano*1.98/1.5</eqn>
+            <non_negative />
+            <display x="820" y="158" color="blue" label_side="right" label="Nutrition_Consumption">
+                <pts>
+                    <pt x="820" y="218" />
+                    <pt x="820" y="99" />
+                </pts>
+            </display>
+        </flow>
+        <flow name="Nutrition\nProduction">
+            <eqn>Decomposing__Biomass/Average_DecompositionDelay</eqn>
+            <non_negative />
+            <display x="804" y="296" color="blue" label_side="left" label="Nutrition_Production">
+                <pts>
+                    <pt x="804" y="341" />
+                    <pt x="804" y="252" />
+                </pts>
+            </display>
+        </flow>
+        <flow name="DeathOf\nOrganisms">
+            <eqn>0.05*Cyano_Death/4.5+Zoo__Death*6.4/9+Fish__Death*500 </eqn>
+            <non_negative />
+            <display x="805" y="420" color="blue" label_side="right" label="DeathOf_Organisms">
+                <pts>
+                    <pt x="805" y="466" />
+                    <pt x="805" y="375" />
+                </pts>
+            </display>
+        </flow>
+        <aux name="Toxin_Elimination_Delay">
+            <eqn>40</eqn>
+            <display x="647" y="854" color="blue" />
+        </aux>
+        <aux name="AvgToxin_Production_perCyanobacteria">
+            <eqn>0.05</eqn>
+            <display x="459" y="836" color="blue" />
+        </aux>
+        <aux name="Water_Quality">
+            <eqn>Toxin_Concenration/Normal_Toxin_Concentration</eqn>
+            <display x="722" y="735" color="blue" />
+        </aux>
+        <aux name="Normal_Toxin\nConcentration">
+            <eqn>20000</eqn>
+            <display x="781" y="787" color="blue" label_angle="257" />
+        </aux>
+        <aux name="EffectOf_ToxinConcentration_OnBiomassDeath">
+            <eqn>SMTH1(Water_Quality,010)</eqn>
+            <gf>
+                <xscale min="0.5" max="8" />
+                <yscale min="0.75" max="2" />
+                <ypts>0.25,0.83360128617363305,1,1.09967845659164,1.1881028938906799,1.2604501607717,1.3327974276527299,1.38504823151125,1.42926045016077,1.4774919614147899,1.52572347266881,1.5819935691318301,1.6262057877813501,1.67041800643087,1.69453376205788,1.7266881028938901,1.7588424437299,1.7829581993569099,1.8110932475884201,1.8311897106109301,1.85530546623794,1.8713826366559501,1.8914790996784601,1.9115755627009601,1.9316720257234701,1.9517684887459801,1.9678456591639899,1.98392282958199,1.9959807073955,1.9959807073955,4</ypts>
+            </gf>
+            <display x="666" y="666" color="blue" />
+        </aux>
+        <aux name="NormalFishDeathCoef">
+            <eqn>0.01</eqn>
+            <display x="500" y="715" color="blue" />
+        </aux>
+        <aux name="NormalFishRegenCoef">
+            <eqn>0.01</eqn>
+            <display x="382" y="716" color="blue" label_angle="279" />
+        </aux>
+        <aux name="NormalZoo\nDeathCoef">
+            <eqn>0.045</eqn>
+            <display x="451" y="467" color="blue" />
+        </aux>
+        <aux name="Reference\nLevelOfFish">
+            <eqn>100</eqn>
+            <display x="324" y="631" color="blue" />
+        </aux>
+        <aux name="NormalZoo\nRegenCoef">
+            <eqn>0.075</eqn>
+            <display x="273" y="457" color="blue" />
+        </aux>
+        <aux name="EffectOfZooOn_FishRegen">
+            <eqn>ZooPerFish/ReferenceZoo_PerFish</eqn>
+            <gf>
+                <xscale min="0" max="4" />
+                <yscale min="0" max="2" />
+                <ypts>0,0.24503311258278099,0.556291390728477,1,1.4900662251655601,1.7483443708609301,1.86754966887417,1.95364238410596,1.98675496688742,2,2,2,2</ypts>
+            </gf>
+            <display x="286" y="562" color="blue" />
+        </aux>
+        <aux name="ReferenceLevelOf\nCyanobacterias">
+            <eqn>10000</eqn>
+            <display x="245" y="269" color="blue" />
+        </aux>
+        <aux name="EffectOfCyano\n_OnZooRegen">
+            <eqn>CyanoPerZoo/ReferenceCyano_PerZoo</eqn>
+            <gf>
+                <xscale min="0" max="4" />
+                <yscale min="0" max="2" />
+                <ypts>0,0.13880126182965299,0.39116719242902198,1,1.4447949526813899,1.6971608832807601,1.8013245033112599,1.8940397350993401,1.9602649006622499,2,2,2,2</ypts>
+            </gf>
+            <display x="243" y="322" color="blue" label="EffectOfCyano__OnZooRegen" />
+        </aux>
+        <aux name="ReferenceLevel\nOfZoo">
+            <eqn>10000</eqn>
+            <display x="261" y="377" color="blue" />
+        </aux>
+        <aux name="EffectOfOxygenLevel_OnBiomassDeath">
+            <eqn>(Oxygen_Level/ReferenceLevelOf_Oxygen)</eqn>
+            <gf>
+                <xscale min="0" max="2" />
+                <yscale min="0.75" max="100" />
+                <ypts>99.372239747634097,51.689710610932501,37.932475884244397,30.893890675241199,24.4951768488746,19.056270096462999,15.2170418006431,12.3376205787781,9.4581993569131804,7.2186495176848897,5.29903536977492,4.3392282958199404,3.3794212218649502,2.09967845659164,1.13987138263666,1,0.92000000000000004,0.85999999999999999,0.81499999999999995,0.77500000000000002,0.73999999999999999,0.70999999999999996,0.68500000000000005,0.66000000000000003,0.64000000000000001,0.625,0.60999999999999999,0.59999999999999998,0.5,0.5,0.5</ypts>
+            </gf>
+            <display x="610" y="362" color="blue" />
+        </aux>
+        <aux name="NormalCyano\nDeathCoef">
+            <eqn>0.45</eqn>
+            <display x="370" y="237" color="blue" />
+        </aux>
+        <aux name="NormalCyano\nRegenCoef">
+            <eqn>0.75</eqn>
+            <display x="230" y="147" color="blue" />
+        </aux>
+        <aux name="NutritionPerCyano">
+            <eqn>If(Cyanobacterias=0)Then(5)Else(Nutrition_Level/Cyanobacterias)</eqn>
+            <display x="460" y="146" color="blue">
+                <scale min="0.052999999999999999" max="2.5249999999999999" />
+            </display>
+        </aux>
+        <aux name="ReferenceLevelOf\nOxygen">
+            <eqn>2500</eqn>
+            <display x="533" y="336" color="blue" label_side="left" label_angle="265" />
+        </aux>
+        <aux name="NutritionDecay\nDelay">
+            <eqn>1250</eqn>
+            <display x="688" y="292" color="blue" />
+        </aux>
+        <aux name="FetilizerUse">
+            <eqn>STEP(0,48)-STEP(00,200)+1130</eqn>
+            <display x="939" y="258" color="blue" />
+        </aux>
+        <aux name="Average\nDecompositionDelay">
+            <eqn>40</eqn>
+            <display x="856" y="292" color="blue" />
+        </aux>
+        <aux name="AvgNutritionConsumption_PerCyano">
+            <eqn>NutritionPerCyano/ReferenceNutrition_PerCyano</eqn>
+            <gf>
+                <xscale min="0" max="2" />
+                <yscale min="0" max="0.25" />
+                <ypts>0,0.00993377483443709,0.0240066225165563,0.057119205298013197,0.14999999999999999,0.19558359621451099,0.22712933753943201,0.24132492113564699,0.24842271293375401</ypts>
+            </gf>
+            <display x="622" y="132" color="blue">
+                <scale min="0.052999999999999999" max="2.5249999999999999" />
+            </display>
+        </aux>
+        <aux name="EffectOfNutrition_ConsumptionOnCyanoRegen">
+            <eqn>NutritionPerCyano/ReferenceNutrition_PerCyano</eqn>
+            <gf type="extrapolate">
+                <xscale min="0" max="4" />
+                <yscale min="0" max="3" />
+                <ypts>0,0.47318611987381698,1,1.3564668769716099,1.63406940063091,1.8927444794952699,2.15772870662461,2.3564668769716102,2.5930599369085199</ypts>
+            </gf>
+            <display x="398" y="94" color="blue" />
+        </aux>
+        <aux name="ReferenceNutritionLevel">
+            <eqn>25000</eqn>
+            <display x="751" y="184" color="blue" />
+        </aux>
+        <aux name="OxygenAdjTime">
+            <eqn>10</eqn>
+            <display x="609" y="196" color="blue" />
+        </aux>
+        <aux name="CyanoPerZoo">
+            <eqn>If (Zooplanktons&lt;1 )Then( 0) Else (Cyanobacterias/Zooplanktons)</eqn>
+            <display x="328" y="361" color="blue" />
+        </aux>
+        <aux name="ReferenceCyano\nPerZoo">
+            <eqn>ReferenceLevelOf_Cyanobacterias/ReferenceLevel_OfZoo</eqn>
+            <display x="294" y="291" color="blue" />
+        </aux>
+        <aux name="ReferenceZoo\nPerFish">
+            <eqn>ReferenceLevel_OfZoo/Reference_LevelOfFish</eqn>
+            <display x="341" y="530" color="blue" />
+        </aux>
+        <aux name="ZooPerFish">
+            <eqn>If(Fish&lt;10)Then(0)Else(Zooplanktons/Fish)</eqn>
+            <display x="374" y="597" color="blue" />
+        </aux>
+        <aux name="ReferenceNutrition\nPerCyano">
+            <eqn>ReferenceNutritionLevel/ReferenceLevelOf_Cyanobacterias</eqn>
+            <display x="544" y="130" color="blue" />
+        </aux>
+        <aux name="EffeOfConcentrationOnEliminaion">
+            <eqn>Toxin_Concenration/NormConcentration</eqn>
+            <gf>
+                <xscale min="0" max="2" />
+                <yscale min="0" max="2" />
+                <ypts>1.70977917981073,1.70977917981073,1.6466876971608799,1.5646687697160899,1.3249211356466899,1,0.63091482649842301,0.45425867507886403,0.35331230283911702,0.296529968454259,0.29022082018927398</ypts>
+            </gf>
+            <display x="556" y="862" color="blue" />
+        </aux>
+        <aux name="NormConcentration">
+            <eqn>20000</eqn>
+            <display x="567" y="918" color="blue" />
+        </aux>
+        <aux name="Consumptionperzoo">
+            <eqn>CyanoPerZoo/ReferenceCyano_PerZoo</eqn>
+            <gf>
+                <xscale min="0" max="2" />
+                <yscale min="0" max="1.5" />
+                <ypts>0,0.018927444794952699,0.050473186119873802,0.157728706624606,0.43533123028391202,1,1.26813880126183,1.38801261829653,1.43217665615142,1.47003154574132,1.5</ypts>
+            </gf>
+            <display x="404" y="329" color="blue" />
+        </aux>
+        <flow name="ZooConsum">
+            <eqn>normalconscoef*Zooplanktons*Consumptionperzoo</eqn>
+            <non_negative />
+            <display x="334" y="243" color="blue" label_angle="277">
+                <pts>
+                    <pt x="334" y="218" />
+                    <pt x="334" y="269" />
+                </pts>
+            </display>
+        </flow>
+        <aux name="normalconscoef">
+            <eqn>0.3</eqn>
+            <display x="288" y="262" color="blue" />
+        </aux>
+        <aux name="EffOnConperfish">
+            <eqn>ZooPerFish/ReferenceZoo_PerFish</eqn>
+            <gf>
+                <xscale min="0" max="2" />
+                <yscale min="0" max="1.4" />
+                <ypts>0,0.050473186119873802,0.154340836012862,0.32797427652733102,0.72668810289389096,1,1.2218649517684901,1.31230283911672,1.3564668769716099,1.38170347003155,1.3999999999999999</ypts>
+            </gf>
+            <display x="457" y="572" color="blue" />
+        </aux>
+        <flow name="ZooConsump">
+            <eqn>NormalConsperfish*Fish*EffOnConperfish</eqn>
+            <non_negative />
+            <display x="357" y="481" color="blue" label_angle="277">
+                <pts>
+                    <pt x="357" y="447" />
+                    <pt x="357" y="516" />
+                </pts>
+            </display>
+        </flow>
+        <aux name="NormalConsperfish">
+            <eqn>3</eqn>
+            <display x="444" y="524" color="blue" />
+        </aux>
+        <stock name="ChemicalAgents">
+            <eqn>0</eqn>
+            <inflow>Appliance</inflow>
+            <outflow>Elimination</outflow>
+            <non_negative />
+            <display x="808" y="595" color="#F432FF" label_angle="82" />
+        </stock>
+        <flow name="Appliance">
+            <eqn>PULSE(0,100,1000)</eqn>
+            <non_negative />
+            <display x="813" y="645" color="#F432FF" label_angle="277">
+                <pts>
+                    <pt x="813" y="679" />
+                    <pt x="813" y="612" />
+                </pts>
+            </display>
+        </flow>
+        <flow name="Elimination">
+            <eqn>ChemicalAgents/ChemicalELiminationDelay</eqn>
+            <non_negative />
+            <display x="867" y="592" color="#F432FF">
+                <pts>
+                    <pt x="830" y="592" />
+                    <pt x="904" y="592" />
+                </pts>
+            </display>
+        </flow>
+        <aux name="ChemicalEliminationDelay">
+            <eqn>30</eqn>
+            <display x="892" y="630" color="#F432FF" />
+        </aux>
+        <aux name="EffectofChemicalsonCyanoDeath">
+            <eqn>ChemicalRatio</eqn>
+            <gf>
+                <xscale min="0" max="1" />
+                <yscale min="1" max="5" />
+                <ypts>1,1.96463022508039,2.71061093247588,3.3279742765273301,3.8038585209003202,4.1639871382636704,4.4855305466237896,4.6398713826366604,4.7942122186495197,4.8585209003215404,4.9035369774919602</ypts>
+            </gf>
+            <display x="713" y="479" color="#F432FF" />
+        </aux>
+        <aux name="EffectofChemicalsonOtherBiomass">
+            <eqn>ChemicalRatio</eqn>
+            <gf>
+                <xscale min="0" max="1" />
+                <yscale min="1" max="1.25" />
+                <ypts>1,1.0522508038585201,1.09485530546624,1.1237942122186499,1.1511254019292601,1.16961414790997,1.1864951768488701,1.2073954983922801,1.22508038585209,1.2363344051446901,1.2427652733118999</ypts>
+            </gf>
+            <display x="652" y="546" color="#F432FF" />
+        </aux>
+        <aux name="ChemicalSaturation">
+            <eqn>100</eqn>
+            <display x="740" y="591" color="#F432FF" />
+        </aux>
+        <aux name="ChemicalRatio">
+            <eqn>ChemicalAgents/ChemicalSaturation</eqn>
+            <display x="764" y="532" color="#F432FF" label_side="right" label_angle="4" />
+        </aux>
+        <stock name="BioAgent">
+            <eqn>0</eqn>
+            <inflow>Introduction</inflow>
+            <inflow>BARegen</inflow>
+            <outflow>BADeath</outflow>
+            <non_negative />
+            <display x="126" y="438" color="#009802" label_side="center" />
+        </stock>
+        <flow name="Introduction">
+            <eqn>PULSE(IntroLevel,100,100)-PULSE(IntroLevel,300,100)</eqn>
+            <non_negative />
+            <display x="63" y="360" color="#009802" label_angle="253">
+                <pts>
+                    <pt x="18" y="360" />
+                    <pt x="109" y="360" />
+                    <pt x="109" y="421" />
+                </pts>
+            </display>
+        </flow>
+        <flow name="BARegen">
+            <eqn>BioAgent*NormalBA_RegenCOef*EffectofCyanoonBARegen</eqn>
+            <non_negative />
+            <display x="127" y="378" color="#009802" label_angle="277">
+                <pts>
+                    <pt x="127" y="335" />
+                    <pt x="127" y="421" />
+                </pts>
+            </display>
+        </flow>
+        <flow name="BADeath">
+            <eqn>BioAgent*NormalBADeath*EffectOfOxygenLevel_OnBiomassDeath</eqn>
+            <non_negative />
+            <display x="121" y="519" color="#009802" label_angle="277">
+                <pts>
+                    <pt x="121" y="455" />
+                    <pt x="121" y="583" />
+                </pts>
+            </display>
+        </flow>
+        <aux name="NormalBA\nRegenCOef">
+            <eqn>0.01</eqn>
+            <display x="81" y="340" color="#009802" />
+        </aux>
+        <aux name="NormalBADeath">
+            <eqn>0.01</eqn>
+            <display x="41" y="531" color="#009802" label_side="top" label_angle="94" />
+        </aux>
+        <aux name="SaturationBA">
+            <eqn>100</eqn>
+            <display x="44" y="309" color="blue" />
+        </aux>
+        <aux name="EffectofBAonCyanoDeath">
+            <eqn>BAlevel</eqn>
+            <gf>
+                <xscale min="0" max="2" />
+                <yscale min="1" max="3" />
+                <ypts>1,1.4951768488746,1.8167202572347301,2.0546623794212202,2.2926045016077201,2.48553054662379,2.63987138263666,2.7877813504823199,2.88424437299035,2.9614147909967801,3</ypts>
+            </gf>
+            <display x="115" y="253" color="blue" />
+        </aux>
+        <aux name="BAlevel">
+            <eqn>BioAgent/(SaturationBA+1)</eqn>
+            <display x="148" y="295" color="blue" />
+        </aux>
+        <aux name="CyanoLevel">
+            <eqn>Cyanobacterias/ReferenceLevelOf_Cyanobacterias</eqn>
+            <display x="205" y="227" color="blue" />
+        </aux>
+        <aux name="EffectofCyanoonBARegen">
+            <eqn>CyanoLevel</eqn>
+            <gf>
+                <xscale min="0" max="3" />
+                <yscale min="0" max="3" />
+                <ypts>0,0.067524115755627001,0.173633440514469,0.35691318327974297,0.56913183279742796,1,1.6688102893890699,2.07395498392283,2.32475884244373,2.5273311897106101,2.6913183279742801,2.8263665594855301,2.9035369774919602,2.9614147909967801,3,3</ypts>
+            </gf>
+            <display x="186" y="299" color="blue" />
+        </aux>
+        <aux name="IntroLevel">
+            <eqn>0</eqn>
+            <display x="45" y="380" color="blue" />
+        </aux>
+        <flow name="Clean">
+            <eqn>PULSE(Cyanobacterias*0.8,80,1000)*0</eqn>
+            <non_negative />
+            <display x="331" y="111" color="blue" label_side="left">
+                <pts>
+                    <pt x="331" y="184" />
+                    <pt x="331" y="39" />
+                </pts>
+            </display>
+        </flow>
+        <flow name="CleanN">
+            <eqn>PULSE(Nutrition_Level*0.8,80,1000)*0</eqn>
+            <non_negative />
+            <display x="745" y="56" color="blue">
+                <pts>
+                    <pt x="796" y="218" />
+                    <pt x="796" y="56" />
+                    <pt x="695" y="56" />
+                </pts>
+            </display>
+        </flow>
+        <display page_width="814" page_height="567" page_cols="3" page_rows="2" isee:converter_size="small" isee:animate_flows="true" isee:animate_stocks="true" isee:animate_converters="true" interval="DT" scroll_x="32">
+            <connector x="501" y="685" uid="0" color="#FF007F">
+                <from>Fish</from>
+                <to>Fish__Death</to>
+            </connector>
+            <connector x="563" y="262" uid="1" color="#FF007F">
+                <from>Oxygen_Level</from>
+                <to>EffectOfOxygenLevel_OnBiomassDeath</to>
+            </connector>
+            <connector x="266" y="376" uid="2" color="#FF007F">
+                <from>ReferenceLevel_OfZoo</from>
+                <to>ReferenceCyano_PerZoo</to>
+            </connector>
+            <connector x="235" y="147" uid="3" color="#FF007F">
+                <from>NormalCyano_RegenCoef</from>
+                <to>Cyano__Regen</to>
+            </connector>
+            <connector x="299" y="291" uid="4" color="#FF007F">
+                <from>ReferenceCyano_PerZoo</from>
+                <to>Consumptionperzoo</to>
+            </connector>
+            <connector x="662" y="662" uid="5" color="#FF007F">
+                <from>EffectOf_ToxinConcentration_OnBiomassDeath</from>
+                <to>Fish__Death</to>
+            </connector>
+            <connector x="363" y="192" uid="6" color="#FF007F">
+                <from>Cyanobacterias</from>
+                <to>Oxygen_Consumption</to>
+            </connector>
+            <connector x="481" y="652" uid="7" color="#FF007F">
+                <from>Fish</from>
+                <to>Oxygen_Consumption</to>
+            </connector>
+            <connector x="505" y="713" uid="8" color="#FF007F">
+                <from>NormalFishDeathCoef</from>
+                <to>Fish__Death</to>
+            </connector>
+            <connector x="401" y="325" uid="9" color="#FF007F">
+                <from>Consumptionperzoo</from>
+                <to>ZooConsum</to>
+            </connector>
+            <connector x="185" y="304" uid="10" color="#FF007F">
+                <from>EffectofCyanoonBARegen</from>
+                <to>BARegen</to>
+            </connector>
+            <connector x="392" y="97" uid="11" color="#FF007F">
+                <from>EffectOfNutrition_ConsumptionOnCyanoRegen</from>
+                <to>Cyano__Regen</to>
+            </connector>
+            <connector x="43" y="384" uid="12" color="#FF007F">
+                <from>IntroLevel</from>
+                <to>Introduction</to>
+            </connector>
+            <connector x="324" y="358" uid="13" color="#FF007F">
+                <from>CyanoPerZoo</from>
+                <to>EffectOfCyano__OnZooRegen</to>
+            </connector>
+            <connector x="738" y="586" uid="14" color="#FF007F">
+                <from>ChemicalSaturation</from>
+                <to>ChemicalRatio</to>
+            </connector>
+            <connector x="567" y="913" uid="15" color="#FF007F">
+                <from>NormConcentration</from>
+                <to>EffeOfConcentrationOnEliminaion</to>
+            </connector>
+            <connector x="104" y="427" uid="16" color="#FF007F">
+                <from>BioAgent</from>
+                <to>BARegen</to>
+            </connector>
+            <connector x="317" y="217" uid="17" color="#FF007F">
+                <from>Cyanobacterias</from>
+                <to>Toxin__Production</to>
+            </connector>
+            <connector x="112" y="455" uid="18" color="#FF007F">
+                <from>BioAgent</from>
+                <to>BADeath</to>
+            </connector>
+            <connector x="322" y="184" uid="19" color="#FF007F">
+                <from>Cyanobacterias</from>
+                <to>Clean</to>
+            </connector>
+            <connector x="540" y="128" uid="20" color="#FF007F">
+                <from>ReferenceNutrition_PerCyano</from>
+                <to>EffectOfNutrition_ConsumptionOnCyanoRegen</to>
+            </connector>
+            <connector x="538" y="335" uid="21" color="#FF007F">
+                <from>ReferenceLevelOf_Oxygen</from>
+                <to>EffectOfOxygenLevel_OnBiomassDeath</to>
+            </connector>
+            <connector x="151" y="291" uid="22" color="#FF007F">
+                <from>BAlevel</from>
+                <to>EffectofBAonCyanoDeath</to>
+            </connector>
+            <connector x="386" y="413" uid="23" color="#FF007F">
+                <from>Zooplanktons</from>
+                <to>Oxygen_Consumption</to>
+            </connector>
+            <connector x="528" y="336" uid="24" color="#FF007F">
+                <from>ReferenceLevelOf_Oxygen</from>
+                <to>Oxygen__Intake</to>
+            </connector>
+            <connector x="375" y="447" uid="25" color="#FF007F">
+                <from>Zooplanktons</from>
+                <to>ZooPerFish</to>
+            </connector>
+            <connector x="804" y="579" uid="26" color="#FF007F">
+                <from>ChemicalAgents</from>
+                <to>ChemicalRatio</to>
+            </connector>
+            <connector x="49" y="308" uid="27" color="#FF007F">
+                <from>SaturationBA</from>
+                <to>BAlevel</to>
+            </connector>
+            <connector x="41" y="526" uid="28" color="#FF007F">
+                <from>NormalBADeath</from>
+                <to>BADeath</to>
+            </connector>
+            <connector x="86" y="340" uid="29" color="#FF007F">
+                <from>NormalBA_RegenCOef</from>
+                <to>BARegen</to>
+            </connector>
+            <connector x="453" y="569" uid="30" color="#FF007F">
+                <from>EffOnConperfish</from>
+                <to>ZooConsump</to>
+            </connector>
+            <connector x="375" y="237" uid="31" color="#FF007F">
+                <from>NormalCyano_DeathCoef</from>
+                <to>Cyano_Death</to>
+            </connector>
+            <connector x="604" y="196" uid="32" color="#FF007F">
+                <from>OxygenAdjTime</from>
+                <to>Oxygen__Intake</to>
+            </connector>
+            <connector x="242" y="327" uid="33" color="#FF007F">
+                <from>EffectOfCyano__OnZooRegen</from>
+                <to>Zoo__Regen</to>
+            </connector>
+            <connector x="290" y="565" uid="34" color="#FF007F">
+                <from>EffectOfZooOn_FishRegen</from>
+                <to>Fish__Regen</to>
+            </connector>
+            <connector x="762" y="527" uid="35" color="#FF007F">
+                <from>ChemicalRatio</from>
+                <to>EffectofChemicalsonCyanoDeath</to>
+            </connector>
+            <connector x="385" y="712" uid="36" color="#FF007F">
+                <from>NormalFishRegenCoef</from>
+                <to>Fish__Regen</to>
+            </connector>
+            <connector x="747" y="185" uid="37" color="#FF007F">
+                <from>ReferenceNutritionLevel</from>
+                <to>ReferenceNutrition_PerCyano</to>
+            </connector>
+            <connector x="396" y="207" uid="38" color="#FF007F">
+                <from>Cyano_Death</from>
+                <to>DeathOf_Organisms</to>
+            </connector>
+            <connector x="454" y="145" uid="39" color="#FF007F">
+                <from>NutritionPerCyano</from>
+                <to>EffectOfNutrition_ConsumptionOnCyanoRegen</to>
+            </connector>
+            <connector x="352" y="218" uid="40" color="#FF007F">
+                <from>Cyanobacterias</from>
+                <to>CyanoPerZoo</to>
+            </connector>
+            <connector x="605" y="364" uid="41" color="#FF007F">
+                <from>EffectOfOxygenLevel_OnBiomassDeath</from>
+                <to>Zoo__Death</to>
+            </connector>
+            <connector x="646" y="544" uid="42" color="#FF007F">
+                <from>EffectofChemicalsonOtherBiomass</from>
+                <to>Fish__Death</to>
+            </connector>
+            <connector x="345" y="534" uid="43" color="#FF007F">
+                <from>ReferenceZoo_PerFish</from>
+                <to>EffOnConperfish</to>
+            </connector>
+            <connector x="782" y="229" uid="44" color="#FF007F">
+                <from>Nutrition_Level</from>
+                <to>NutritionPerCyano</to>
+            </connector>
+            <connector x="597" y="770" uid="45" color="#FF007F">
+                <from>Toxin_Concenration</from>
+                <to>Toxin__Elimination</to>
+            </connector>
+            <connector x="372" y="412" uid="46" color="#FF007F">
+                <from>Zooplanktons</from>
+                <to>ZooConsum</to>
+            </connector>
+            <connector x="323" y="184" uid="47" color="#FF007F">
+                <from>Cyanobacterias</from>
+                <to>Cyano__Regen</to>
+            </connector>
+            <connector x="662" y="663" uid="48" color="#FF007F">
+                <from>EffectOf_ToxinConcentration_OnBiomassDeath</from>
+                <to>Zoo__Death</to>
+            </connector>
+            <connector x="596" y="766" uid="49" color="#FF007F">
+                <from>Toxin_Concenration</from>
+                <to>Water_Quality</to>
+            </connector>
+            <connector x="148" y="426" uid="50" color="#FF007F">
+                <from>BioAgent</from>
+                <to>BAlevel</to>
+            </connector>
+            <connector x="760" y="528" uid="51" color="#FF007F">
+                <from>ChemicalRatio</from>
+                <to>EffectofChemicalsonOtherBiomass</to>
+            </connector>
+            <connector x="783" y="352" uid="52" color="#FF007F">
+                <from>Decomposing__Biomass</from>
+                <to>Nutrition_Production</to>
+            </connector>
+            <connector x="470" y="652" uid="53" color="#FF007F">
+                <from>Fish</from>
+                <to>ZooConsump</to>
+            </connector>
+            <connector x="115" y="248" uid="54" color="#FF007F">
+                <from>EffectofBAonCyanoDeath</from>
+                <to>Cyano_Death</to>
+            </connector>
+            <connector x="548" y="126" uid="55" color="#FF007F">
+                <from>ReferenceNutrition_PerCyano</from>
+                <to>AvgNutritionConsumption_PerCyano</to>
+            </connector>
+            <connector x="244" y="264" uid="56" color="#FF007F">
+                <from>ReferenceLevelOf_Cyanobacterias</from>
+                <to>CyanoLevel</to>
+            </connector>
+            <connector x="607" y="360" uid="57" color="#FF007F">
+                <from>EffectOfOxygenLevel_OnBiomassDeath</from>
+                <to>BADeath</to>
+            </connector>
+            <connector x="369" y="598" uid="58" color="#FF007F">
+                <from>ZooPerFish</from>
+                <to>EffectOfZooOn_FishRegen</to>
+            </connector>
+            <connector x="361" y="184" uid="59" color="#FF007F">
+                <from>Cyanobacterias</from>
+                <to>Cyano_Death</to>
+            </connector>
+            <connector x="574" y="799" uid="60" color="#FF007F">
+                <from>Toxin_Concenration</from>
+                <to>EffeOfConcentrationOnEliminaion</to>
+            </connector>
+            <connector x="292" y="296" uid="61" color="#FF007F">
+                <from>ReferenceCyano_PerZoo</from>
+                <to>EffectOfCyano__OnZooRegen</to>
+            </connector>
+            <connector x="332" y="365" uid="62" color="#FF007F">
+                <from>CyanoPerZoo</from>
+                <to>Consumptionperzoo</to>
+            </connector>
+            <connector x="342" y="413" uid="63" color="#FF007F">
+                <from>Zooplanktons</from>
+                <to>Zoo__Regen</to>
+            </connector>
+            <connector x="249" y="271" uid="64" color="#FF007F">
+                <from>ReferenceLevelOf_Cyanobacterias</from>
+                <to>ReferenceCyano_PerZoo</to>
+            </connector>
+            <connector x="261" y="382" uid="65" color="#FF007F">
+                <from>ReferenceLevel_OfZoo</from>
+                <to>ReferenceZoo_PerFish</to>
+            </connector>
+            <connector x="538" y="228" uid="66" color="#FF007F">
+                <from>Oxygen_Level</from>
+                <to>Oxygen__Intake</to>
+            </connector>
+            <connector x="852" y="289" uid="67" color="#FF007F">
+                <from>Average_DecompositionDelay</from>
+                <to>Nutrition_Production</to>
+            </connector>
+            <connector x="277" y="454" uid="68" color="#FF007F">
+                <from>NormalZoo_RegenCoef</from>
+                <to>Zoo__Regen</to>
+            </connector>
+            <connector x="379" y="598" uid="69" color="#FF007F">
+                <from>ZooPerFish</from>
+                <to>EffOnConperfish</to>
+            </connector>
+            <connector x="830" y="580" uid="70" color="#FF007F">
+                <from>ChemicalAgents</from>
+                <to>Elimination</to>
+            </connector>
+            <connector x="692" y="288" uid="71" color="#FF007F">
+                <from>NutritionDecay_Delay</from>
+                <to>Nutrition_Decay</to>
+            </connector>
+            <connector x="457" y="686" uid="72" color="#FF007F">
+                <from>Fish</from>
+                <to>Fish__Regen</to>
+            </connector>
+            <connector x="893" y="625" uid="73" color="#FF007F">
+                <from>ChemicalEliminationDelay</from>
+                <to>Elimination</to>
+            </connector>
+            <connector x="540" y="661" uid="74" color="#FF007F">
+                <from>Fish__Death</from>
+                <to>DeathOf_Organisms</to>
+            </connector>
+            <connector x="787" y="218" uid="75" color="#FF007F">
+                <from>Nutrition_Level</from>
+                <to>CleanN</to>
+            </connector>
+            <connector x="934" y="260" uid="76" color="#FF007F">
+                <from>FetilizerUse</from>
+                <to>Chemical_Runoff</to>
+            </connector>
+            <connector x="457" y="653" uid="77" color="#FF007F">
+                <from>Fish</from>
+                <to>ZooPerFish</to>
+            </connector>
+            <connector x="720" y="731" uid="78" color="#FF007F">
+                <from>Water_Quality</from>
+                <to>EffectOf_ToxinConcentration_OnBiomassDeath</to>
+            </connector>
+            <connector x="202" y="231" uid="79" color="#FF007F">
+                <from>CyanoLevel</from>
+                <to>EffectofCyanoonBARegen</to>
+            </connector>
+            <connector x="245" y="264" uid="80" color="#FF007F">
+                <from>ReferenceLevelOf_Cyanobacterias</from>
+                <to>ReferenceNutrition_PerCyano</to>
+            </connector>
+            <connector x="465" y="146" uid="81" color="#FF007F">
+                <from>NutritionPerCyano</from>
+                <to>AvgNutritionConsumption_PerCyano</to>
+            </connector>
+            <connector x="777" y="784" uid="82" color="#FF007F">
+                <from>Normal_Toxin_Concentration</from>
+                <to>Water_Quality</to>
+            </connector>
+            <connector x="464" y="835" uid="83" color="#FF007F">
+                <from>AvgToxin_Production_perCyanobacteria</from>
+                <to>Toxin__Production</to>
+            </connector>
+            <connector x="708" y="479" uid="84" color="#FF007F">
+                <from>EffectofChemicalsonCyanoDeath</from>
+                <to>Cyano_Death</to>
+            </connector>
+            <connector x="606" y="359" uid="85" color="#FF007F">
+                <from>EffectOfOxygenLevel_OnBiomassDeath</from>
+                <to>Cyano_Death</to>
+            </connector>
+            <connector x="448" y="463" uid="86" color="#FF007F">
+                <from>NormalZoo_DeathCoef</from>
+                <to>Zoo__Death</to>
+            </connector>
+            <connector x="642" y="854" uid="87" color="#FF007F">
+                <from>Toxin_Elimination_Delay</from>
+                <to>Toxin__Elimination</to>
+            </connector>
+            <connector x="316" y="187" uid="88" color="#FF007F">
+                <from>Cyanobacterias</from>
+                <to>CyanoLevel</to>
+            </connector>
+            <connector x="561" y="862" uid="89" color="#FF007F">
+                <from>EffeOfConcentrationOnEliminaion</from>
+                <to>Toxin__Elimination</to>
+            </connector>
+            <connector x="337" y="533" uid="90" color="#FF007F">
+                <from>ReferenceZoo_PerFish</from>
+                <to>EffectOfZooOn_FishRegen</to>
+            </connector>
+            <connector x="293" y="260" uid="91" color="#FF007F">
+                <from>normalconscoef</from>
+                <to>ZooConsum</to>
+            </connector>
+            <connector x="359" y="187" uid="92" color="#FF007F">
+                <from>Cyanobacterias</from>
+                <to>Nutrition_Consumption</to>
+            </connector>
+            <connector x="435" y="434" uid="93" color="#FF007F">
+                <from>Zoo__Death</from>
+                <to>DeathOf_Organisms</to>
+            </connector>
+            <connector x="782" y="249" uid="94" color="#FF007F">
+                <from>Nutrition_Level</from>
+                <to>Nutrition_Decay</to>
+            </connector>
+            <connector x="608" y="367" uid="95" color="#FF007F">
+                <from>EffectOfOxygenLevel_OnBiomassDeath</from>
+                <to>Fish__Death</to>
+            </connector>
+            <connector x="326" y="626" uid="96" color="#FF007F">
+                <from>Reference_LevelOfFish</from>
+                <to>ReferenceZoo_PerFish</to>
+            </connector>
+            <connector x="625" y="130" uid="97" color="#FF007F">
+                <from>AvgNutritionConsumption_PerCyano</from>
+                <to>Nutrition_Consumption</to>
+            </connector>
+            <connector x="652" y="541" uid="98" color="#FF007F">
+                <from>EffectofChemicalsonOtherBiomass</from>
+                <to>Zoo__Death</to>
+            </connector>
+            <connector x="440" y="520" uid="99" color="#FF007F">
+                <from>NormalConsperfish</from>
+                <to>ZooConsump</to>
+            </connector>
+            <connector x="364" y="413" uid="100" color="#FF007F">
+                <from>Zooplanktons</from>
+                <to>CyanoPerZoo</to>
+            </connector>
+            <connector x="361" y="192" uid="101" color="#FF007F">
+                <from>Cyanobacterias</from>
+                <to>NutritionPerCyano</to>
+            </connector>
+            <connector x="386" y="445" uid="102" color="#FF007F">
+                <from>Zooplanktons</from>
+                <to>Zoo__Death</to>
+            </connector>
+            <stacked_container x="962" y="39" height="498" width="869" uid="103">
+                <graph type="time_series" background="white" show_grid="true" plot_numbers="true" isee:use_five_segments="false" date_time="2020-06-29T16:26:23Z" time_precision="2" from="0" to="1500">
+                    <title>Untitled</title>
+                    <plot index="0" pen_width="1" color="red" precision="1" show_y_axis="true">
+                        <entity name="Cyanobacterias" />
+                    </plot>
+                    <plot index="1" pen_width="1" color="#7F00FF" precision="1" show_y_axis="true">
+                        <entity name="Fish" />
+                    </plot>
+                    <plot index="2" pen_width="1" color="#FF7F00" precision="1" show_y_axis="true">
+                        <entity name="Zooplanktons" />
+                    </plot>
+                    <plot index="3" pen_width="1" color="#008F44" precision="1" show_y_axis="true">
+                        <entity name="Decomposing__Biomass" />
+                    </plot>
+                </graph>
+            </stacked_container>
+            <pad_icon x="923" y="931" width="26" height="22" color="#008F44" label_side="bottom" label="Graph 1" type="graph" icon_of="103" />
+            <stacked_container height="282" width="492" uid="104">
+                <graph type="time_series" background="#FFFFC9" show_grid="true" plot_numbers="true" isee:use_five_segments="false" date_time="2020-06-29T16:26:23Z" time_precision="2" from="0" to="1500">
+                    <title>Untitled</title>
+                    <plot index="0" pen_width="1" color="blue" precision="max" show_y_axis="true">
+                        <entity name="EffectOfOxygenLevel_OnBiomassDeath" />
+                    </plot>
+                </graph>
+            </stacked_container>
+            <pad_icon x="935" y="928" width="26" height="22" color="#008F44" label_side="bottom" label="Graph 2" type="graph" icon_of="104" />
+            <stacked_container x="959" y="565" height="499" width="870" uid="105">
+                <graph type="time_series" background="white" show_grid="true" plot_numbers="true" isee:use_five_segments="false" date_time="2020-06-29T16:26:23Z" time_precision="2" from="0" to="1500">
+                    <title>Untitled</title>
+                    <plot index="0" pen_width="1" color="blue" precision="1" show_y_axis="true">
+                        <entity name="Nutrition_Level" />
+                    </plot>
+                    <plot index="1" pen_width="1" color="red" precision="1" show_y_axis="true">
+                        <entity name="Toxin_Concenration" />
+                    </plot>
+                    <plot index="2" pen_width="1" color="#008F44" precision="1" show_y_axis="true">
+                        <entity name="Cyanobacterias" />
+                    </plot>
+                    <plot index="3" pen_width="1" color="#FF7F00" precision="1" show_y_axis="true">
+                        <entity name="Cyano_Death" />
+                    </plot>
+                    <plot index="4" pen_width="1" color="#7F00FF" precision="1" show_y_axis="true">
+                        <entity name="Oxygen_Level" />
+                    </plot>
+                </graph>
+            </stacked_container>
+            <pad_icon x="853" y="964" width="26" height="22" color="#008F44" label_side="bottom" label="Graph 3" type="graph" icon_of="105" />
+            <stacked_container height="691" width="1181" uid="106">
+                <graph type="time_series" background="#FFFFC9" show_grid="true" plot_numbers="true" isee:use_five_segments="false" date_time="2020-06-29T16:26:23Z" time_precision="2" from="0" to="1500">
+                    <title>Untitled</title>
+                    <plot index="0" pen_width="1" color="blue" precision="max" show_y_axis="true">
+                        <entity name="EffectOfNutrition_ConsumptionOnCyanoRegen" />
+                    </plot>
+                </graph>
+            </stacked_container>
+            <pad_icon x="299" y="951" width="26" height="22" color="#008F44" label_side="bottom" label="Graph 4" type="graph" icon_of="106" />
+            <stacked_container height="715" width="1220" uid="107">
+                <graph type="time_series" background="#FFFFC9" show_grid="true" plot_numbers="true" isee:use_five_segments="false" date_time="2020-06-29T16:26:23Z" time_precision="2" from="150" to="200">
+                    <title>Untitled</title>
+                    <plot index="0" pen_width="1" color="fuchsia" precision="1" show_y_axis="true">
+                        <entity name="EffectOfNutrition_ConsumptionOnCyanoRegen" />
+                    </plot>
+                    <plot index="1" pen_width="1" color="#008F44" precision="max" show_y_axis="true">
+                        <entity name="Cyanobacterias" />
+                    </plot>
+                    <plot index="2" pen_width="1" color="blue" precision="1" show_y_axis="true">
+                        <entity name="EffectOfOxygenLevel_OnBiomassDeath" />
+                    </plot>
+                </graph>
+            </stacked_container>
+            <pad_icon x="644" y="960" width="26" height="22" color="#008F44" label_side="bottom" label="Graph 5" type="graph" icon_of="107" />
+            <stacked_container height="282" width="492" uid="108">
+                <graph type="time_series" background="#FFFFC9" show_grid="true" plot_numbers="true" isee:use_five_segments="false" date_time="2020-06-29T16:26:23Z" time_precision="2" from="0" to="1500">
+                    <title>Untitled</title>
+                </graph>
+            </stacked_container>
+            <pad_icon x="396" y="956" width="26" height="22" color="#008F44" label_side="bottom" label="Graph 6" type="graph" icon_of="108" />
+            <stacked_container height="427" width="753" uid="109">
+                <graph type="time_series" background="#FFFFC9" show_grid="true" plot_numbers="true" isee:use_five_segments="false" date_time="2020-06-29T16:26:23Z" time_precision="2" from="0" to="1500">
+                    <title>Untitled</title>
+                    <plot index="0" pen_width="1" color="fuchsia" precision="1" show_y_axis="true">
+                        <entity name="Zoo__Regen" />
+                    </plot>
+                    <plot index="1" pen_width="1" color="red" precision="1" show_y_axis="true">
+                        <entity name="Zoo__Death" />
+                    </plot>
+                </graph>
+            </stacked_container>
+            <pad_icon x="485" y="970" width="26" height="22" color="#008F44" label_side="bottom" label="Graph 7" type="graph" icon_of="109" />
+            <stacked_container height="419" width="741" uid="110">
+                <graph type="time_series" background="#FFFFC9" show_grid="true" plot_numbers="true" isee:use_five_segments="false" date_time="2020-06-29T16:26:23Z" time_precision="2" from="0" to="1500">
+                    <title>Untitled</title>
+                    <plot index="0" pen_width="1" color="blue" precision="1" show_y_axis="true">
+                        <entity name="Decomposing__Biomass" />
+                    </plot>
+                </graph>
+            </stacked_container>
+            <pad_icon x="722" y="950" width="26" height="22" color="#008F44" label_side="bottom" label="Graph 8" type="graph" icon_of="110" />
+            <stacked_container height="392" width="698" uid="111">
+                <graph type="time_series" background="#FFFFC9" show_grid="true" plot_numbers="true" isee:use_five_segments="false" date_time="2020-06-29T16:26:23Z" time_precision="2" from="0" to="1500">
+                    <title>Untitled</title>
+                    <plot index="0" pen_width="1" color="blue" precision="max" show_y_axis="true">
+                        <entity name="EffectOfNutrition_ConsumptionOnCyanoRegen" />
+                    </plot>
+                    <plot index="1" pen_width="1" color="red" precision="max" show_y_axis="true">
+                        <entity name="EffectOfOxygenLevel_OnBiomassDeath" />
+                    </plot>
+                </graph>
+            </stacked_container>
+            <pad_icon x="570" y="955" width="26" height="22" color="#008F44" label_side="bottom" label="Graph 9" type="graph" icon_of="111" />
+            <stacked_container height="282" width="492" uid="112">
+                <graph type="time_series" background="#FFFFC9" show_grid="true" plot_numbers="true" isee:use_five_segments="false" date_time="2020-06-29T16:26:23Z" time_precision="2" from="0" to="1500">
+                    <title>Untitled</title>
+                    <plot index="0" pen_width="1" color="red" precision="1" show_y_axis="true">
+                        <entity name="EffectOfNutrition_ConsumptionOnCyanoRegen" />
+                    </plot>
+                </graph>
+            </stacked_container>
+            <pad_icon x="853" y="934" width="26" height="22" color="#008F44" label_side="bottom" label="Graph 10" type="graph" icon_of="112" />
+            <stacked_container height="404" width="491" uid="113">
+                <table font-size="9" background="#E0E0E0" columns_width="63" column_width="63" orientation="vertical" interval="DT" date_time="2020-06-29T16:26:23Z">
+                    <title>Untitled Table</title>
+                    <item type="time" color="black" precision="max" width="100" />
+                    <item color="black" precision="0.01" delimit_000s="true" index="0">
+                        <entity name="Cyanobacterias" />
+                    </item>
+                    <item color="black" precision="0.01" delimit_000s="true" index="1">
+                        <entity name="Decomposing__Biomass" />
+                    </item>
+                    <item color="black" precision="0.01" delimit_000s="true" index="2">
+                        <entity name="Fish" />
+                    </item>
+                    <item color="black" precision="0.01" delimit_000s="true" index="3">
+                        <entity name="Nutrition_Level" />
+                    </item>
+                    <item color="black" precision="0.01" delimit_000s="true" index="4">
+                        <entity name="Oxygen_Level" />
+                    </item>
+                    <item color="black" precision="0.01" delimit_000s="true" index="5">
+                        <entity name="Toxin_Concenration" />
+                    </item>
+                    <item color="black" precision="0.01" delimit_000s="true" index="6">
+                        <entity name="Zooplanktons" />
+                    </item>
+                </table>
+            </stacked_container>
+            <pad_icon x="875" y="889" width="26" height="22" color="#008F44" label_side="bottom" label="Table 1" type="table" icon_of="113" />
+        </display>
+        <interface page_width="788" page_height="528">
+            <simulation_delay>0</simulation_delay>
+        </interface>
+        <popup x="646" y="386" content="104" />
+        <popup x="512" y="326" content="106" />
+        <popup x="382" y="201" content="107" />
+        <popup x="614" y="311" content="108" />
+        <popup x="244" y="284" content="109" />
+        <popup x="98" y="401" content="110" />
+        <popup x="70" y="263" content="111" />
+        <popup x="405" y="468" content="112" />
+        <popup x="282" y="551" content="113" />
+    </model>
+</xmile>
