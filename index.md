@@ -1,6 +1,6 @@
 ## Welcome to GitHub Pages
 
-## [IE 588 Agent-based Modeling and Simulation](https://ie.boun.edu.tr/courses/ie-588-agent-based-modelling-and-simulation) 
+## [IE 588 Agent-based Modeling and Simulation](IE_588_Syllabus.PDF) 
 _Instructor: Gönenç Yücel_
 
 **Project Description:** Analyzing the potential outcomes of a measles outbreak for a theoretical population
