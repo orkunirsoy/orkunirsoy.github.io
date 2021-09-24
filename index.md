@@ -35,4 +35,13 @@ _Instructor: Assoc. Prof. Tınaz Ekim Aşıcı_
 
 [C++ Code Repository](https://github.com/orkunirsoy/oirsoy/tree/main/IE%20_456_Project_Code)
 
+## [IE 582 Statistical Learning for Data Mining](IE_582_Syllabus.pdf) 
+_Instructor: Asst. Prof. Mustafa Gökçe Baydoğan_
+
+**Project Description:** Predicting outcomes of soccer games using previous game and bet score data 
+
+**Softwares Used:** R (Feature Extraction, Prediction)
+### Links
+[Short Report & R Code](IE 582 Project - Güz,İrsoy.html)
+
 
