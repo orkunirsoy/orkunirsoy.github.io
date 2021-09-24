@@ -1,11 +1,12 @@
 ## Welcome to GitHub Pages
 
-# [IE 588 Agent-based Modeling and Simulation](https://ie.boun.edu.tr/courses/ie-588-agent-based-modelling-and-simulation) 
+## [IE 588 Agent-based Modeling and Simulation](https://ie.boun.edu.tr/courses/ie-588-agent-based-modelling-and-simulation) 
 **Project Description:** Analyzing the potential outcomes of a measles outbreak for a theoretical population
 
 **Softwares Used:** Netlogo (Simulation), R Studio & Microsoft Excel (Analysis)
-## Links
+### Links
 [Project report](IE_588_Project_Report.pdf)
+
 [NetLogo Code](IE_588_Project_code.nlogo)
 
 
