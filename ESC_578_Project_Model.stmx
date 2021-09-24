@@ -1,0 +1,2453 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xmile version="1.0" xmlns="http://docs.oasis-open.org/xmile/ns/XMILE/v1.0" xmlns:isee="http://iseesystems.com/XMILE">
+	<header>
+		<smile version="1.0" namespace="std, isee" uses_arrays="1"/>
+		<name>Land use final model</name>
+		<uuid>ad69ec62-0e05-497f-8284-bee247e976b4</uuid>
+		<vendor>isee systems, inc.</vendor>
+		<product version="2.1" isee:build_number="2315" isee:saved_by_v1="true" lang="en">Stella Architect</product>
+	</header>
+	<sim_specs isee:sim_duration="1.5" isee:simulation_delay="0.03" isee:restore_on_start="false" method="Euler" time_units="Years" isee:instantaneous_flows="false" isee:loop_scores="false" isee:loop_exhaustive_allowed="1000">
+		<start>0</start>
+		<stop>50</stop>
+		<dt reciprocal="true">128</dt>
+	</sim_specs>
+	<dimensions>
+		<dim name="TreeAge" size="3"/>
+	</dimensions>
+	<isee:prefs show_module_prefix="true" live_update_on_drag="true" show_restore_buttons="false" layer="model" interface_scale_ui="true" interface_max_page_width="10000" interface_max_page_height="10000" interface_min_page_width="0" interface_min_page_height="0" rerun_on_structure_change="false" saved_runs="5" keep="false" rifp="true"/>
+	<isee:multiplayer_settings include_chat="true" allow_observers="false" advance_time_increment="1" max_advance_time_in_ms="0" observer_start_page="home_page" enabled="false"/>
+	<isee:time_formats default_format="Builtin">
+		<isee:time_format name="Builtin" type="adaptive"/>
+	</isee:time_formats>
+	<default_format/>
+	<model_units>
+		<unit name="Cubic Meters">
+			<eqn>Meters^3</eqn>
+			<alias>cubic meter</alias>
+			<alias>cu m</alias>
+		</unit>
+		<unit name="Meters">
+			<eqn/>
+			<alias>m</alias>
+			<alias>meter</alias>
+		</unit>
+		<unit name="Kilometers">
+			<eqn/>
+			<alias>km</alias>
+			<alias>kilometer</alias>
+		</unit>
+		<unit name="Square Kilometers">
+			<eqn>Kilometers^2</eqn>
+			<alias>sq km</alias>
+			<alias>square kilometer</alias>
+		</unit>
+		<unit name="Kilograms">
+			<eqn/>
+			<alias>kg</alias>
+			<alias>kilogram</alias>
+		</unit>
+		<unit name="Tonnes">
+			<eqn/>
+			<alias>tonne</alias>
+			<alias>metric ton</alias>
+		</unit>
+		<unit name="Years">
+			<eqn/>
+			<alias>yr</alias>
+			<alias>year</alias>
+		</unit>
+	</model_units>
+	<model>
+		<variables>
+			<aux name="Crop Productivity">
+				<eqn>Norrnal_Crop_Productivity*Effect_of_Water_Availability_on_Productivity*Effect_of_STT_on_Productivity*Effect_of_Nutrients_on_Productivity*Effect_of_Water_Quality_on_Productivity</eqn>
+				<units>Tonnes/Square Kilometer</units>
+			</aux>
+			<aux name="Population">
+				<eqn>IF Eq_Switch THEN INIT(&quot;Population_(Time_Series)&quot;) ELSE &quot;Population_(Time_Series)&quot;*Overpopulation_Constant</eqn>
+			</aux>
+			<aux name="Food Demand">
+				<eqn>(Population)*Food_Demand_per_Capita</eqn>
+			</aux>
+			<aux name="Perceived Need for\nFood Lands">
+				<eqn>IF Eq_Switch THEN 0 ELSE SMTH3(1-Share_of_Domestic_Food_in_Consumption/Target_Domestic_Share, Perception_Delay)</eqn>
+			</aux>
+			<aux name="Share of Domestic Food in Consumption">
+				<eqn>MIN(1, Food_Production/Food_Demand)</eqn>
+			</aux>
+			<aux name="Energy Demand">
+				<eqn>Population*Energy_Demand_per_Capita</eqn>
+				<units>MWh</units>
+			</aux>
+			<aux name="Energy used\nFrom Fossil">
+				<eqn>Energy_Demand-(Energy_Production_From_Other_Renewables+Energy_Production_from_Bioenergy)</eqn>
+			</aux>
+			<aux name="Energy Production from\nBioenergy">
+				<eqn>Bioenergy_Lands*Crop_Productivity*Energy_per_tonne</eqn>
+				<units>MWh</units>
+			</aux>
+			<flow name="Sequestration">
+				<eqn>Forest_Lands[1]*Capture_per_forest_km2[1] +Forest_Lands[2]*Capture_per_forest_km2[2] +Forest_Lands[3]*Capture_per_forest_km2[3] +Bioproductive_Lands*Capture_per_BPL</eqn>
+				<units>Tonnes CE/Years</units>
+			</flow>
+			<flow name="Emissions\nfrom Fossil Fuel">
+				<eqn>Energy_used_From_Fossil*Fossil_GHG_Footprint</eqn>
+				<units>Tonnes CE/Years</units>
+			</flow>
+			<flow name="Emissions\nfrom Bioenergy">
+				<eqn>(Biofuel_GHG_Footprint*Energy_Production_from_Bioenergy)*(1-BECCS_Adoption_in_Bioenergy)</eqn>
+				<units>Tonnes CE/Years</units>
+			</flow>
+			<flow name="Emissions\nfrom FoodProd">
+				<eqn>Food_Lands*Food_GHG_Footprint</eqn>
+				<units>Tonnes CE/Years</units>
+			</flow>
+			<stock name="GHG Accumulatıon">
+				<eqn>0</eqn>
+				<inflow>Emissions_from_Bioenergy</inflow>
+				<inflow>Emissions_from_Fossil_Fuel</inflow>
+				<inflow>Emissions_from_FoodProd</inflow>
+				<inflow>Other_Emissors</inflow>
+				<outflow>Sequestration</outflow>
+				<non_negative/>
+				<units>Tonnes CE</units>
+			</stock>
+			<aux name="Target Emission">
+				<eqn>220*10^6</eqn>
+			</aux>
+			<aux name="Effect of Emissions on\nBioenergy Motivation">
+				<eqn>Emission_Discrepancy</eqn>
+				<gf>
+					<xscale min="0" max="1"/>
+					<yscale min="1" max="1.2"/>
+					<ypts>1.00133857018486,1.00359724199242,1.00948517463551,1.02384058440442,1.053788284274,1.1,1.146211715726,1.17615941559558,1.19051482536449,1.19640275800758,1.19866142981514</ypts>
+				</gf>
+			</aux>
+			<aux name="Emission Discrepancy">
+				<eqn>IF Eq_Switch THEN 0 ELSE (Net_Emissions-Target_Emission)/Net_Emissions</eqn>
+			</aux>
+			<aux name="Effect of Emissions on\nForestation">
+				<eqn>Emission_Discrepancy</eqn>
+				<gf>
+					<xscale min="0" max="1"/>
+					<yscale min="1" max="3"/>
+					<ypts>1.01338570184857,1.03597241992418,1.09485174635513,1.23840584404424,1.53788284273999,2,2.46211715726001,2.76159415595577,2.90514825364487,2.96402758007582,2.98661429815143</ypts>
+				</gf>
+			</aux>
+			<aux name="Net Emissions">
+				<eqn>Emissions_from_FoodProd+Emissions_from_Fossil_Fuel+Emissions_from_Bioenergy+Other_Emissors-Sequestration</eqn>
+			</aux>
+			<group name="GHG Sector" run="false">
+				<entity name="Biofuel_GHG_Footprint"/>
+				<entity name="Capture_per_forest_km2"/>
+				<entity name="Emission_Discrepancy"/>
+				<entity name="Capture_per_BPL"/>
+				<entity name="Emissions_from_Bioenergy"/>
+				<entity name="Effect_of_Emissions_on_Forestation"/>
+				<entity name="Target_Emission"/>
+				<entity name="Food_GHG_Footprint"/>
+				<entity name="Net_Emissions"/>
+				<entity name="Sequestration"/>
+				<entity name="Emissions_from_FoodProd"/>
+				<entity name="Emissions_from_Fossil_Fuel"/>
+				<entity name="Effect_of_Emissions_on_Bioenergy_Motivation"/>
+				<entity name="Fossil_GHG_Footprint"/>
+				<entity name="GHG_Accumulatıon"/>
+				<entity name="Other_Emissors"/>
+				<entity name="Projected_Emissions_from_Industry"/>
+			</group>
+			<group name="Energy Sector" run="false">
+				<entity name="Utilization"/>
+				<entity name="Energy_Imports"/>
+				<entity name='"Non-Renewable_Resources"'/>
+				<entity name="Energy_Demand_per_Capita"/>
+				<entity name="Adjustment"/>
+				<entity name="Perceived_need_for_Renewables"/>
+				<entity name="Energy_Production_From_Other_Renewables"/>
+				<entity name="Current_Share_of_Renewables"/>
+				<entity name="Current_Share_of_Bioenergy"/>
+				<entity name="Energy_Production_from_Bioenergy"/>
+				<entity name="Slope"/>
+				<entity name="MAX_BECCS"/>
+				<entity name="Depreciation"/>
+				<entity name="A"/>
+				<entity name="Perceived_need_for_Bioenergy"/>
+				<entity name="Energy_per_tonne"/>
+				<entity name='"Non-Renewable_Extraction"'/>
+				<entity name="B"/>
+				<entity name='"2015_Intercept"'/>
+				<entity name="Energy_used_From_Fossil"/>
+				<entity name="Investment"/>
+				<entity name="Energy_Demand"/>
+				<entity name="Eq_Switch"/>
+				<entity name="Renewable_Energy_Production_Capacity"/>
+				<entity name="BECCS_Adoption_in_Bioenergy"/>
+				<entity name="BECCS_Switch"/>
+				<entity name="Depreciation_Delay"/>
+				<entity name="Target_Share_of_Renewables"/>
+				<entity name="Normal_Investment"/>
+				<entity name="Extraction_Delay"/>
+				<entity name="Adj"/>
+				<entity name="Effect_of_Perceived_Need_on_Renewable_Investment"/>
+				<entity name="Average_Yearly_Savings_Through_Biofuel"/>
+				<entity name="Share_of_Domestic_Energy_Production_in_Consumption"/>
+			</group>
+			<group name="Food Sector" run="false">
+				<entity name="Oxidation"/>
+				<entity name='"Food_Import/Export"'/>
+				<entity name="Perception_Delay"/>
+				<entity name="Effect_of_STT_on_Productivity"/>
+				<entity name="Generation_Rate"/>
+				<entity name="Soil_Top_Thickness"/>
+				<entity name="Food_Demand"/>
+				<entity name="Effect_of_Intensive_Farming_on_Erosion"/>
+				<entity name='"Population_(Time_Series)"'/>
+				<entity name="Normal_Humification_Rate"/>
+				<entity name="Normal_Oxidation_Fraction"/>
+				<entity name="Humification"/>
+				<entity name="Population"/>
+				<entity name="Erosion"/>
+				<entity name="Normal_Erosion_Fraction"/>
+				<entity name="Effect_of_Nutrients_on_Productivity"/>
+				<entity name="Norrnal_Crop_Productivity"/>
+				<entity name="Reference_STT"/>
+				<entity name="Perceived_Need_for_Food_Lands"/>
+				<entity name="Reference_Nutrients"/>
+				<entity name="Food_Demand_per_Capita"/>
+				<entity name="Nutrients"/>
+				<entity name="Effect_of_Intensive_Farming_on_Humification"/>
+				<entity name="Share_of_Domestic_Food_in_Consumption"/>
+				<entity name="Farming_Agression"/>
+				<entity name="Food_Production"/>
+				<entity name="Crop_Productivity"/>
+				<entity name="Generation"/>
+				<entity name="Target_Domestic_Share"/>
+				<entity name="Overpopulation_Constant"/>
+			</group>
+			<stock name="BECCS Adoption\nin Bioenergy">
+				<eqn>0</eqn>
+				<inflow>Adjustment</inflow>
+				<non_negative/>
+			</stock>
+			<flow name="Adjustment">
+				<eqn>BECCS_Switch*(IF BECCS_Adoption_in_Bioenergy&lt;MAX_BECCS THEN A + B*BECCS_Adoption_in_Bioenergy*(MAX_BECCS-BECCS_Adoption_in_Bioenergy) ELSE 0)</eqn>
+			</flow>
+			<aux name="MAX BECCS">
+				<eqn>0.6</eqn>
+			</aux>
+			<aux name="A">
+				<eqn>0.02</eqn>
+			</aux>
+			<stock name="Renewable Energy\nProduction Capacity">
+				<eqn>574076156</eqn>
+				<inflow>Investment</inflow>
+				<outflow>Depreciation</outflow>
+				<non_negative/>
+				<units>MWh</units>
+			</stock>
+			<flow name="Investment">
+				<eqn>Effect_of_Perceived_Need_on_Renewable_Investment*Normal_Investment</eqn>
+				<non_negative/>
+				<units>MWh/Years</units>
+			</flow>
+			<flow name="Depreciation">
+				<eqn>Renewable_Energy_Production_Capacity/Depreciation_Delay</eqn>
+				<non_negative/>
+				<units>MWh/Years</units>
+			</flow>
+			<aux name="Energy Production\nFrom Other Renewables">
+				<eqn>Renewable_Energy_Production_Capacity*Utilization</eqn>
+			</aux>
+			<flow name="Non-Renewable\nExtraction">
+				<eqn>&quot;Non-Renewable_Resources&quot;/Extraction_Delay</eqn>
+				<non_negative/>
+			</flow>
+			<aux name="Target Share of\nRenewables">
+				<eqn>0.3</eqn>
+			</aux>
+			<aux name="Current Share of\nRenewables">
+				<eqn>(Energy_Production_from_Bioenergy+Energy_Production_From_Other_Renewables)/Energy_Demand</eqn>
+			</aux>
+			<aux name="Perceived need\nfor Renewables">
+				<eqn>IF Eq_Switch THEN 0 ELSE SMTH3(1-Current_Share_of_Renewables/Target_Share_of_Renewables, Perception_Delay)</eqn>
+			</aux>
+			<aux name="Capture per forest km2">
+				<doc>http://urbanforestrynetwork.org/benefits/air%20quality.htm</doc>
+				<dimensions>
+					<dim name="TreeAge"/>
+				</dimensions>
+				<element subscript="1">
+					<eqn>111.92</eqn>
+				</element>
+				<element subscript="2">
+					<eqn>447.68</eqn>
+				</element>
+				<element subscript="3">
+					<eqn>223.84</eqn>
+				</element>
+			</aux>
+			<aux name="Fossil GHG Footprint">
+				<doc>https://www.forestresearch.gov.uk/tools-and-resources/fthr/biomass-energy-resources/reference-biomass/facts-figures/carbon-emissions-of-different-fuels/</doc>
+				<eqn>0.26</eqn>
+				<units>Tonnes/MWh</units>
+			</aux>
+			<aux name="Food GHG Footprint">
+				<doc>https://www.nature.com/articles/s41598-017-04182-x</doc>
+				<eqn>140.9</eqn>
+				<units>Tonnes/km2</units>
+			</aux>
+			<aux name="Biofuel GHG Footprint">
+				<doc>https://en.wikipedia.org/wiki/Environmental_impact_of_biodiesel</doc>
+				<eqn>44.9/0.000277777778/1000000</eqn>
+				<units>Tonnes/MWh</units>
+			</aux>
+			<flow name="Other Emissors">
+				<eqn>Projected_Emissions_from_Industry</eqn>
+				<units>Tonnes CE/Years</units>
+			</flow>
+			<aux name="Food Demand per Capita">
+				<eqn>31770000/INIT(&quot;Population_(Time_Series)&quot;)</eqn>
+			</aux>
+			<stock name="Non-Renewable\nResources">
+				<eqn>15801.9*11.63*100</eqn>
+				<outflow>&quot;Non-Renewable_Extraction&quot;</outflow>
+				<non_negative/>
+			</stock>
+			<aux name="Extraction Delay">
+				<eqn>100</eqn>
+			</aux>
+			<aux name="Depreciation Delay">
+				<eqn>15</eqn>
+			</aux>
+			<flow name="B to C">
+				<eqn>Bioproductive_Lands*B_to_C_Fraction/Land_Conversion_Delay*Aggregated_Cropland_Effect</eqn>
+				<non_negative/>
+				<units>Square Kilometers/Years</units>
+			</flow>
+			<flow name="F to B">
+				<dimensions>
+					<dim name="TreeAge"/>
+				</dimensions>
+				<eqn>Forest_Lands*F_to_B_Fraction/Land_Conversion_Delay</eqn>
+				<non_negative/>
+				<units>Square Kilometers/Years</units>
+			</flow>
+			<flow name="F to C">
+				<dimensions>
+					<dim name="TreeAge"/>
+				</dimensions>
+				<eqn>Forest_Lands*F_to_C_Fraction/Land_Conversion_Delay*Aggregated_Cropland_Effect</eqn>
+				<non_negative/>
+				<units>Square Kilometers/Years</units>
+			</flow>
+			<flow name="Crop Lands Food/Energy Ratio Adjustment">
+				<eqn>(IF Adjustment_Rate &lt; 0 THEN &quot;Crop_Lands_Food/Energy_Ratio&quot;*Adjustment_Rate/Croplands_Reallocation_Delay ELSE (1 - &quot;Crop_Lands_Food/Energy_Ratio&quot;)*Adjustment_Rate/Croplands_Reallocation_Delay)</eqn>
+			</flow>
+			<stock name="Crop Lands\nFood/Energy Ratio">
+				<doc>Challenges and Opportunities for Bio-diesel Production in Turkey</doc>
+				<eqn>0.96</eqn>
+				<inflow>&quot;Crop_Lands_Food/Energy_Ratio_Adjustment&quot;</inflow>
+				<non_negative/>
+			</stock>
+			<stock name="Forest Lands">
+				<dimensions>
+					<dim name="TreeAge"/>
+				</dimensions>
+				<element subscript="1">
+					<eqn>193143.44/5</eqn>
+				</element>
+				<element subscript="2">
+					<eqn>193143.44*3/5</eqn>
+				</element>
+				<element subscript="3">
+					<eqn>193143.44/5</eqn>
+				</element>
+				<inflow>C_to_F</inflow>
+				<inflow>B_to_F</inflow>
+				<outflow>F_to_C</outflow>
+				<outflow>F_to_B</outflow>
+				<outflow>Aging</outflow>
+				<non_negative/>
+				<units>Square Kilometers</units>
+			</stock>
+			<stock name="Crop Lands">
+				<eqn>340889.8</eqn>
+				<inflow>B_to_C</inflow>
+				<inflow>F_to_C</inflow>
+				<outflow>C_to_F</outflow>
+				<outflow>C_to_B</outflow>
+				<non_negative/>
+				<units>Square Kilometers</units>
+			</stock>
+			<stock name="Bioproductive Lands">
+				<eqn>212927.6</eqn>
+				<inflow>F_to_B</inflow>
+				<inflow>C_to_B</inflow>
+				<outflow>B_to_C</outflow>
+				<outflow>B_to_F</outflow>
+				<non_negative/>
+				<units>Square Kilometers</units>
+			</stock>
+			<aux name="Land Conversion Delay">
+				<eqn>5</eqn>
+			</aux>
+			<aux name="Croplands Reallocation Delay">
+				<eqn>1</eqn>
+			</aux>
+			<aux name="Effect of Bioenergy Land Need\nOn Crop Lands Increase">
+				<eqn>Perceived_need_for_Bioenergy</eqn>
+				<gf>
+					<xscale min="-1" max="1"/>
+					<yscale min="0.2" max="1.8"/>
+					<ypts>0.210708561478856,0.228777935939347,0.275881397084107,0.390724675235388,0.630306274191992,1,1.36969372580801,1.60927532476461,1.72411860291589,1.77122206406065,1.78929143852114</ypts>
+				</gf>
+			</aux>
+			<aux name="Food Lands">
+				<eqn>Crop_Lands*&quot;Crop_Lands_Food/Energy_Ratio&quot;</eqn>
+			</aux>
+			<aux name="Bioenergy Lands">
+				<eqn>Crop_Lands*(1-&quot;Crop_Lands_Food/Energy_Ratio&quot;)</eqn>
+			</aux>
+			<group name="Land Use Sector" run="false">
+				<entity name="B_to_F_Fraction"/>
+				<entity name="Bioproductive_Lands"/>
+				<entity name="C_to_B"/>
+				<entity name="B_to_C_Fraction"/>
+				<entity name="C_to_B_Fraction"/>
+				<entity name="Bioenergy_Lands"/>
+				<entity name="Normal_B_to_F"/>
+				<entity name="C_to_F_Fraction"/>
+				<entity name="Adjustment_Rate"/>
+				<entity name="F_to_C_Fraction"/>
+				<entity name="Crop_Lands"/>
+				<entity name="Croplands_Reallocation_Delay"/>
+				<entity name="Effect_of_Bioenergy_Land_Need_On_Crop_Lands_Increase"/>
+				<entity name="Forest_Lands"/>
+				<entity name="F_to_B"/>
+				<entity name="Forests"/>
+				<entity name="C_to_F"/>
+				<entity name="Land_Conversion_Delay"/>
+				<entity name="Need_of_Food_minus_Bioenergy"/>
+				<entity name='"Crop_Lands_Food/Energy_Ratio"'/>
+				<entity name="F_to_C"/>
+				<entity name="Aging"/>
+				<entity name="Effect_of_Food_Land_Need_On_Crop_Lands_Increase"/>
+				<entity name='"Crop_Lands_Food/Energy_Ratio_Adjustment"'/>
+				<entity name="Age_Cohort_Size"/>
+				<entity name="B_to_F"/>
+				<entity name="F_to_B_Fraction"/>
+				<entity name="Food_Lands"/>
+				<entity name="Aggregated_Cropland_Effect"/>
+				<entity name="B_to_C"/>
+			</group>
+			<stock name="Usable\nGroundwater">
+				<eqn>14*10^9</eqn>
+				<inflow>Ground_Percolation</inflow>
+				<outflow>GW_Consumption</outflow>
+				<non_negative/>
+				<units>Cubic Meters</units>
+			</stock>
+			<stock name="Usable\nSurface Water">
+				<eqn>98*10^9</eqn>
+				<inflow>Surface_Percolation</inflow>
+				<outflow>SW_Consumption</outflow>
+				<non_negative/>
+				<units>Cubic Meters</units>
+			</stock>
+			<stock name="Natural Reservoirs">
+				<eqn>500*10^9</eqn>
+				<inflow>Rainfall</inflow>
+				<outflow>Surface_Percolation</outflow>
+				<outflow>Ground_Percolation</outflow>
+				<outflow>Evaporation_And_Runoff</outflow>
+				<non_negative/>
+				<units>Cubic Meters</units>
+			</stock>
+			<flow name="Rainfall">
+				<eqn>Normal_Rainfall_Rate*Eff_of_Forest_Lands_on_Rainfall</eqn>
+				<non_negative/>
+				<units>Cubic Meters/Years</units>
+			</flow>
+			<flow name="Surface\nPercolation">
+				<eqn>Natural_Reservoirs*Surface_Percolation_Fraction/Eff_of_Bioproductive_Lands_on_Percolation</eqn>
+				<non_negative/>
+				<units>Cubic Meters/Years</units>
+			</flow>
+			<flow name="Ground\nPercolation">
+				<eqn>Natural_Reservoirs*Ground_Percolation_Fraction*Eff_of_Bioproductive_Lands_on_Percolation</eqn>
+				<non_negative/>
+				<units>Cubic Meters/Years</units>
+			</flow>
+			<flow name="GW Consumption">
+				<eqn>Total_Water_Demand*(1-&quot;SW/GW_Consumption_Ratio&quot;)*Eff_of_Water_Availability_on_Consumption</eqn>
+				<non_negative/>
+				<units>Cubic Meters/Years</units>
+			</flow>
+			<flow name="SW Consumption">
+				<eqn>&quot;SW/GW_Consumption_Ratio&quot;*Total_Water_Demand*Eff_of_Water_Availability_on_Consumption</eqn>
+				<non_negative/>
+				<units>Cubic Meters/Years</units>
+			</flow>
+			<aux name="SW/GW Consumption Ratio">
+				<eqn>Usable_Surface_Water/(Usable_Surface_Water+Usable_Groundwater)</eqn>
+			</aux>
+			<aux name="Total Water Demand">
+				<eqn>Water_Use_in_Agriculture+Water_Use_of_Population+Projected_Water_Demand_in_Industry</eqn>
+			</aux>
+			<aux name="Water Use in\nAgriculture">
+				<eqn>Crop_Lands*Food_Production_Water_Footprint</eqn>
+			</aux>
+			<aux name="Water Use\nof Population">
+				<eqn>(Population)*Per_capita_water_consumption</eqn>
+			</aux>
+			<aux name="Per capita water\nconsumption">
+				<eqn>93.33</eqn>
+			</aux>
+			<aux name="Food Production\nWater Footprint">
+				<doc>Valuing Water Resources in Turkey
+A Methodological Overview and Case Study</doc>
+				<eqn>93871.98</eqn>
+			</aux>
+			<aux name="Projected Water\nDemand in Industry">
+				<eqn>5*10^9</eqn>
+				<units>Cubic Meters</units>
+			</aux>
+			<aux name="Reference Water">
+				<eqn>112*10^9</eqn>
+				<units>Cubic Meters</units>
+			</aux>
+			<aux name="Water Availability">
+				<eqn>Usable_Water_Level/Reference_Water</eqn>
+			</aux>
+			<flow name="Aging">
+				<dimensions>
+					<dim name="TreeAge"/>
+				</dimensions>
+				<element subscript="1">
+					<eqn>Forest_Lands[1]/Age_Cohort_Size[1]-Forest_Lands[3]/Age_Cohort_Size[3]</eqn>
+				</element>
+				<element subscript="2">
+					<eqn>Forest_Lands[2]/Age_Cohort_Size[2]-Forest_Lands[1]/Age_Cohort_Size[1]</eqn>
+				</element>
+				<element subscript="3">
+					<eqn>Forest_Lands[3]/Age_Cohort_Size[3]-Forest_Lands[2]/Age_Cohort_Size[2]</eqn>
+				</element>
+				<units>Square Kilometers/Years</units>
+			</flow>
+			<aux name="Age Cohort Size">
+				<dimensions>
+					<dim name="TreeAge"/>
+				</dimensions>
+				<element subscript="1">
+					<eqn>10</eqn>
+				</element>
+				<element subscript="2">
+					<eqn>30</eqn>
+				</element>
+				<element subscript="3">
+					<eqn>10</eqn>
+				</element>
+			</aux>
+			<group name="Water Sector 1" run="false">
+				<entity name="Reference_Water"/>
+				<entity name="Water_Availability"/>
+				<entity name="Effect_of_Water_Availability_on_Productivity"/>
+				<entity name="Eff_of_Water_Availability_on_Consumption"/>
+				<entity name="Total_Water_Demand"/>
+				<entity name="Water_Use_of_Population"/>
+				<entity name="Per_capita_water_consumption"/>
+				<entity name="Projected_Water_Demand_in_Industry"/>
+				<entity name="Usable_Groundwater"/>
+				<entity name="Natural_Reservoirs"/>
+				<entity name="Rainfall"/>
+				<entity name="Ground_Percolation"/>
+				<entity name="GW_Consumption"/>
+				<entity name="Usable_Water_Level"/>
+				<entity name="Reference_Bioproductive_Lands"/>
+				<entity name="Eff_of_Bioproductive_Lands_on_Percolation"/>
+				<entity name="Ground_Percolation_Fraction"/>
+				<entity name="Evaporation_And_Runoff"/>
+				<entity name='"SW/GW_Consumption_Ratio"'/>
+				<entity name="Usable_Surface_Water"/>
+				<entity name="Surface_Percolation"/>
+				<entity name="SW_Consumption"/>
+				<entity name="Water_Use_in_Agriculture"/>
+				<entity name="Food_Production_Water_Footprint"/>
+				<entity name="Surface_Percolation_Fraction"/>
+				<entity name="Water_Quality"/>
+				<entity name="Water_Regeneration"/>
+				<entity name="Regeneration_Delay"/>
+				<entity name="Water_Quality_Reference"/>
+				<entity name="Normal_Rainfall_Rate"/>
+				<entity name="Eff_of_Forest_Lands_on_Rainfall"/>
+				<entity name="Reference_Forest_Lands"/>
+				<entity name="Effect_of_Water_Quality_on_Productivity"/>
+				<entity name="Degradation"/>
+				<entity name="Quality_Degradation_Fraction_due_to_Oxidation"/>
+				<entity name='"E&amp;R_Fraction"'/>
+				<entity name="Reference_Oxidation"/>
+			</group>
+			<stock name="Soil Top Thickness">
+				<doc>Wikipedia &quot;Topsoil&quot;</doc>
+				<eqn>20</eqn>
+				<inflow>Generation</inflow>
+				<outflow>Erosion</outflow>
+				<non_negative/>
+			</stock>
+			<stock name="Nutrients">
+				<doc>Saeed</doc>
+				<eqn>400</eqn>
+				<inflow>Humification</inflow>
+				<outflow>Oxidation</outflow>
+				<non_negative/>
+				<units>Kilogram/Square Kilometer</units>
+			</stock>
+			<flow name="Humification">
+				<eqn>Normal_Humification_Rate*Effect_of_Intensive_Farming_on_Humification</eqn>
+				<non_negative/>
+				<units>Kilogram/Square Kilometer/Years</units>
+			</flow>
+			<flow name="Oxidation">
+				<eqn>Nutrients*Normal_Oxidation_Fraction</eqn>
+				<non_negative/>
+				<units>Kilogram/Square Kilometer/Years</units>
+			</flow>
+			<flow name="Generation">
+				<eqn>Generation_Rate</eqn>
+				<non_negative/>
+			</flow>
+			<flow name="Erosion">
+				<eqn>Normal_Erosion_Fraction*Soil_Top_Thickness*Effect_of_Intensive_Farming_on_Erosion</eqn>
+				<non_negative/>
+			</flow>
+			<aux name="Effect of STT on Productivity">
+				<eqn>Soil_Top_Thickness/Reference_STT</eqn>
+				<gf>
+					<xscale min="0" max="2"/>
+					<yscale min="0" max="2"/>
+					<ypts>0.0133857018485697,0.0359724199241831,0.0948517463551336,0.238405844044235,0.53788284273999,1,1.46211715726001,1.76159415595577,1.90514825364487,1.96402758007582,1.98661429815143</ypts>
+				</gf>
+			</aux>
+			<aux name="Effect of Nutrients on Productivity">
+				<eqn>Nutrients/Reference_Nutrients</eqn>
+				<gf>
+					<xscale min="0" max="2"/>
+					<yscale min="0" max="2"/>
+					<ypts>0.0133857018485697,0.0259074550613917,0.0498488532942281,0.0948517463551336,0.176799354414117,0.31773820976183,0.53788284273999,0.834859587075371,1.16514041292463,1.46211715726001,1.68226179023817,1.82320064558588,1.90514825364487,1.95015114670577,1.97409254493861,1.98661429815143</ypts>
+				</gf>
+			</aux>
+			<aux name="Reference Nutrients">
+				<eqn>400</eqn>
+			</aux>
+			<aux name="Reference STT">
+				<eqn>20</eqn>
+			</aux>
+			<aux name="Norrnal\nCrop Productivity">
+				<eqn>102.9189</eqn>
+				<units>Tonnes/Square Kilometer</units>
+			</aux>
+			<aux name="Farming Agression">
+				<eqn>SMTH1(Crop_Productivity/Norrnal_Crop_Productivity, Perception_Delay)</eqn>
+				<gf>
+					<xscale min="0" max="2"/>
+					<yscale min="0" max="2"/>
+					<ypts>1.98661429815143,1.96402758007582,1.90514825364487,1.76159415595576,1.46211715726001,1,0.53788284273999,0.238405844044235,0.0948517463551335,0.0359724199241831,0.0133857018485697</ypts>
+				</gf>
+			</aux>
+			<aux name="Effect of Intensive Farming on Erosion">
+				<eqn>Farming_Agression</eqn>
+				<gf>
+					<xscale min="0" max="2"/>
+					<yscale min="0.5" max="1.5"/>
+					<ypts>0.506692850924285,0.517986209962092,0.547425873177567,0.619202922022118,0.768941421369995,1,1.23105857863001,1.38079707797788,1.45257412682243,1.48201379003791,1.49330714907572</ypts>
+				</gf>
+			</aux>
+			<aux name="Effect of Intensive\nFarming on Humification">
+				<eqn>Farming_Agression</eqn>
+				<gf>
+					<xscale min="0" max="2"/>
+					<yscale min="0.5" max="1.5"/>
+					<ypts>0.506692850924285,0.517986209962092,0.547425873177567,0.619202922022118,0.768941421369995,1,1.23105857863001,1.38079707797788,1.45257412682243,1.48201379003791,1.49330714907572</ypts>
+				</gf>
+			</aux>
+			<aux name="Capture per BPL">
+				<eqn>20</eqn>
+			</aux>
+			<stock name="Water Quality">
+				<eqn>0.5</eqn>
+				<inflow>Water_Regeneration</inflow>
+				<outflow>Degradation</outflow>
+				<non_negative/>
+			</stock>
+			<flow name="Water Regeneration">
+				<eqn>(1-Water_Quality)/Regeneration_Delay</eqn>
+				<non_negative/>
+			</flow>
+			<flow name="Degradation">
+				<eqn>Water_Quality*Quality_Degradation_Fraction_due_to_Oxidation</eqn>
+				<non_negative/>
+			</flow>
+			<aux name="Regeneration Delay">
+				<eqn>10</eqn>
+			</aux>
+			<aux name="Water Quality\nReference">
+				<eqn>0.5</eqn>
+			</aux>
+			<aux name="Effect of Water Availability\non Productivity">
+				<eqn>Water_Availability</eqn>
+				<gf>
+					<xscale min="0" max="1"/>
+					<yscale min="0" max="1"/>
+					<ypts>0,0.386744810206184,0.625100742507318,0.772002650338619,0.862540235521152,0.918339744538405,0.952729718605963,0.973924713637219,0.986987468889448,0.995038217404746,1</ypts>
+				</gf>
+			</aux>
+			<aux name="Usable\nWater Level">
+				<eqn>Usable_Groundwater+Usable_Surface_Water</eqn>
+			</aux>
+			<aux name="Normal Erosion\nFraction">
+				<eqn>1/100</eqn>
+			</aux>
+			<aux name="Generation\nRate">
+				<eqn>0.2</eqn>
+			</aux>
+			<aux name="Normal Humification\nRate">
+				<eqn>80</eqn>
+			</aux>
+			<aux name="Normal Oxidation\nFraction">
+				<eqn>0.2</eqn>
+			</aux>
+			<aux name="Energy Demand\nper Capita">
+				<doc>https://www.iea.org/countries/turkey</doc>
+				<eqn>&quot;2015_Intercept&quot;+Slope*TIME*(1-Eq_Switch)</eqn>
+				<units>MWh/capita</units>
+			</aux>
+			<aux name="Eff of Water Availability on Consumption">
+				<eqn>Water_Availability</eqn>
+				<gf>
+					<xscale min="0" max="1"/>
+					<yscale min="0" max="1"/>
+					<ypts>0,0.131245067676216,0.245580359347689,0.34518455136084,0.431955616720949,0.507546991256012,0.573399080087539,0.630766704768895,0.680743014100565,0.724280314246554,0.762208215072973,0.795249438490021,0.824033590027739,0.84910915606501,0.870953955320793,0.889984243762385,0.906562646426091,0.921005067292361,0.933586708884111,0.944547316292594,0.954095745556518,0.962413943445589,0.969660414483831,0.975973241277371,0.981472715699462,0.986263631070397,0.990437279010148,0.99407318901404,0.997240643899368,1</ypts>
+				</gf>
+			</aux>
+			<aux name="Normal Rainfall\nRate">
+				<eqn>501*10^9</eqn>
+				<units>My Cubic Meters</units>
+			</aux>
+			<aux name="Eff of Forest Lands\non Rainfall">
+				<eqn>SUM(Forest_Lands)/Reference_Forest_Lands</eqn>
+			</aux>
+			<aux name="Reference Forest Lands">
+				<eqn>193143.44</eqn>
+				<units>Square Kilometers</units>
+			</aux>
+			<aux name="Reference\nBioproductive Lands">
+				<eqn>212927.6</eqn>
+				<units>Square Kilometers</units>
+			</aux>
+			<aux name="Eff of Bioproductive Lands on Percolation">
+				<eqn>Bioproductive_Lands/Reference_Bioproductive_Lands</eqn>
+				<gf>
+					<xscale min="0" max="2"/>
+					<yscale min="0" max="2"/>
+					<ypts>1.98661429815143,1.96402758007582,1.90514825364487,1.76159415595576,1.46211715726001,1,0.53788284273999,0.238405844044235,0.0948517463551335,0.0359724199241831,0.0133857018485697</ypts>
+				</gf>
+			</aux>
+			<aux name="Surface Percolation\nFraction">
+				<eqn>0.0775761</eqn>
+			</aux>
+			<aux name="Ground Percolation\nFraction">
+				<eqn>0.0110823</eqn>
+			</aux>
+			<aux name="Projected Emissions from Industry">
+				<doc>https://www.worldometers.info/co2-emissions/turkey-co2-emissions/</doc>
+				<eqn>6*10^7</eqn>
+			</aux>
+			<aux name="Effect of Water\nQuality on Productivity">
+				<eqn>Water_Quality/Water_Quality_Reference</eqn>
+				<gf>
+					<xscale min="0" max="2"/>
+					<yscale min="0.75" max="1.25"/>
+					<ypts>0.753346425462143,0.758993104981046,0.773712936588783,0.809601461011059,0.884470710684998,1,1.115529289315,1.19039853898894,1.22628706341122,1.24100689501895,1.24665357453786</ypts>
+				</gf>
+			</aux>
+			<aux name="Quality Degradation Fraction due to Oxidation">
+				<eqn>Oxidation/Reference_Oxidation</eqn>
+				<gf>
+					<xscale min="1" max="2"/>
+					<yscale min="0.1" max="0.3"/>
+					<ypts>0.1,0.103597241992418,0.109485174635513,0.123840584404424,0.153788284273999,0.2,0.246211715726001,0.276159415595577,0.290514825364487,0.296402758007582,0.298661429815143</ypts>
+				</gf>
+			</aux>
+			<aux name="Perception Delay">
+				<eqn>1</eqn>
+			</aux>
+			<aux name="Effect of Food Land Need\nOn Crop Lands Increase">
+				<eqn>Perceived_Need_for_Food_Lands</eqn>
+				<gf>
+					<xscale min="-0.5" max="0.5"/>
+					<yscale min="0.2" max="1.8"/>
+					<ypts>0.210708561478856,0.228777935939347,0.275881397084107,0.390724675235388,0.630306274191992,1,1.36969372580801,1.60927532476461,1.72411860291589,1.77122206406065,1.78929143852114</ypts>
+				</gf>
+			</aux>
+			<aux name="Perceived need\nfor Bioenergy">
+				<eqn>Perceived_need_for_Renewables*Effect_of_Emissions_on_Bioenergy_Motivation</eqn>
+			</aux>
+			<flow name="C to F">
+				<dimensions>
+					<dim name="TreeAge"/>
+				</dimensions>
+				<element subscript="1">
+					<eqn>Effect_of_Emissions_on_Forestation*C_to_F_Fraction*Crop_Lands/Land_Conversion_Delay</eqn>
+				</element>
+				<element subscript="2">
+					<eqn>0</eqn>
+				</element>
+				<element subscript="3">
+					<eqn>0</eqn>
+				</element>
+				<non_negative/>
+				<units>Square Kilometers/Years</units>
+			</flow>
+			<aux name="B to F Fraction">
+				<eqn>Normal_B_to_F*Effect_of_Emissions_on_Forestation</eqn>
+			</aux>
+			<aux name="F to B Fraction">
+				<eqn>0.01102432</eqn>
+			</aux>
+			<aux name="Effect of Perceived Need on Renewable Investment">
+				<eqn>Perceived_need_for_Renewables</eqn>
+				<gf>
+					<xscale min="-1" max="1"/>
+					<yscale min="0.5" max="1.5"/>
+					<ypts>0.506692850924285,0.517986209962092,0.547425873177567,0.619202922022118,0.768941421369995,1,1.23105857863001,1.38079707797788,1.45257412682243,1.48201379003791,1.49330714907572</ypts>
+				</gf>
+			</aux>
+			<aux name="Normal Investment">
+				<eqn>Renewable_Energy_Production_Capacity/Depreciation_Delay</eqn>
+			</aux>
+			<flow name="Evaporation And Runoff">
+				<eqn>Natural_Reservoirs*&quot;E&amp;R_Fraction&quot;</eqn>
+				<non_negative/>
+				<units>Cubic Meters/Years</units>
+			</flow>
+			<aux name="E&amp;R Fraction">
+				<eqn>0.9133416</eqn>
+			</aux>
+			<aux name="Reference Oxidation">
+				<eqn>80</eqn>
+			</aux>
+			<aux name="2015 Intercept">
+				<eqn>20.244</eqn>
+				<units>MWh</units>
+			</aux>
+			<aux name="Slope">
+				<eqn>(21.609-20.244)/4</eqn>
+			</aux>
+			<aux name="C to F Fraction">
+				<eqn>0.01</eqn>
+			</aux>
+			<aux name="Adjustment Rate">
+				<eqn>Need_of_Food_minus_Bioenergy</eqn>
+				<gf>
+					<xscale min="-2" max="2"/>
+					<yscale min="-0.01" max="0.01"/>
+					<ypts>-0.01,-0.008,-0.006,-0.004,-0.002,0,0.002,0.004,0.006,0.008,0.01</ypts>
+				</gf>
+			</aux>
+			<aux name="Need of Food\nminus Bioenergy">
+				<eqn>Perceived_Need_for_Food_Lands-Perceived_need_for_Bioenergy</eqn>
+			</aux>
+			<aux name="Forests">
+				<eqn>SUM(Forest_Lands)</eqn>
+			</aux>
+			<aux name="Energy per tonne">
+				<doc>https://www.forestresearch.gov.uk/tools-and-resources/fthr/biomass-energy-resources/reference-biomass/facts-figures/potential-yields-of-biofuels-per-ha-pa/</doc>
+				<eqn>27*0.000277777778*1000</eqn>
+				<units>MWh/Tonne</units>
+			</aux>
+			<flow name="C to B">
+				<eqn>Crop_Lands*C_to_B_Fraction/Land_Conversion_Delay</eqn>
+				<non_negative/>
+				<units>Square Kilometers/Years</units>
+			</flow>
+			<flow name="B to F">
+				<dimensions>
+					<dim name="TreeAge"/>
+				</dimensions>
+				<element subscript="1">
+					<eqn>Bioproductive_Lands*B_to_F_Fraction/Land_Conversion_Delay</eqn>
+				</element>
+				<element subscript="2">
+					<eqn>0</eqn>
+				</element>
+				<element subscript="3">
+					<eqn>0</eqn>
+				</element>
+				<non_negative/>
+				<units>Square Kilometers/Years</units>
+			</flow>
+			<aux name="F to C Fraction">
+				<eqn>0.01764957</eqn>
+			</aux>
+			<aux name="C to B Fraction">
+				<eqn>0.01</eqn>
+			</aux>
+			<aux name="B to C Fraction">
+				<eqn>0.01600966</eqn>
+			</aux>
+			<aux name="Food Import/Export">
+				<eqn>Food_Production-Food_Demand</eqn>
+			</aux>
+			<aux name="Food Production">
+				<eqn>Crop_Productivity*Food_Lands</eqn>
+			</aux>
+			<aux name="Target Domestic Share">
+				<eqn>0.95</eqn>
+			</aux>
+			<aux name="Energy Imports">
+				<eqn>Energy_used_From_Fossil-&quot;Non-Renewable_Extraction&quot;</eqn>
+			</aux>
+			<aux name="B">
+				<eqn>0.1</eqn>
+			</aux>
+			<aux name="Utilization">
+				<doc>SUNKEY</doc>
+				<eqn>0.36</eqn>
+			</aux>
+			<aux name="Aggregated\nCropland Effect">
+				<eqn>Effect_of_Food_Land_Need_On_Crop_Lands_Increase*Effect_of_Bioenergy_Land_Need_On_Crop_Lands_Increase</eqn>
+			</aux>
+			<aux name="Normal B to F">
+				<eqn>0.01</eqn>
+			</aux>
+			<aux name="Current Share\nof Bioenergy">
+				<eqn>Energy_Production_from_Bioenergy/Energy_Demand</eqn>
+			</aux>
+			<aux name="BECCS Switch">
+				<eqn>0</eqn>
+			</aux>
+			<aux name="Eq Switch">
+				<eqn>0</eqn>
+			</aux>
+			<aux name="Population (Time Series)">
+				<eqn>TIME</eqn>
+				<gf>
+					<xscale min="0" max="85"/>
+					<yscale min="50000000" max="100000000"/>
+					<ypts>78529409,79827871,81116450,82340088,83429615,84339067,85042738,85561976,85957253,86316463,86705224,87141804,87612950,88114632,88633175,89157785,89692564,90242360,90796629,91340898,91864241,92362476,92836744,93287930,93718886,94131585,94525087,94897553,95249264,95580757,95892325,96183920,96455071,96705210,96933570,97139570,97323026,97483895,97621906,97736771,97828330,97896655,97941894,97964175,97963683,97940717,97895585,97828840,97741351,97634200,97508360,97364550,97203385,97025691,96832380,96624270,96402046,96166441,95918370,95658808,95388601,95108404,94818685,94519899,94212422,93896595,93572831,93241482,92902721,92556633,92203329,91843046,91476052,91102460,90722371,90335919,89943272,89544663,89140354,88730592,88315631,87895714,87471058,87041855,86608269,86170458</ypts>
+				</gf>
+			</aux>
+			<aux name="Overpopulation\nConstant">
+				<eqn>1</eqn>
+			</aux>
+			<flow name="Adj">
+				<eqn>Energy_Production_from_Bioenergy*38/50</eqn>
+				<non_negative/>
+			</flow>
+			<stock name="Average Yearly Savings\nThrough Biofuel">
+				<eqn>0</eqn>
+				<inflow>Adj</inflow>
+				<non_negative/>
+			</stock>
+			<aux name="Share of Domestic\nEnergy Production in Consumption">
+				<eqn>1-Energy_Imports/Energy_Demand</eqn>
+			</aux>
+		</variables>
+		<views>
+			<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
+				<text_box color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt"/>
+				<isee:loop_indicator color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt"/>
+				<numeric_display color="blue" background="white" font_size="9pt" isee:transparent="false"/>
+				<graph color="black" background="white" font_size="12pt" axis_color="#666666" grid_color="#C8C8C8" isee:graph_area_color="white" legend_position="bottom" isee:transparent="false" isee:hide_border="false" axis_title_font_style="normal" axis_title_font_weight="normal" axis_title_text_decoration="none" axis_title_text_align="center" axis_title_vertical_text_align="center" axis_title_font_color="black" axis_title_font_family="Arial" axis_title_font_size="12pt" axis_title_text_padding="2" axis_title_text_border_color="black" axis_title_text_border_width="thin" axis_title_text_border_style="none" axis_label_font_style="normal" axis_label_font_weight="normal" axis_label_text_decoration="none" axis_label_text_align="center" axis_label_vertical_text_align="center" axis_label_font_color="black" axis_label_font_family="Arial" axis_label_font_size="9pt" axis_label_text_padding="2" axis_label_text_border_color="black" axis_label_text_border_width="thin" axis_label_text_border_style="none">
+					<isee:series_styles>
+						<isee:series_style color="blue" thickness="1"/>
+						<isee:series_style color="red" thickness="1" pen_style="dot_dashed"/>
+						<isee:series_style color="fuchsia" thickness="1" pen_style="dotted"/>
+						<isee:series_style color="#008F44" thickness="1" pen_style="dashed"/>
+						<isee:series_style color="#FF7F00" thickness="1"/>
+						<isee:series_style color="#7F00FF" thickness="1" pen_style="dot_dashed"/>
+						<isee:series_style color="#0CA0FF" thickness="1" pen_style="dotted"/>
+						<isee:series_style color="lime" thickness="1" pen_style="dashed"/>
+						<isee:series_style color="#FF007F" thickness="1"/>
+						<isee:series_style color="aqua" thickness="1" pen_style="dot_dashed"/>
+						<isee:series_style color="#F586FF" thickness="1" pen_style="dotted"/>
+						<isee:series_style color="black" thickness="1" pen_style="dashed"/>
+						<isee:series_style color="#C8C8C8" thickness="1"/>
+					</isee:series_styles>
+				</graph>
+				<table color="black" background="#E0E0E0" text_align="right" font_size="12pt" orientation="vertical" wrap_text="false" isee:auto_fit="true" isee:use_alternate_row_colors="false" isee:unlimited_table_length="false" blank_column_width="80" column_width="160" interval="1" report_balances="beginning" report_flows="instantaneous" header_font_style="normal" header_font_weight="normal" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="12pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
+				<button color="black" background="#E0E0E0" font_size="12pt" border_width="thin" border_style="solid" transparent="false" corner_radius="0" isee:flat="false" icon_side="top" isee:highlight_on_hover="false" isee:highlight_color="#959595"/>
+				<isee:annotation color="black" background="#E0E0E0" font_size="12pt" border_width="thin" border_style="solid" transparent="false" corner_radius="0" isee:flat="false" icon_side="top" isee:highlight_on_hover="false" isee:highlight_color="#959595" popup_corner_radius="0" popup_background_color="#FFFECF"/>
+				<slider color="#66CC66" background="#E0E0E0" font_size="12pt" num_ticks="3" label_side="top" wrap_title="true" vertical="false" isee:fancy_appearance="false" isee:show_hover_tip="when_deciding" input_expands="true" input_width="100"/>
+				<isee:sim_speed_slider color="black" background="white"/>
+				<isee:time_slider color="#E95F74" background="silver"/>
+				<isee:pie_input color="black" background="white" font_size="12pt" legend_position="bottom" isee:transparent="false"/>
+				<knob color="#66CC66" background="#E0E0E0" font_size="12pt" label_side="bottom" wrap_title="true"/>
+				<numeric_input color="black" background="#E0E0E0" font_size="12pt" label_side="left" wrap_title="true" input_expands="false" input_width="100"/>
+				<switch color="black" background="#E0E0E0" font_size="12pt" label_side="top" wrap_title="true" isee:appearance="switch" isee:on_color="green"/>
+				<options color="black" background="white" appearance="radio-buttons" arrangement="vertical"/>
+				<graphical_input color="black" background="#E0E0E0" font_size="12pt" isee:show_hover_tip="true"/>
+				<group_input color="black" background="#E0E0E0" font_size="12pt"/>
+				<lamp color="black" background="white" font_size="9pt"/>
+				<gauge color="black" background="white" font_size="9pt" needle_color="#F09F72" bar_color="#EEEEEE" bar_progress_color="black" appearance="radial" num_major_ticks="11" num_minor_ticks="11" show_numeric_value="true"/>
+				<isee:spatial_map color="black" background="white" font_size="12pt"/>
+				<isee:animation_object color="black" background="white" font_size="12pt"/>
+				<isee:navigation_widget color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt" border_color="#999999" border_width="thin" border_style="solid" item_spacing="6" appearance="tabs" corner_radius="4" selected_item_color="black" selected_item_background="white" item_background="#DDDDDD"/>
+				<isee:shape color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt" border_width="thin" border_style="solid" opacity="1" transparent_background="true"/>
+				<isee:selector color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt"/>
+				<isee:iframe color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt" border_width="thin" border_style="solid"/>
+				<isee:financial_table color="black" background="#E0E0E0" text_align="right" font_size="12pt" hide_border="false" auto_fit="true" first_column_width="250" other_column_width="100" header_font_style="normal" header_font_weight="bold" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="14pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
+			</style>
+			<view isee:show_pages="false" background="white" page_width="1056" page_height="816" isee:page_cols="4" isee:page_rows="5" zoom="80" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
+				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
+					<stock color="blue" background="white" font_color="blue" font_size="9pt" label_side="top">
+						<shape type="rectangle" width="45" height="35"/>
+					</stock>
+					<flow color="blue" background="white" font_color="blue" font_size="9pt" label_side="bottom"/>
+					<isee:placeholder color="#228B22" background="white" font_color="#228B22" font_size="9pt" label_side="bottom"/>
+					<module color="blue" background="white" font_color="blue" font_size="9pt" label_side="top">
+						<shape type="rectangle" width="55" height="45"/>
+					</module>
+					<aux color="blue" background="white" font_color="blue" font_size="9pt" label_side="bottom">
+						<shape type="circle" radius="18"/>
+					</aux>
+					<group color="red" background="white" font_color="red" font_size="9pt"/>
+					<connector color="#FF007F" background="white" font_color="#FF007F" font_size="9pt" isee:thickness="1"/>
+					<text_box color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt"/>
+					<isee:loop_indicator color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt"/>
+					<numeric_display color="blue" background="white" font_size="9pt" isee:transparent="false"/>
+					<graph color="black" background="white" font_size="12pt" axis_color="#666666" grid_color="#C8C8C8" isee:graph_area_color="white" legend_position="bottom" isee:transparent="false" isee:hide_border="false" axis_title_font_style="normal" axis_title_font_weight="normal" axis_title_text_decoration="none" axis_title_text_align="center" axis_title_vertical_text_align="center" axis_title_font_color="black" axis_title_font_family="Arial" axis_title_font_size="12pt" axis_title_text_padding="2" axis_title_text_border_color="black" axis_title_text_border_width="thin" axis_title_text_border_style="none" axis_label_font_style="normal" axis_label_font_weight="normal" axis_label_text_decoration="none" axis_label_text_align="center" axis_label_vertical_text_align="center" axis_label_font_color="black" axis_label_font_family="Arial" axis_label_font_size="9pt" axis_label_text_padding="2" axis_label_text_border_color="black" axis_label_text_border_width="thin" axis_label_text_border_style="none">
+						<isee:series_styles>
+							<isee:series_style color="blue" thickness="1"/>
+							<isee:series_style color="red" thickness="1" pen_style="dot_dashed"/>
+							<isee:series_style color="fuchsia" thickness="1" pen_style="dotted"/>
+							<isee:series_style color="#008F44" thickness="1" pen_style="dashed"/>
+							<isee:series_style color="#FF7F00" thickness="1"/>
+							<isee:series_style color="#7F00FF" thickness="1" pen_style="dot_dashed"/>
+							<isee:series_style color="#0CA0FF" thickness="1" pen_style="dotted"/>
+							<isee:series_style color="lime" thickness="1" pen_style="dashed"/>
+							<isee:series_style color="#FF007F" thickness="1"/>
+							<isee:series_style color="aqua" thickness="1" pen_style="dot_dashed"/>
+							<isee:series_style color="#F586FF" thickness="1" pen_style="dotted"/>
+							<isee:series_style color="black" thickness="1" pen_style="dashed"/>
+							<isee:series_style color="#C8C8C8" thickness="1"/>
+						</isee:series_styles>
+					</graph>
+					<table color="black" background="#E0E0E0" text_align="right" font_size="12pt" orientation="vertical" wrap_text="false" isee:auto_fit="true" isee:use_alternate_row_colors="false" isee:unlimited_table_length="false" blank_column_width="80" column_width="160" interval="1" report_balances="beginning" report_flows="instantaneous" header_font_style="normal" header_font_weight="normal" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="12pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
+				</style>
+				<aux label_side="left" x="188.625" y="1013" name="Crop Productivity"/>
+				<aux label_side="top" x="616.25" y="856" name="Population"/>
+				<aux x="499.25" y="882" name="Food Demand"/>
+				<connector uid="8" angle="192.529">
+					<from>Population</from>
+					<to>Food_Demand</to>
+				</connector>
+				<aux label_side="bottom" x="170.625" y="868" name="Perceived Need for\nFood Lands"/>
+				<aux label_side="top" x="301.25" y="879" name="Share of Domestic Food in Consumption"/>
+				<connector uid="19" angle="164.578">
+					<from>Share_of_Domestic_Food_in_Consumption</from>
+					<to>Perceived_Need_for_Food_Lands</to>
+				</connector>
+				<aux x="918.25" y="291.75" name="Energy Demand"/>
+				<aux x="1078" y="173.75" name="Energy used\nFrom Fossil"/>
+				<aux x="911" y="232.75" name="Energy Production from\nBioenergy"/>
+				<flow label_side="right" x="1729" y="143" name="Sequestration">
+					<pts>
+						<pt x="1729" y="198.25"/>
+						<pt x="1729" y="78.75"/>
+					</pts>
+				</flow>
+				<flow label_side="right" x="1733" y="287" name="Emissions\nfrom Fossil Fuel">
+					<pts>
+						<pt x="1733" y="349.75"/>
+						<pt x="1733" y="233.25"/>
+					</pts>
+				</flow>
+				<flow label_side="right" x="1632" y="287.5" name="Emissions\nfrom Bioenergy">
+					<pts>
+						<pt x="1632" y="350.75"/>
+						<pt x="1632" y="233.25"/>
+					</pts>
+				</flow>
+				<flow label_side="right" x="1632" y="145.5" name="Emissions\nfrom FoodProd">
+					<pts>
+						<pt x="1632" y="83.75"/>
+						<pt x="1632" y="198.25"/>
+					</pts>
+				</flow>
+				<stock label_side="center" x="1605.5" y="198.25" width="147" height="35" name="GHG Accumulatıon"/>
+				<aux x="1517" y="456.75" name="Target Emission"/>
+				<aux x="1788" y="412.75" name="Effect of Emissions on\nBioenergy Motivation"/>
+				<aux x="1628" y="474.75" name="Emission Discrepancy"/>
+				<aux x="1794" y="492.75" name="Effect of Emissions on\nForestation"/>
+				<aux label_side="left" x="1610" y="406.75" name="Net Emissions"/>
+				<connector uid="64" angle="236.853">
+					<from>Emissions_from_FoodProd</from>
+					<to>Net_Emissions</to>
+				</connector>
+				<connector uid="70" angle="35.5377">
+					<from>Emission_Discrepancy</from>
+					<to>Effect_of_Emissions_on_Bioenergy_Motivation</to>
+				</connector>
+				<connector uid="58" angle="163.993">
+					<from>
+						<alias uid="59"/>
+					</from>
+					<to>Sequestration</to>
+				</connector>
+				<connector uid="69" angle="339.775">
+					<from>Target_Emission</from>
+					<to>Emission_Discrepancy</to>
+				</connector>
+				<connector uid="71" angle="14.0362">
+					<from>Emission_Discrepancy</from>
+					<to>Effect_of_Emissions_on_Forestation</to>
+				</connector>
+				<connector uid="66" angle="246.038">
+					<from>Emissions_from_Fossil_Fuel</from>
+					<to>Net_Emissions</to>
+				</connector>
+				<connector uid="68" angle="315">
+					<from>Net_Emissions</from>
+					<to>Emission_Discrepancy</to>
+				</connector>
+				<connector uid="65" angle="226.034">
+					<from>Emissions_from_Bioenergy</from>
+					<to>Net_Emissions</to>
+				</connector>
+				<connector uid="67" angle="280.421">
+					<from>Sequestration</from>
+					<to>Net_Emissions</to>
+				</connector>
+				<connector uid="62" angle="140.906">
+					<from>
+						<alias uid="63"/>
+					</from>
+					<to>Emissions_from_Fossil_Fuel</to>
+				</connector>
+				<connector uid="60" angle="21.1247">
+					<from>
+						<alias uid="61"/>
+					</from>
+					<to>Emissions_from_Bioenergy</to>
+				</connector>
+				<group locked="true" x="1440" y="47.25" width="541" height="496" name="GHG Sector">
+					<item uid="242"/>
+					<item uid="61"/>
+					<item uid="343"/>
+					<item uid="63"/>
+					<item uid="416"/>
+					<item uid="118"/>
+					<item uid="59"/>
+				</group>
+				<connector uid="85" angle="21.0375">
+					<from>
+						<alias uid="86"/>
+					</from>
+					<to>Energy_Production_from_Bioenergy</to>
+				</connector>
+				<group locked="true" x="728" y="44.75" width="674" height="501" name="Energy Sector">
+					<item uid="274"/>
+					<item uid="307"/>
+					<item uid="86"/>
+					<item uid="73"/>
+					<item uid="94"/>
+					<item uid="417"/>
+				</group>
+				<connector uid="95" angle="94.2019">
+					<from>
+						<alias uid="94"/>
+					</from>
+					<to>Energy_Demand</to>
+				</connector>
+				<group locked="true" x="39.25" y="794" width="668" height="525" name="Food Sector">
+					<item uid="301"/>
+					<item uid="252"/>
+					<item uid="413"/>
+					<item uid="237"/>
+					<item uid="84"/>
+				</group>
+				<stock label_side="center" x="796.5" y="455.25" width="82" height="37" name="BECCS Adoption\nin Bioenergy"/>
+				<flow label_side="bottom" x="963.75" y="477.75" name="Adjustment">
+					<pts>
+						<pt x="1061" y="477.75"/>
+						<pt x="878.5" y="477.75"/>
+					</pts>
+				</flow>
+				<aux x="929" y="415.75" name="MAX BECCS"/>
+				<aux x="1043" y="433.75" name="A"/>
+				<connector uid="115" angle="344.249">
+					<from>MAX_BECCS</from>
+					<to>Adjustment</to>
+				</connector>
+				<connector uid="116" angle="180">
+					<from>A</from>
+					<to>Adjustment</to>
+				</connector>
+				<connector uid="117" angle="20.3231">
+					<from>BECCS_Adoption_in_Bioenergy</from>
+					<to>Adjustment</to>
+				</connector>
+				<connector uid="119" angle="2.65069">
+					<from>
+						<alias uid="118"/>
+					</from>
+					<to>Emissions_from_Bioenergy</to>
+				</connector>
+				<connector uid="120" angle="32.0054">
+					<from>Energy_Production_from_Bioenergy</from>
+					<to>Energy_used_From_Fossil</to>
+				</connector>
+				<connector uid="121" angle="56.3099">
+					<from>Energy_Demand</from>
+					<to>Energy_used_From_Fossil</to>
+				</connector>
+				<stock label_side="center" x="1193.5" y="352.75" width="98" height="43" name="Renewable Energy\nProduction Capacity"/>
+				<flow label_side="bottom" x="1144.25" y="372.75" name="Investment">
+					<pts>
+						<pt x="1095" y="372.75"/>
+						<pt x="1193.5" y="372.75"/>
+					</pts>
+				</flow>
+				<flow label_side="left" x="1250" y="432.25" name="Depreciation">
+					<pts>
+						<pt x="1250" y="395.75"/>
+						<pt x="1250" y="489.75"/>
+					</pts>
+				</flow>
+				<aux label_side="bottom" x="1020" y="343.75" name="Energy Production\nFrom Other Renewables"/>
+				<connector uid="126" angle="156.911">
+					<from>Renewable_Energy_Production_Capacity</from>
+					<to>Energy_Production_From_Other_Renewables</to>
+				</connector>
+				<connector uid="127" angle="83.991">
+					<from>Energy_Production_From_Other_Renewables</from>
+					<to>Energy_used_From_Fossil</to>
+				</connector>
+				<flow x="867.5" y="143" name="Non-Renewable\nExtraction">
+					<pts>
+						<pt x="826.5" y="143"/>
+						<pt x="932.5" y="143"/>
+					</pts>
+				</flow>
+				<aux x="1172" y="185.75" name="Target Share of\nRenewables"/>
+				<aux label_side="right" label_angle="315" x="1121" y="264.75" name="Current Share of\nRenewables"/>
+				<connector uid="128" angle="339.775">
+					<from>Energy_Production_from_Bioenergy</from>
+					<to>Current_Share_of_Renewables</to>
+				</connector>
+				<connector uid="129" angle="3.90049">
+					<from>Energy_Production_From_Other_Renewables</from>
+					<to>Current_Share_of_Renewables</to>
+				</connector>
+				<connector uid="130" angle="351.724">
+					<from>Energy_Demand</from>
+					<to>Current_Share_of_Renewables</to>
+				</connector>
+				<aux x="1294" y="250.25" name="Perceived need\nfor Renewables"/>
+				<connector uid="131" angle="355.236">
+					<from>Target_Share_of_Renewables</from>
+					<to>Perceived_need_for_Renewables</to>
+				</connector>
+				<connector uid="132" angle="31.6075">
+					<from>Current_Share_of_Renewables</from>
+					<to>Perceived_need_for_Renewables</to>
+				</connector>
+				<connector uid="135" angle="321.71">
+					<from>Renewable_Energy_Production_Capacity</from>
+					<to>Depreciation</to>
+				</connector>
+				<aux x="1887.5" y="66.75" name="Capture per forest km2"/>
+				<connector uid="145" angle="182.726">
+					<from>Capture_per_forest_km2</from>
+					<to>Sequestration</to>
+				</connector>
+				<aux x="1851" y="333.75" name="Fossil GHG Footprint"/>
+				<aux x="1542" y="171.25" name="Food GHG Footprint"/>
+				<connector uid="147" angle="60.2551">
+					<from>Food_GHG_Footprint</from>
+					<to>Emissions_from_FoodProd</to>
+				</connector>
+				<connector uid="148" angle="175.914">
+					<from>Fossil_GHG_Footprint</from>
+					<to>Emissions_from_Fossil_Fuel</to>
+				</connector>
+				<aux x="1524" y="349.5" name="Biofuel GHG Footprint"/>
+				<connector uid="149" angle="58.7816">
+					<from>Biofuel_GHG_Footprint</from>
+					<to>Emissions_from_Bioenergy</to>
+				</connector>
+				<flow x="1824.25" y="216.75" name="Other Emissors">
+					<pts>
+						<pt x="1908" y="216.75"/>
+						<pt x="1752.5" y="216.75"/>
+					</pts>
+				</flow>
+				<connector uid="150" angle="194.931">
+					<from>Other_Emissors</from>
+					<to>Net_Emissions</to>
+				</connector>
+				<aux x="573.25" y="915" name="Food Demand per Capita"/>
+				<connector uid="154" angle="116.565">
+					<from>Food_Demand_per_Capita</from>
+					<to>Food_Demand</to>
+				</connector>
+				<stock label_side="center" x="745.5" y="130.5" width="81" height="51" name="Non-Renewable\nResources"/>
+				<aux x="973" y="142.25" name="Extraction Delay"/>
+				<connector uid="168" angle="141.633">
+					<from>Extraction_Delay</from>
+					<to>&quot;Non-Renewable_Extraction&quot;</to>
+				</connector>
+				<connector uid="169" angle="28.9677">
+					<from>&quot;Non-Renewable_Resources&quot;</from>
+					<to>&quot;Non-Renewable_Extraction&quot;</to>
+				</connector>
+				<aux label_side="top" x="1335" y="439.25" name="Depreciation Delay"/>
+				<connector uid="173" angle="190.437">
+					<from>Depreciation_Delay</from>
+					<to>Depreciation</to>
+				</connector>
+				<flow x="234.625" y="558" name="B to C">
+					<pts>
+						<pt x="201.25" y="558"/>
+						<pt x="268" y="558"/>
+						<pt x="268" y="375.5"/>
+					</pts>
+				</flow>
+				<flow x="317.75" y="610" name="F to B">
+					<pts>
+						<pt x="422.25" y="610"/>
+						<pt x="201.25" y="610"/>
+					</pts>
+				</flow>
+				<flow x="382.125" y="546" name="F to C">
+					<pts>
+						<pt x="422.25" y="546"/>
+						<pt x="342" y="546"/>
+						<pt x="342" y="375.5"/>
+					</pts>
+				</flow>
+				<flow label_side="right" x="309" y="128.125" name="Crop Lands Food/Energy Ratio Adjustment">
+					<pts>
+						<pt x="309" y="60"/>
+						<pt x="309" y="187.25"/>
+					</pts>
+				</flow>
+				<stock label_side="center" x="251.625" y="187.25" width="111" height="39" name="Crop Lands\nFood/Energy Ratio"/>
+				<stock label_side="center" x="422.25" y="529.5" width="68" height="100" name="Forest Lands"/>
+				<stock label_side="center" x="248.815" y="338.5" width="109" height="37" name="Crop Lands"/>
+				<stock label_side="center" x="106.25" y="538.5" width="95" height="100" name="Bioproductive Lands"/>
+				<aux label_side="bottom" x="305.125" y="554" name="Land Conversion Delay"/>
+				<aux label_side="left" x="230" y="110.125" name="Croplands Reallocation Delay"/>
+				<aux label_side="right" label_angle="315" x="400.125" y="428.25" name="Effect of Bioenergy Land Need\nOn Crop Lands Increase"/>
+				<aux x="183.75" y="201" name="Food Lands"/>
+				<aux x="425" y="193" name="Bioenergy Lands"/>
+				<connector uid="144" angle="265.03">
+					<from>Land_Conversion_Delay</from>
+					<to>F_to_B</to>
+				</connector>
+				<connector uid="143" angle="111.801">
+					<from>Land_Conversion_Delay</from>
+					<to>B_to_C</to>
+				</connector>
+				<connector uid="142" angle="55.1455">
+					<from>Land_Conversion_Delay</from>
+					<to>F_to_C</to>
+				</connector>
+				<connector uid="141" angle="7.12502">
+					<from>Croplands_Reallocation_Delay</from>
+					<to>&quot;Crop_Lands_Food/Energy_Ratio_Adjustment&quot;</to>
+				</connector>
+				<connector uid="140" angle="218.472">
+					<from>Forest_Lands</from>
+					<to>F_to_B</to>
+				</connector>
+				<connector uid="37" angle="36.0559">
+					<from>&quot;Crop_Lands_Food/Energy_Ratio&quot;</from>
+					<to>Bioenergy_Lands</to>
+				</connector>
+				<connector uid="36" angle="140.312">
+					<from>&quot;Crop_Lands_Food/Energy_Ratio&quot;</from>
+					<to>Food_Lands</to>
+				</connector>
+				<connector uid="27" angle="128.66">
+					<from>&quot;Crop_Lands_Food/Energy_Ratio&quot;</from>
+					<to>&quot;Crop_Lands_Food/Energy_Ratio_Adjustment&quot;</to>
+				</connector>
+				<connector uid="1" angle="155.958">
+					<from>Crop_Lands</from>
+					<to>Food_Lands</to>
+				</connector>
+				<connector uid="3" angle="25.0327">
+					<from>Crop_Lands</from>
+					<to>Bioenergy_Lands</to>
+				</connector>
+				<group locked="true" x="30.75" y="38" width="671" height="705.5" name="Land Use Sector">
+					<item uid="75"/>
+					<item uid="313"/>
+					<item uid="77"/>
+				</group>
+				<stock label_side="center" x="856.5" y="829.5" width="83" height="55" name="Usable\nGroundwater"/>
+				<stock label_side="center" x="1096.5" y="829.5" width="83" height="55" name="Usable\nSurface Water"/>
+				<stock label_side="center" x="972.5" y="969.5" width="95" height="47" name="Natural Reservoirs"/>
+				<flow label_side="left" label_angle="135" x="1011" y="1072.25" name="Rainfall">
+					<pts>
+						<pt x="1011" y="1128"/>
+						<pt x="1011" y="1016.5"/>
+					</pts>
+				</flow>
+				<flow x="1107.75" y="994" name="Surface\nPercolation">
+					<pts>
+						<pt x="1067.5" y="994"/>
+						<pt x="1148" y="994"/>
+						<pt x="1148" y="884.5"/>
+					</pts>
+				</flow>
+				<flow label_side="bottom" x="931.25" y="993" name="Ground\nPercolation">
+					<pts>
+						<pt x="972.5" y="993"/>
+						<pt x="890" y="993"/>
+						<pt x="890" y="884.5"/>
+					</pts>
+				</flow>
+				<flow label_side="left" x="898" y="789.75" name="GW Consumption">
+					<pts>
+						<pt x="898" y="829.5"/>
+						<pt x="898" y="729"/>
+					</pts>
+				</flow>
+				<flow label_side="right" x="1142" y="788.25" name="SW Consumption">
+					<pts>
+						<pt x="1142" y="829.5"/>
+						<pt x="1142" y="726"/>
+					</pts>
+				</flow>
+				<aux label_side="top" x="1015" y="794.25" name="SW/GW Consumption Ratio"/>
+				<connector uid="196" angle="148.151">
+					<from>Usable_Surface_Water</from>
+					<to>&quot;SW/GW_Consumption_Ratio&quot;</to>
+				</connector>
+				<connector uid="198" angle="2.70488">
+					<from>&quot;SW/GW_Consumption_Ratio&quot;</from>
+					<to>SW_Consumption</to>
+				</connector>
+				<aux x="1188.5" y="661" name="Total Water Demand"/>
+				<connector uid="200" angle="280.521">
+					<from>Total_Water_Demand</from>
+					<to>SW_Consumption</to>
+				</connector>
+				<aux x="1257" y="791" name="Water Use in\nAgriculture"/>
+				<aux label_side="right" x="1257" y="654" name="Water Use\nof Population"/>
+				<aux label_side="right" x="1287.33" y="690" name="Per capita water\nconsumption"/>
+				<aux label_side="right" x="1292.25" y="779.333" name="Food Production\nWater Footprint"/>
+				<connector uid="205" angle="225">
+					<from>Food_Production_Water_Footprint</from>
+					<to>Water_Use_in_Agriculture</to>
+				</connector>
+				<connector uid="208" angle="167.335">
+					<from>Per_capita_water_consumption</from>
+					<to>Water_Use_of_Population</to>
+				</connector>
+				<connector uid="209" angle="124.077">
+					<from>
+						<alias uid="201"/>
+					</from>
+					<to>Water_Use_of_Population</to>
+				</connector>
+				<connector uid="210" angle="137.49">
+					<from>Water_Use_in_Agriculture</from>
+					<to>Total_Water_Demand</to>
+				</connector>
+				<connector uid="212" angle="123.69">
+					<from>Water_Use_of_Population</from>
+					<to>Total_Water_Demand</to>
+				</connector>
+				<aux label_side="right" x="1138" y="619.167" name="Projected Water\nDemand in Industry"/>
+				<connector uid="213" angle="278.872">
+					<from>Projected_Water_Demand_in_Industry</from>
+					<to>Total_Water_Demand</to>
+				</connector>
+				<aux label_side="right" x="907.25" y="690" name="Reference Water"/>
+				<aux label_side="left" label_angle="135" x="829.5" y="690" name="Water Availability"/>
+				<flow x="536.125" y="572" name="Aging">
+					<pts>
+						<pt x="490.25" y="572"/>
+						<pt x="594" y="572"/>
+					</pts>
+				</flow>
+				<aux label_side="top" x="558.5" y="513.25" name="Age Cohort Size"/>
+				<connector uid="222" angle="43.7156">
+					<from>Forest_Lands</from>
+					<to>Aging</to>
+				</connector>
+				<connector uid="223" angle="285.945">
+					<from>Age_Cohort_Size</from>
+					<to>Aging</to>
+				</connector>
+				<group locked="false" x="729" y="597" width="666.5" height="679.167" name="Water Sector 1">
+					<item uid="191"/>
+					<item uid="201"/>
+					<item uid="330"/>
+					<item uid="194"/>
+					<item uid="249"/>
+				</group>
+				<connector uid="224" angle="175.236">
+					<from>&quot;SW/GW_Consumption_Ratio&quot;</from>
+					<to>GW_Consumption</to>
+				</connector>
+				<connector uid="225" angle="27.542">
+					<from>Usable_Groundwater</from>
+					<to>&quot;SW/GW_Consumption_Ratio&quot;</to>
+				</connector>
+				<connector uid="226" angle="181.941">
+					<from>Total_Water_Demand</from>
+					<to>GW_Consumption</to>
+				</connector>
+				<stock label_side="center" x="246.25" y="1124.5" width="91" height="36" name="Soil Top Thickness"/>
+				<stock label_side="center" x="384.25" y="1126" width="69" height="35" name="Nutrients"/>
+				<flow label_side="right" x="427" y="1222" name="Humification">
+					<pts>
+						<pt x="427" y="1283"/>
+						<pt x="427" y="1161"/>
+					</pts>
+				</flow>
+				<flow x="501.625" y="1146" name="Oxidation">
+					<pts>
+						<pt x="453.25" y="1146"/>
+						<pt x="574" y="1146"/>
+					</pts>
+				</flow>
+				<flow label_side="left" x="291.75" y="1221.25" name="Generation">
+					<pts>
+						<pt x="291.75" y="1282"/>
+						<pt x="291.75" y="1160.5"/>
+					</pts>
+				</flow>
+				<flow x="188.625" y="1139.5" name="Erosion">
+					<pts>
+						<pt x="246.25" y="1139.5"/>
+						<pt x="107" y="1139.5"/>
+					</pts>
+				</flow>
+				<aux label_side="right" x="258.75" y="1091" name="Effect of STT on Productivity"/>
+				<aux label_side="right" x="448.25" y="1071" name="Effect of Nutrients on Productivity"/>
+				<connector uid="228" angle="79.4792">
+					<from>Soil_Top_Thickness</from>
+					<to>Effect_of_STT_on_Productivity</to>
+				</connector>
+				<connector uid="229" angle="101.373">
+					<from>Nutrients</from>
+					<to>Effect_of_Nutrients_on_Productivity</to>
+				</connector>
+				<aux label_side="right" x="577" y="1093" name="Reference Nutrients"/>
+				<aux x="181.25" y="1080" name="Reference STT"/>
+				<connector uid="230" angle="26.9802">
+					<from>Reference_STT</from>
+					<to>Effect_of_STT_on_Productivity</to>
+				</connector>
+				<connector uid="231" angle="201.801">
+					<from>Reference_Nutrients</from>
+					<to>Effect_of_Nutrients_on_Productivity</to>
+				</connector>
+				<connector uid="232" angle="144.782">
+					<from>Effect_of_Nutrients_on_Productivity</from>
+					<to>Crop_Productivity</to>
+				</connector>
+				<connector uid="233" angle="97.125">
+					<from>Effect_of_STT_on_Productivity</from>
+					<to>Crop_Productivity</to>
+				</connector>
+				<aux x="94.8333" y="1045.5" name="Norrnal\nCrop Productivity"/>
+				<connector uid="234" angle="354.289">
+					<from>Norrnal_Crop_Productivity</from>
+					<to>Crop_Productivity</to>
+				</connector>
+				<aux label_side="right" x="145.625" y="962" name="Farming Agression"/>
+				<aux label_side="left" x="178.25" y="1262" name="Effect of Intensive Farming on Erosion"/>
+				<connector uid="238" angle="231.633">
+					<from>
+						<alias uid="237"/>
+					</from>
+					<to>Effect_of_Intensive_Farming_on_Erosion</to>
+				</connector>
+				<connector uid="239" angle="108.308">
+					<from>Effect_of_Intensive_Farming_on_Erosion</from>
+					<to>Erosion</to>
+				</connector>
+				<aux label_side="right" x="553" y="1262" name="Effect of Intensive\nFarming on Humification"/>
+				<connector uid="240" angle="309.588">
+					<from>
+						<alias uid="237"/>
+					</from>
+					<to>Effect_of_Intensive_Farming_on_Humification</to>
+				</connector>
+				<connector uid="241" angle="123.69">
+					<from>Effect_of_Intensive_Farming_on_Humification</from>
+					<to>Humification</to>
+				</connector>
+				<aux x="1905.5" y="171.25" name="Capture per BPL"/>
+				<connector uid="243" angle="181.458">
+					<from>
+						<alias uid="242"/>
+					</from>
+					<to>Sequestration</to>
+				</connector>
+				<connector uid="244" angle="186.968">
+					<from>Capture_per_BPL</from>
+					<to>Sequestration</to>
+				</connector>
+				<connector uid="245" angle="206.003">
+					<from>Reference_Water</from>
+					<to>Water_Availability</to>
+				</connector>
+				<stock label_side="center" x="1001.58" y="1180.5" width="71" height="32" name="Water Quality"/>
+				<flow x="946.208" y="1194" name="Water Regeneration">
+					<pts>
+						<pt x="890.833" y="1194"/>
+						<pt x="1001.58" y="1194"/>
+					</pts>
+				</flow>
+				<flow x="1115.71" y="1197" name="Degradation">
+					<pts>
+						<pt x="1072.58" y="1197"/>
+						<pt x="1182.83" y="1197"/>
+					</pts>
+				</flow>
+				<aux label_side="bottom" x="833.208" y="1194" name="Regeneration Delay"/>
+				<aux x="922" y="1233.25" name="Water Quality\nReference"/>
+				<connector uid="247" angle="27.9892">
+					<from>Regeneration_Delay</from>
+					<to>Water_Regeneration</to>
+				</connector>
+				<connector uid="248" angle="150.16">
+					<from>Water_Quality</from>
+					<to>Water_Regeneration</to>
+				</connector>
+				<connector uid="251" angle="51.9856">
+					<from>Water_Quality</from>
+					<to>Degradation</to>
+				</connector>
+				<aux label_side="right" x="786.25" y="629.5" name="Effect of Water Availability\non Productivity"/>
+				<connector uid="253" angle="112.504">
+					<from>Water_Availability</from>
+					<to>Effect_of_Water_Availability_on_Productivity</to>
+				</connector>
+				<aux label_side="left" x="821" y="748" name="Usable\nWater Level"/>
+				<connector uid="255" angle="184.382">
+					<from>Usable_Groundwater</from>
+					<to>Usable_Water_Level</to>
+				</connector>
+				<connector uid="256" angle="115.56">
+					<from>Usable_Surface_Water</from>
+					<to>Usable_Water_Level</to>
+				</connector>
+				<connector uid="257" angle="97.3524">
+					<from>Usable_Water_Level</from>
+					<to>Water_Availability</to>
+				</connector>
+				<connector uid="258" angle="158.199">
+					<from>
+						<alias uid="252"/>
+					</from>
+					<to>Crop_Productivity</to>
+				</connector>
+				<aux x="94.8333" y="1169.5" name="Normal Erosion\nFraction"/>
+				<connector uid="265" angle="345.964">
+					<from>Normal_Erosion_Fraction</from>
+					<to>Erosion</to>
+				</connector>
+				<connector uid="266" angle="190.353">
+					<from>Soil_Top_Thickness</from>
+					<to>Erosion</to>
+				</connector>
+				<aux x="240.75" y="1247.5" name="Generation\nRate"/>
+				<connector uid="267" angle="13.8171">
+					<from>Generation_Rate</from>
+					<to>Generation</to>
+				</connector>
+				<aux x="566" y="1198" name="Normal Humification\nRate"/>
+				<connector uid="268" angle="156.251">
+					<from>Normal_Humification_Rate</from>
+					<to>Humification</to>
+				</connector>
+				<aux x="625.25" y="1164" name="Normal Oxidation\nFraction"/>
+				<connector uid="269" angle="11.4151">
+					<from>Nutrients</from>
+					<to>Oxidation</to>
+				</connector>
+				<connector uid="270" angle="198.925">
+					<from>Normal_Oxidation_Fraction</from>
+					<to>Oxidation</to>
+				</connector>
+				<aux label_side="left" x="815" y="324.5" name="Energy Demand\nper Capita"/>
+				<connector uid="273" angle="47.9508">
+					<from>Energy_Demand_per_Capita</from>
+					<to>Energy_Demand</to>
+				</connector>
+				<connector uid="275" angle="44.1931">
+					<from>
+						<alias uid="274"/>
+					</from>
+					<to>Energy_Production_from_Bioenergy</to>
+				</connector>
+				<aux x="1025" y="647.5" name="Eff of Water Availability on Consumption"/>
+				<connector uid="283" angle="33.6901">
+					<from>Water_Availability</from>
+					<to>Eff_of_Water_Availability_on_Consumption</to>
+				</connector>
+				<connector uid="284" angle="254.055">
+					<from>Eff_of_Water_Availability_on_Consumption</from>
+					<to>GW_Consumption</to>
+				</connector>
+				<connector uid="285" angle="288.8">
+					<from>Eff_of_Water_Availability_on_Consumption</from>
+					<to>SW_Consumption</to>
+				</connector>
+				<aux x="963.5" y="1114" name="Normal Rainfall\nRate"/>
+				<connector uid="288" angle="79.6952">
+					<from>Normal_Rainfall_Rate</from>
+					<to>Rainfall</to>
+				</connector>
+				<aux x="922" y="1076.25" name="Eff of Forest Lands\non Rainfall"/>
+				<connector uid="289" angle="12.9946">
+					<from>
+						<alias uid="194"/>
+					</from>
+					<to>Eff_of_Forest_Lands_on_Rainfall</to>
+				</connector>
+				<connector uid="290" angle="21.2912">
+					<from>Eff_of_Forest_Lands_on_Rainfall</from>
+					<to>Rainfall</to>
+				</connector>
+				<aux x="827" y="1064.5" name="Reference Forest Lands"/>
+				<connector uid="291" angle="14.4703">
+					<from>Reference_Forest_Lands</from>
+					<to>Eff_of_Forest_Lands_on_Rainfall</to>
+				</connector>
+				<aux label_side="top" x="1020" y="868" name="Reference\nBioproductive Lands"/>
+				<aux x="1025" y="915.5" name="Eff of Bioproductive Lands on Percolation"/>
+				<connector uid="292" angle="330.255">
+					<from>Reference_Bioproductive_Lands</from>
+					<to>Eff_of_Bioproductive_Lands_on_Percolation</to>
+				</connector>
+				<connector uid="293" angle="31.1225">
+					<from>
+						<alias uid="191"/>
+					</from>
+					<to>Eff_of_Bioproductive_Lands_on_Percolation</to>
+				</connector>
+				<connector uid="294" angle="4.08562">
+					<from>Eff_of_Bioproductive_Lands_on_Percolation</from>
+					<to>Surface_Percolation</to>
+				</connector>
+				<connector uid="295" angle="180">
+					<from>Eff_of_Bioproductive_Lands_on_Percolation</from>
+					<to>Ground_Percolation</to>
+				</connector>
+				<aux x="1201" y="1012" name="Surface Percolation\nFraction"/>
+				<aux x="827" y="993" name="Ground Percolation\nFraction"/>
+				<connector uid="296" angle="345.069">
+					<from>Ground_Percolation_Fraction</from>
+					<to>Ground_Percolation</to>
+				</connector>
+				<connector uid="297" angle="213.69">
+					<from>Surface_Percolation_Fraction</from>
+					<to>Surface_Percolation</to>
+				</connector>
+				<connector uid="298" angle="165.141">
+					<from>Natural_Reservoirs</from>
+					<to>Ground_Percolation</to>
+				</connector>
+				<connector uid="299" angle="13.6713">
+					<from>Natural_Reservoirs</from>
+					<to>Surface_Percolation</to>
+				</connector>
+				<aux x="1910" y="245.25" name="Projected Emissions from Industry"/>
+				<connector uid="300" angle="137.816">
+					<from>Projected_Emissions_from_Industry</from>
+					<to>Other_Emissors</to>
+				</connector>
+				<aux x="1002" y="1233.25" name="Effect of Water\nQuality on Productivity"/>
+				<connector uid="303" angle="339.444">
+					<from>Water_Quality_Reference</from>
+					<to>Effect_of_Water_Quality_on_Productivity</to>
+				</connector>
+				<connector uid="304" angle="116.565">
+					<from>
+						<alias uid="301"/>
+					</from>
+					<to>Crop_Productivity</to>
+				</connector>
+				<aux label_side="right" x="1206.5" y="1147.75" name="Quality Degradation Fraction due to Oxidation"/>
+				<connector uid="305" angle="175.236">
+					<from>
+						<alias uid="249"/>
+					</from>
+					<to>Quality_Degradation_Fraction_due_to_Oxidation</to>
+				</connector>
+				<connector uid="306" angle="145.944">
+					<from>Quality_Degradation_Fraction_due_to_Oxidation</from>
+					<to>Degradation</to>
+				</connector>
+				<aux x="84.25" y="909.5" name="Perception Delay"/>
+				<connector uid="308" angle="63.4349">
+					<from>Perception_Delay</from>
+					<to>Perceived_Need_for_Food_Lands</to>
+				</connector>
+				<connector uid="310" angle="110.136">
+					<from>
+						<alias uid="307"/>
+					</from>
+					<to>Perceived_need_for_Renewables</to>
+				</connector>
+				<aux label_side="left" label_angle="225" x="216.625" y="433.75" name="Effect of Food Land Need\nOn Crop Lands Increase"/>
+				<connector uid="80" angle="270.955">
+					<from>
+						<alias uid="77"/>
+					</from>
+					<to>Effect_of_Food_Land_Need_On_Crop_Lands_Increase</to>
+				</connector>
+				<aux label_side="top" x="1338" y="173.75" name="Perceived need\nfor Bioenergy"/>
+				<connector uid="314" angle="60.0941">
+					<from>Perceived_need_for_Renewables</from>
+					<to>Perceived_need_for_Bioenergy</to>
+				</connector>
+				<connector uid="316" angle="250.346">
+					<from>
+						<alias uid="313"/>
+					</from>
+					<to>Effect_of_Bioenergy_Land_Need_On_Crop_Lands_Increase</to>
+				</connector>
+				<flow x="407.033" y="357" name="C to F">
+					<pts>
+						<pt x="357.815" y="357"/>
+						<pt x="456.25" y="357"/>
+						<pt x="456.25" y="529.5"/>
+					</pts>
+				</flow>
+				<aux label_side="bottom" x="425" y="709" name="B to F Fraction"/>
+				<aux label_side="left" label_angle="225" x="398.5" y="655.5" name="F to B Fraction"/>
+				<connector uid="323" angle="174.806">
+					<from>F_to_B_Fraction</from>
+					<to>F_to_B</to>
+				</connector>
+				<aux label_side="right" x="1194" y="314.5" name="Effect of Perceived Need on Renewable Investment"/>
+				<connector uid="325" angle="194.036">
+					<from>Perceived_need_for_Renewables</from>
+					<to>Effect_of_Perceived_Need_on_Renewable_Investment</to>
+				</connector>
+				<aux label_side="bottom" x="1158.25" y="467.25" name="Normal Investment"/>
+				<connector uid="326" angle="202.249">
+					<from>Effect_of_Perceived_Need_on_Renewable_Investment</from>
+					<to>Investment</to>
+				</connector>
+				<connector uid="327" angle="111.501">
+					<from>Normal_Investment</from>
+					<to>Investment</to>
+				</connector>
+				<flow label_side="right" x="1057" y="1063.75" name="Evaporation And Runoff">
+					<pts>
+						<pt x="1057" y="1016.5"/>
+						<pt x="1057" y="1132"/>
+					</pts>
+				</flow>
+				<connector uid="328" angle="332.488">
+					<from>Natural_Reservoirs</from>
+					<to>Evaporation_And_Runoff</to>
+				</connector>
+				<aux x="1118.83" y="1090.25" name="E&amp;R Fraction"/>
+				<connector uid="329" angle="177.138">
+					<from>&quot;E&amp;R_Fraction&quot;</from>
+					<to>Evaporation_And_Runoff</to>
+				</connector>
+				<connector uid="331" angle="151.805">
+					<from>
+						<alias uid="330"/>
+					</from>
+					<to>Water_Use_in_Agriculture</to>
+				</connector>
+				<aux x="1269.33" y="1197" name="Reference Oxidation"/>
+				<connector uid="332" angle="183.033">
+					<from>Reference_Oxidation</from>
+					<to>Quality_Degradation_Fraction_due_to_Oxidation</to>
+				</connector>
+				<aux x="769" y="376.75" name="2015 Intercept"/>
+				<aux x="822.25" y="372.75" name="Slope"/>
+				<connector uid="333" angle="54.7824">
+					<from>&quot;2015_Intercept&quot;</from>
+					<to>Energy_Demand_per_Capita</to>
+				</connector>
+				<connector uid="334" angle="98.5453">
+					<from>Slope</from>
+					<to>Energy_Demand_per_Capita</to>
+				</connector>
+				<connector uid="335" angle="105.945">
+					<from>
+						<alias uid="75"/>
+					</from>
+					<to>C_to_F</to>
+				</connector>
+				<connector uid="336" angle="26.9898">
+					<from>Crop_Lands</from>
+					<to>C_to_F</to>
+				</connector>
+				<aux x="455" y="315" name="C to F Fraction"/>
+				<connector uid="337" angle="171.369">
+					<from>C_to_F_Fraction</from>
+					<to>C_to_F</to>
+				</connector>
+				<aux x="376" y="244" name="Adjustment Rate"/>
+				<aux label_side="bottom" x="312" y="274.75" name="Need of Food\nminus Bioenergy"/>
+				<connector uid="341" angle="77.125">
+					<from>Need_of_Food_minus_Bioenergy</from>
+					<to>Adjustment_Rate</to>
+				</connector>
+				<connector uid="340" angle="132.274">
+					<from>
+						<alias uid="313"/>
+					</from>
+					<to>Need_of_Food_minus_Bioenergy</to>
+				</connector>
+				<connector uid="339" angle="43.2643">
+					<from>
+						<alias uid="77"/>
+					</from>
+					<to>Need_of_Food_minus_Bioenergy</to>
+				</connector>
+				<connector uid="342" angle="84.8056">
+					<from>Adjustment_Rate</from>
+					<to>&quot;Crop_Lands_Food/Energy_Ratio_Adjustment&quot;</to>
+				</connector>
+				<connector uid="344" angle="14.0362">
+					<from>
+						<alias uid="343"/>
+					</from>
+					<to>Emissions_from_FoodProd</to>
+				</connector>
+				<aux x="647" y="590" name="Forests"/>
+				<connector uid="346" angle="335.126">
+					<from>Forest_Lands</from>
+					<to>Forests</to>
+				</connector>
+				<aux label_side="left" label_angle="225" x="835.5" y="279" name="Energy per tonne"/>
+				<connector uid="350" angle="80.1807">
+					<from>Energy_per_tonne</from>
+					<to>Energy_Production_from_Bioenergy</to>
+				</connector>
+				<flow x="201.283" y="357" name="C to B">
+					<pts>
+						<pt x="248.815" y="357"/>
+						<pt x="153.75" y="357"/>
+						<pt x="153.75" y="538.5"/>
+					</pts>
+				</flow>
+				<flow x="305.125" y="691" name="B to F">
+					<pts>
+						<pt x="151" y="638.5"/>
+						<pt x="151" y="691"/>
+						<pt x="459.25" y="691"/>
+						<pt x="459.25" y="629.5"/>
+					</pts>
+				</flow>
+				<connector uid="355" angle="185.194">
+					<from>B_to_F_Fraction</from>
+					<to>B_to_F</to>
+				</connector>
+				<connector uid="356" angle="306.297">
+					<from>Bioproductive_Lands</from>
+					<to>B_to_F</to>
+				</connector>
+				<connector uid="357" angle="62.6476">
+					<from>Land_Conversion_Delay</from>
+					<to>C_to_F</to>
+				</connector>
+				<connector uid="358" angle="252.474">
+					<from>Land_Conversion_Delay</from>
+					<to>B_to_F</to>
+				</connector>
+				<aux label_side="top" x="418.125" y="500.25" name="F to C Fraction"/>
+				<aux x="91.25" y="383.5" name="C to B Fraction"/>
+				<aux label_side="top" x="201.25" y="496.25" width="17" height="17" name="B to C Fraction"/>
+				<connector uid="359" angle="68.459">
+					<from>C_to_B_Fraction</from>
+					<to>C_to_B</to>
+				</connector>
+				<connector uid="360" angle="315.477">
+					<from>B_to_C_Fraction</from>
+					<to>B_to_C</to>
+				</connector>
+				<connector uid="361" angle="195.195">
+					<from>F_to_C_Fraction</from>
+					<to>F_to_C</to>
+				</connector>
+				<connector uid="362" angle="353.819">
+					<from>Bioproductive_Lands</from>
+					<to>B_to_C</to>
+				</connector>
+				<connector uid="363" angle="156.797">
+					<from>Crop_Lands</from>
+					<to>C_to_B</to>
+				</connector>
+				<connector uid="364" angle="170.233">
+					<from>Forest_Lands</from>
+					<to>F_to_C</to>
+				</connector>
+				<connector uid="365" angle="99.3893">
+					<from>Land_Conversion_Delay</from>
+					<to>C_to_B</to>
+				</connector>
+				<aux label_side="bottom" x="423" y="909.5" name="Food Import/Export"/>
+				<connector uid="369" angle="180">
+					<from>Food_Demand</from>
+					<to>&quot;Food_Import/Export&quot;</to>
+				</connector>
+				<aux label_side="right" x="309.75" y="953.5" name="Food Production"/>
+				<connector uid="375" angle="129.207">
+					<from>Food_Production</from>
+					<to>Share_of_Domestic_Food_in_Consumption</to>
+				</connector>
+				<connector uid="376" angle="32.55">
+					<from>Food_Production</from>
+					<to>&quot;Food_Import/Export&quot;</to>
+				</connector>
+				<connector uid="377" angle="39.4349">
+					<from>Crop_Productivity</from>
+					<to>Food_Production</to>
+				</connector>
+				<connector uid="378" angle="157.973">
+					<from>
+						<alias uid="84"/>
+					</from>
+					<to>Food_Production</to>
+				</connector>
+				<connector uid="380" angle="164.578">
+					<from>Food_Demand</from>
+					<to>Share_of_Domestic_Food_in_Consumption</to>
+				</connector>
+				<aux label_side="top" x="139" y="831" name="Target Domestic Share"/>
+				<connector uid="381" angle="351.384">
+					<from>Target_Domestic_Share</from>
+					<to>Perceived_Need_for_Food_Lands</to>
+				</connector>
+				<connector uid="382" angle="153.975">
+					<from>Crop_Productivity</from>
+					<to>Farming_Agression</to>
+				</connector>
+				<connector uid="383" angle="103.736">
+					<from>Norrnal_Crop_Productivity</from>
+					<to>Farming_Agression</to>
+				</connector>
+				<connector uid="384" angle="355.352">
+					<from>Perception_Delay</from>
+					<to>Farming_Agression</to>
+				</connector>
+				<aux x="994" y="84" name="Energy Imports"/>
+				<connector uid="388" angle="84.144">
+					<from>Energy_used_From_Fossil</from>
+					<to>Energy_Imports</to>
+				</connector>
+				<connector uid="389" angle="60.4612">
+					<from>&quot;Non-Renewable_Extraction&quot;</from>
+					<to>Energy_Imports</to>
+				</connector>
+				<aux label_side="right" x="1025" y="513.25" name="B"/>
+				<connector uid="390" angle="139.164">
+					<from>B</from>
+					<to>Adjustment</to>
+				</connector>
+				<aux x="925.25" y="358.75" name="Utilization"/>
+				<connector uid="393" angle="49.7245">
+					<from>Utilization</from>
+					<to>Energy_Production_From_Other_Renewables</to>
+				</connector>
+				<aux label_side="top" x="307.125" y="477.75" name="Aggregated\nCropland Effect"/>
+				<connector uid="394" angle="315">
+					<from>Effect_of_Food_Land_Need_On_Crop_Lands_Increase</from>
+					<to>Aggregated_Cropland_Effect</to>
+				</connector>
+				<connector uid="395" angle="232.792">
+					<from>Effect_of_Bioenergy_Land_Need_On_Crop_Lands_Increase</from>
+					<to>Aggregated_Cropland_Effect</to>
+				</connector>
+				<connector uid="396" angle="202.2">
+					<from>Aggregated_Cropland_Effect</from>
+					<to>B_to_C</to>
+				</connector>
+				<connector uid="397" angle="331.539">
+					<from>Aggregated_Cropland_Effect</from>
+					<to>F_to_C</to>
+				</connector>
+				<connector uid="401" angle="194.387">
+					<from>Renewable_Energy_Production_Capacity</from>
+					<to>Normal_Investment</to>
+				</connector>
+				<connector uid="402" angle="245.433">
+					<from>Depreciation_Delay</from>
+					<to>Normal_Investment</to>
+				</connector>
+				<connector uid="403" angle="345.403">
+					<from>
+						<alias uid="73"/>
+					</from>
+					<to>Perceived_need_for_Bioenergy</to>
+				</connector>
+				<aux label_side="top" x="508.25" y="668.5" name="Normal B to F"/>
+				<connector uid="404" angle="266.609">
+					<from>
+						<alias uid="75"/>
+					</from>
+					<to>B_to_F_Fraction</to>
+				</connector>
+				<connector uid="405" angle="221.878">
+					<from>Normal_B_to_F</from>
+					<to>B_to_F_Fraction</to>
+				</connector>
+				<aux x="1020" y="237.75" name="Current Share\nof Bioenergy"/>
+				<connector uid="409" angle="343.583">
+					<from>Energy_Production_from_Bioenergy</from>
+					<to>Current_Share_of_Bioenergy</to>
+				</connector>
+				<connector uid="410" angle="357.594">
+					<from>Energy_Demand</from>
+					<to>Current_Share_of_Bioenergy</to>
+				</connector>
+				<connector uid="302" angle="261.227">
+					<from>Water_Quality</from>
+					<to>Effect_of_Water_Quality_on_Productivity</to>
+				</connector>
+				<aux x="840.25" y="518.25" name="BECCS Switch"/>
+				<connector uid="411" angle="346.063">
+					<from>BECCS_Switch</from>
+					<to>Adjustment</to>
+				</connector>
+				<aux x="761" y="433.75" name="Eq Switch"/>
+				<connector uid="412" angle="39.9462">
+					<from>Eq_Switch</from>
+					<to>Energy_Demand_per_Capita</to>
+				</connector>
+				<aux label_side="top" x="673.25" y="897" name="Population (Time Series)"/>
+				<connector uid="414" angle="98.7778">
+					<from>&quot;Population_(Time_Series)&quot;</from>
+					<to>Population</to>
+				</connector>
+				<connector uid="415" angle="251.565">
+					<from>
+						<alias uid="413"/>
+					</from>
+					<to>Population</to>
+				</connector>
+				<connector uid="418" angle="6.91123">
+					<from>
+						<alias uid="416"/>
+					</from>
+					<to>Emission_Discrepancy</to>
+				</connector>
+				<connector uid="420" angle="176.186">
+					<from>
+						<alias uid="413"/>
+					</from>
+					<to>Perceived_Need_for_Food_Lands</to>
+				</connector>
+				<connector uid="419" angle="332.176">
+					<from>
+						<alias uid="417"/>
+					</from>
+					<to>Perceived_need_for_Renewables</to>
+				</connector>
+				<connector uid="422" angle="215.822">
+					<from>&quot;Population_(Time_Series)&quot;</from>
+					<to>Food_Demand_per_Capita</to>
+				</connector>
+				<aux x="659" y="953" name="Overpopulation\nConstant"/>
+				<connector uid="423" angle="101.143">
+					<from>Overpopulation_Constant</from>
+					<to>Population</to>
+				</connector>
+				<flow x="1100.42" y="98.3333" name="Adj">
+					<pts>
+						<pt x="1070.83" y="98.3333"/>
+						<pt x="1130" y="98.3333"/>
+					</pts>
+				</flow>
+				<connector uid="424" angle="35.3608">
+					<from>Energy_Production_from_Bioenergy</from>
+					<to>Adj</to>
+				</connector>
+				<stock x="1152.5" y="98.3333" name="Average Yearly Savings\nThrough Biofuel"/>
+				<aux label_side="right" x="1264" y="75.8333" name="Share of Domestic\nEnergy Production in Consumption"/>
+				<connector uid="425" angle="0.516164">
+					<from>Energy_Demand</from>
+					<to>Share_of_Domestic_Energy_Production_in_Consumption</to>
+				</connector>
+				<connector uid="426" angle="298.61">
+					<from>Energy_Imports</from>
+					<to>Share_of_Domestic_Energy_Production_in_Consumption</to>
+				</connector>
+				<alias font_style="italic" uid="63" x="1842" y="265.25" width="18" height="18">
+					<of>Energy_used_From_Fossil</of>
+				</alias>
+				<alias font_style="italic" uid="61" x="1497" y="265.25" width="18" height="18">
+					<of>Energy_Production_from_Bioenergy</of>
+				</alias>
+				<alias font_style="italic" label_side="center" uid="59" x="1860" y="98.75" width="74" height="16">
+					<of>Forest_Lands</of>
+				</alias>
+				<alias font_style="italic" label_side="top" uid="73" x="1237" y="139.75" width="18" height="18">
+					<of>Effect_of_Emissions_on_Bioenergy_Motivation</of>
+				</alias>
+				<alias font_style="italic" label_side="top" uid="75" x="628" y="486.25" width="18" height="18">
+					<of>Effect_of_Emissions_on_Forestation</of>
+				</alias>
+				<alias font_style="italic" label_side="right" uid="77" x="100.25" y="300.75" width="18" height="18">
+					<of>Perceived_Need_for_Food_Lands</of>
+				</alias>
+				<alias font_style="italic" uid="86" x="773" y="201.75" width="18" height="18">
+					<of>Bioenergy_Lands</of>
+				</alias>
+				<alias font_style="italic" uid="84" x="366.25" y="971" width="18" height="18">
+					<of>Food_Lands</of>
+				</alias>
+				<alias font_style="italic" label_side="bottom" uid="94" x="844.5" y="392.5" width="18" height="18">
+					<of>Population</of>
+				</alias>
+				<alias color="blue" background="white" font_style="italic" label_side="center" uid="118" x="1462.5" y="227.25" width="109" height="14">
+					<shape type="rectangle" width="45" height="35"/>
+					<of>BECCS_Adoption_in_Bioenergy</of>
+				</alias>
+				<alias font_style="italic" label_side="center" uid="194" x="782.5" y="1106.5" width="89" height="25">
+					<of>Forest_Lands</of>
+				</alias>
+				<alias font_style="italic" label_side="center" uid="191" x="746.375" y="941" width="112" height="24">
+					<of>Bioproductive_Lands</of>
+				</alias>
+				<alias font_style="italic" label_side="right" uid="201" x="1260.33" y="714" width="18" height="18">
+					<of>Population</of>
+				</alias>
+				<alias color="blue" background="white" font_style="italic" label_side="top" uid="237" x="351.25" y="1253" width="18" height="18">
+					<shape type="circle" radius="18"/>
+					<of>Farming_Agression</of>
+				</alias>
+				<alias font_style="italic" label_side="center" uid="242" x="1846" y="128.75" width="100" height="20">
+					<of>Bioproductive_Lands</of>
+				</alias>
+				<alias font_style="italic" label_side="bottom" uid="249" x="1253.17" y="1105" width="18" height="18">
+					<of>Oxidation</of>
+				</alias>
+				<alias font_style="italic" label_side="right" uid="252" x="448" y="1014" width="18" height="18">
+					<of>Effect_of_Water_Availability_on_Productivity</of>
+				</alias>
+				<alias font_style="italic" uid="274" x="766" y="246.75" width="18" height="18">
+					<of>Crop_Productivity</of>
+				</alias>
+				<alias color="blue" background="white" font_style="italic" label_side="right" uid="301" x="282.75" y="1048.5" width="18" height="18">
+					<shape type="circle" radius="18"/>
+					<of>Effect_of_Water_Quality_on_Productivity</of>
+				</alias>
+				<alias color="blue" background="white" font_style="italic" uid="307" x="1359.75" y="293.5" width="18" height="18">
+					<shape type="circle" radius="18"/>
+					<of>Perception_Delay</of>
+				</alias>
+				<alias font_style="italic" label_side="right" uid="313" x="504.5" y="306" width="18" height="18">
+					<of>Perceived_need_for_Bioenergy</of>
+				</alias>
+				<alias font_style="italic" label_side="center" uid="330" x="1241.33" y="849" width="63" height="16">
+					<of>Crop_Lands</of>
+				</alias>
+				<alias font_style="italic" label_side="top" uid="343" x="1515" y="114.75" width="18" height="18">
+					<of>Food_Lands</of>
+				</alias>
+				<alias color="blue" background="white" font_style="italic" uid="413" x="650" y="806" width="18" height="18">
+					<shape type="circle" radius="18"/>
+					<of>Eq_Switch</of>
+				</alias>
+				<alias color="blue" background="white" font_style="italic" uid="416" x="1518" y="504" width="18" height="18">
+					<shape type="circle" radius="18"/>
+					<of>Eq_Switch</of>
+				</alias>
+				<alias color="blue" background="white" font_style="italic" uid="417" x="1242" y="179" width="18" height="18">
+					<shape type="circle" radius="18"/>
+					<of>Eq_Switch</of>
+				</alias>
+			</view>
+			<view background="white" page_width="1066" page_height="600" home_view="true" type="interface">
+				<style/>
+				<stacked_container x="287" y="116" width="251" height="215">
+					<graph width="251" height="215" isee:stash="true" type="time_series" isee:points_only="false" show_grid="false" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" title="Net Emissions" isee:fill_intensity="0.1" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
+						<plot color="blue" title="Base Run" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
+							<entity name="Net_Emissions"/>
+							<isee:data name="Base Run"/>
+						</plot>
+						<plot color="#00AA7F" pen_style="dashed" isee:keep_zero_visible="true" pen_width="1" index="1" show_y_axis="true">
+							<entity name="Net_Emissions"/>
+						</plot>
+					</graph>
+				</stacked_container>
+				<stacked_container x="543" y="116" width="242" height="215">
+					<graph width="242" height="215" isee:stash="true" type="time_series" isee:points_only="false" show_grid="false" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" title="Bioenergy Use" isee:fill_intensity="0.1" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
+						<plot color="blue" title="Base Run" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
+							<entity name="Current_Share_of_Bioenergy"/>
+							<isee:data name="Base Run"/>
+						</plot>
+						<plot color="#00AA7F" pen_style="dashed" isee:keep_zero_visible="true" pen_width="1" index="1" show_y_axis="true">
+							<entity name="Current_Share_of_Bioenergy"/>
+						</plot>
+					</graph>
+				</stacked_container>
+				<stacked_container x="792" y="115.5" width="259" height="216">
+					<graph width="259" height="216" type="time_series" isee:points_only="false" show_grid="false" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" title="Food Security" isee:fill_intensity="0.1" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
+						<plot color="blue" title="Base Run" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
+							<entity name="Share_of_Domestic_Food_in_Consumption"/>
+							<isee:data name="Base Run"/>
+						</plot>
+						<plot color="#00AA7F" pen_style="dashed" isee:keep_zero_visible="true" pen_width="1" index="1" show_y_axis="true">
+							<entity name="Share_of_Domestic_Food_in_Consumption"/>
+						</plot>
+					</graph>
+				</stacked_container>
+				<stacked_container x="216.348" y="335.87" width="228.304" height="230.261">
+					<graph width="228.304" height="230.261" isee:stash="true" type="time_series" isee:points_only="false" show_grid="false" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" title="Forest Lands" isee:fill_intensity="0.1" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
+						<plot color="blue" title="Base Run" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
+							<entity name="Forests"/>
+							<isee:data name="Base Run"/>
+						</plot>
+						<plot color="#00AA7F" pen_style="dashed" isee:keep_zero_visible="true" pen_width="1" index="1" show_y_axis="true">
+							<entity name="Forests"/>
+						</plot>
+					</graph>
+				</stacked_container>
+				<slider isee:show_hover_tip="always" x="11.0652" y="119.652" width="150.391" height="46.6957" increment="0.05" min="0" max="1" title="Target Domestic Share of Food Consumption" isee:navigate_to="false" show_name="true">
+					<entity name="Target_Domestic_Share"/>
+					<reset_to after="never">0</reset_to>
+				</slider>
+				<knob x="174.587" y="117" width="102.261" height="127.087" isee:navigate_to="false" show_name="true">
+					<entity name="Target_Emission"/>
+					<reset_to after="never">0</reset_to>
+				</knob>
+				<slider vertical="false" isee:fancy_appearance="false" isee:show_hover_tip="always" x="14.1087" y="200.152" width="144.304" height="46.6957" increment="0.05" min="0" max="1" isee:navigate_to="false" show_name="true">
+					<entity name="Target_Share_of_Renewables"/>
+					<reset_to after="never">0</reset_to>
+				</slider>
+				<button label="" x="68" y="300.826">
+					<actions>
+						<action>restore_all</action>
+					</actions>
+				</button>
+				<button label="" x="142.587" y="300.826">
+					<actions>
+						<action>start</action>
+					</actions>
+				</button>
+				<switch x="25.2174" y="378" width="144" height="64" show_name="true">
+					<entity name="Eq_Switch"/>
+					<reset_to after="never">0</reset_to>
+				</switch>
+				<numeric_display color="#FFD6A4" font_weight="bold" font_size="12pt" x="10.5" y="481" width="187" height="80" isee:immediately_update_on_user_input="true" retain_ending_value="true" isee:navigate_to="false" show_name="true">
+					<format display_as="currency"/>
+					<entity name="Average_Yearly_Savings_Through_Biofuel"/>
+				</numeric_display>
+				<stacked_container x="457" y="337" width="234" height="228">
+					<graph width="234" height="228" isee:stash="true" type="time_series" isee:points_only="false" show_grid="false" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" title="Other Renewables" isee:fill_intensity="0.1" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
+						<plot color="blue" title="Base Run" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
+							<entity name="Current_Share_of_Renewables"/>
+							<isee:data name="Base Run"/>
+						</plot>
+						<plot color="#00AA7F" pen_style="dashed" isee:keep_zero_visible="true" pen_width="1" index="1" show_y_axis="true">
+							<entity name="Current_Share_of_Renewables"/>
+						</plot>
+					</graph>
+				</stacked_container>
+				<stacked_container x="700.5" y="337" width="351" height="228">
+					<graph width="351" height="228" isee:stash="true" type="time_series" isee:points_only="false" show_grid="false" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" title="Domestic Energy " isee:fill_intensity="0.1" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
+						<plot color="blue" title="Base Run" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
+							<entity name="Share_of_Domestic_Energy_Production_in_Consumption"/>
+							<isee:data name="Base Run"/>
+						</plot>
+						<plot color="#00AA7F" pen_style="dashed" isee:keep_zero_visible="true" pen_width="1" index="1" show_y_axis="true">
+							<entity name="Share_of_Domestic_Energy_Production_in_Consumption"/>
+						</plot>
+					</graph>
+				</stacked_container>
+				<text_box font_weight="bold" font_family="Bookman Old Style" font_size="28pt" x="27" y="24" width="819" height="58">Policy Analysis Interface (Compared to the Base Case)</text_box>
+			</view>
+			<view background="white" page_width="1066" page_height="600" type="interface">
+				<style/>
+				<stacked_container x="540.304" y="266.565" width="485.826" height="285.565">
+					<graph width="485.826" height="285.565" type="time_series" isee:points_only="false" show_grid="false" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" title="Emissions" isee:fill_intensity="0.1" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
+						<plot color="blue" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
+							<entity name="Emissions_from_FoodProd"/>
+						</plot>
+						<plot color="red" pen_style="dot_dashed" isee:keep_zero_visible="true" pen_width="1" index="0" right_axis="true" show_y_axis="true">
+							<entity name="Emissions_from_Fossil_Fuel"/>
+						</plot>
+						<plot color="fuchsia" pen_style="dotted" isee:keep_zero_visible="true" pen_width="1" index="1" show_y_axis="true">
+							<entity name="Emissions_from_Bioenergy"/>
+						</plot>
+						<plot color="#008F44" pen_style="dashed" isee:keep_zero_visible="true" pen_width="1" index="2" show_y_axis="true">
+							<entity name="Other_Emissors"/>
+						</plot>
+						<plot color="#7F00FF" pen_style="dot_dashed" isee:keep_zero_visible="true" pen_width="1" index="3" show_y_axis="true">
+							<entity name="Sequestration"/>
+						</plot>
+						<plot color="#0CA0FF" pen_style="dotted" isee:keep_zero_visible="true" pen_width="1" index="1" right_axis="true" show_y_axis="true">
+							<entity name="Net_Emissions"/>
+						</plot>
+					</graph>
+				</stacked_container>
+				<stacked_container x="21.348" y="266.565" width="502.304" height="285.565">
+					<graph width="502.304" height="285.565" type="time_series" isee:points_only="false" show_grid="false" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" title="Land Use" isee:fill_intensity="0.1" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
+						<plot isee:immediately_update_on_user_input="true" color="red" pen_style="dot_dashed" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
+							<entity name="Bioproductive_Lands"/>
+						</plot>
+						<plot color="fuchsia" pen_style="dotted" isee:keep_zero_visible="true" pen_width="1" index="1" show_y_axis="true">
+							<entity name="Forests"/>
+						</plot>
+						<plot color="#008F44" pen_style="dashed" isee:keep_zero_visible="true" pen_width="1" index="2" show_y_axis="true">
+							<entity name="Bioenergy_Lands"/>
+						</plot>
+						<plot color="#FF7F00" isee:keep_zero_visible="true" pen_width="1" index="3" show_y_axis="true">
+							<entity name="Food_Lands"/>
+						</plot>
+					</graph>
+				</stacked_container>
+				<stacked_container x="17.6522" y="14.739" width="313.957" height="236.913">
+					<graph width="313.957" height="236.913" type="time_series" isee:points_only="false" show_grid="false" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" title="Water Resources" isee:fill_intensity="0.1" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
+						<plot isee:immediately_update_on_user_input="true" color="blue" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
+							<entity name="Usable_Groundwater"/>
+						</plot>
+						<plot isee:immediately_update_on_user_input="true" color="red" pen_style="dot_dashed" isee:keep_zero_visible="true" pen_width="1" index="1" show_y_axis="true">
+							<entity name="Usable_Surface_Water"/>
+						</plot>
+					</graph>
+				</stacked_container>
+				<stacked_container x="357" y="15.1955" width="298" height="242">
+					<graph width="298" height="242" type="time_series" isee:points_only="false" show_grid="false" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" title="Energy" isee:fill_intensity="0.1" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
+						<plot color="blue" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
+							<entity name="Current_Share_of_Renewables"/>
+						</plot>
+						<plot color="red" pen_style="dot_dashed" isee:keep_zero_visible="true" pen_width="1" index="1" show_y_axis="true">
+							<entity name="Current_Share_of_Bioenergy"/>
+						</plot>
+					</graph>
+				</stacked_container>
+				<stacked_container x="673" y="14.1955" width="353" height="244">
+					<graph width="353" height="244" type="time_series" isee:points_only="false" show_grid="false" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" title="Domestiv Energy &amp; Food " isee:fill_intensity="0.1" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
+						<plot color="blue" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
+							<entity name="Share_of_Domestic_Food_in_Consumption"/>
+						</plot>
+						<plot color="red" pen_style="dot_dashed" isee:keep_zero_visible="true" pen_width="1" index="1" show_y_axis="true">
+							<entity name="Share_of_Domestic_Energy_Production_in_Consumption"/>
+						</plot>
+					</graph>
+				</stacked_container>
+			</view>
+			<isee:templates>
+				<view background="white" page_width="1066" page_height="600" type="template">
+					<style/>
+				</view>
+			</isee:templates>
+			<isee:stories/>
+		</views>
+	</model>
+</xmile>
+
