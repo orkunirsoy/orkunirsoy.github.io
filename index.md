@@ -42,6 +42,6 @@ _Instructor: Asst. Prof. Mustafa Gökçe Baydoğan_
 
 **Softwares Used:** R (Feature Extraction, Prediction)
 ### Links
-[Short Report & R Code](IE 582 Project - Güz,İrsoy.html)
+[Short Report & R Code](IE_582_Project.html)
 
 
