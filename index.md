@@ -13,6 +13,8 @@ _Instructor: Assoc. Prof. Gönenç Yücel_
 
 
 ## [ESC 578 Systems and Sustainability](https://esc.boun.edu.tr/tr/graduate-courses) 
+_Instructor: Prof. Ali Kerem Saysel
+
 **Project Description:** Evaluating effectiveness of land-based carbon mitigation strategies for Turkey using Nexus approach
 
 **Softwares Used:** Stella Architect (Simulation, Visualization)
