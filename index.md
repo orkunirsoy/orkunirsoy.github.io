@@ -10,6 +10,33 @@
 [NetLogo Code](IE_588_Project_code.nlogo)
 
 
+## [ESC 578 Systems and Sustainability](https://esc.boun.edu.tr/tr/graduate-courses) 
+**Project Description:** Evaluating effectiveness of land-based carbon mitigation strategies for Turkey using Nexus approach
+
+**Softwares Used:** Stella Architect (Simulation)
+### Links
+[Project report](ESC_578_Project_Writeup.pdf)
+
+[Stella Model](ESC_578_Project_Model.stmx)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 You can use the [editor on GitHub](https://github.com/orkunirsoy/oirsoy/edit/main/README.md) to maintain and preview the content for your website in Markdown files.
 
 Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
