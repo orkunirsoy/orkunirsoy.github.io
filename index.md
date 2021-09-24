@@ -22,7 +22,7 @@ _Instructor: Gönenç Yücel_
 [Stella Model](ESC_578_Project_Model.stmx)
 
 
-## [IE 456 Graph Algorithms and Applications](IE_456_Syllabus) 
+## [IE 456 Graph Algorithms and Applications](IE_456_Syllabus.pdf) 
 _Instructor: Assoc. Prof. Tınaz Ekim Aşıcı_
 
 **Project Description:** Comparing degree sequence generation algorithms for graphs with different degree distribution
