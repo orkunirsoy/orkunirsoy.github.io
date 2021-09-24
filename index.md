@@ -24,6 +24,7 @@ _Instructor: Gönenç Yücel_
 
 ## [IE 456 Graph Algorithms and Applications](IE_456_Syllabus) 
 _Instructor: Assoc. Prof. Tınaz Ekim Aşıcı_
+
 **Project Description:** Comparing degree sequence generation algorithms for graphs with different degree distribution
 
 **Softwares Used:** C++ (Algorithm Implementation & Simulation), R (Analysis, Visualization) 
