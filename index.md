@@ -1,4 +1,6 @@
-## Welcome to GitHub Pages
+## Welcome to my GitHub Page
+This page is created to provide examplary work from selected graduate coursework. You may click on the name of a course to see the syllabus information.
+
 
 ## [IE 550 Dynamics of Socio Economic Systems](IE_550_Syllabus.pdf) 
 _Instructor: Prof. Yaman Barlas_
