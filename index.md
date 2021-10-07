@@ -2,7 +2,7 @@
 
 This page is created to provide examplary work from selected graduate coursework. You may click on the name of a course to see the syllabus information.
 
-# Selected Coursework
+## Selected Coursework
 ### Simulation, Complex Systems and Dynamic Modeling:
 * Systems Simulation w/ Ali Rıza Kaylan (IE 306)	
 * Systems Science and Engineering w/ Yaman Barlas (IE 350)	
@@ -31,5 +31,5 @@ This page is created to provide examplary work from selected graduate coursework
 *	Social Psychology w/ Adil Sarıbay (PSY 241)
 *	Psychology of Close Relationships w/ Gizem Sürenkök (PSY 48G)	
 
-# Selected Projects From Coursework
+## Selected Projects From Coursework
 
