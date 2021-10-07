@@ -1,7 +1,7 @@
 ## Welcome to my GitHub Page
 This page is created to provide examplary work from selected graduate coursework. You may click on the name of a course to see the syllabus information.
 
-```
+
 ## [IE 550 Dynamics of Socio Economic Systems](IE_550_Syllabus.pdf) 
 _Instructor: Prof. Yaman Barlas_
 
@@ -12,7 +12,7 @@ _Instructor: Prof. Yaman Barlas_
 >[Project report](IE_550_Report.pdf)
 
 >[Stella Model](IE_550_Model.stmx)
-```
+
 ## [IE 588 Agent-based Modeling and Simulation](IE_588_Syllabus.PDF) 
 _Instructor: Assoc. Prof. Gönenç Yücel_
 
