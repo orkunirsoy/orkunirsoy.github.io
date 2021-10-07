@@ -8,10 +8,10 @@ _Instructor: Prof. Yaman Barlas_
 **Project Description:** Dynamic Modelling of Harmful Algal Blooms and an Analysis on Potential Mitigation Strategies
 
 **Softwares Used:** Stella Student Version (Simulation)
-### Links
-[Project report](IE_550_Report.pdf)
+>### Links
+>[Project report](IE_550_Report.pdf)
 
-[Stella Model](IE_550_Model.stmx)
+>[Stella Model](IE_550_Model.stmx)
 
 ## [IE 588 Agent-based Modeling and Simulation](IE_588_Syllabus.PDF) 
 _Instructor: Assoc. Prof. Gönenç Yücel_
