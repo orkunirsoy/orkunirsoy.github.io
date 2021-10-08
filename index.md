@@ -4,20 +4,20 @@ This page is created to provide examplary work from selected graduate coursework
 
 ## Selected Coursework
 ### Simulation, Complex Systems and Dynamic Modeling:
-* Systems Simulation w/ Ali Rıza Kaylan (IE 306)	
-* Systems Science and Engineering w/ Yaman Barlas (IE 350)	
-* Graph Algorithms & Applications w/ Tınaz Ekim Aşıcı (IE 456)		
-* Systems Theory w/ Gönenç Yücel (IE 533)
-* Dynamics of Socio-Economic Systems w/ Yaman Barlas (IE 550)		
-* Agent Based Modeling & Simulation w/ Gönenç Yücel (IE 588)
-* Systems and Sustainability w/ Ali Kerem Saysel (ESC 578)				
+* Systems Simulation w/ Ali Rıza Kaylan ([IE 306])	
+* Systems Science and Engineering w/ Yaman Barlas ([IE 350])	
+* Graph Algorithms & Applications w/ Tınaz Ekim Aşıcı ([IE 456](IE_456_Syllabus.pdf))		
+* Systems Theory w/ Gönenç Yücel ([IE 533])
+* Dynamics of Socio-Economic Systems w/ Yaman Barlas ([IE 550](IE_550_Syllabus.pdf))		
+* Agent Based Modeling & Simulation w/ Gönenç Yücel ([IE 588](IE_588_Syllabus.PDF))
+* Systems and Sustainability w/ Ali Kerem Saysel ([ESC 578](http://web.boun.edu.tr/ali.saysel/ESc578.html))				
 	
 ### Statistics & Data Science:
 *	Statistics for Industrial Engineers w/ Mustafa Gökçe Baydoğan (IE 256)	
 *	Statistical Forecasting & Time Series	w/ Refik Güllü (IE 360)
 *	Quality Engineering w/ Mustafa Gökçe Baydoğan (IE 423)
 *	Statistical Inference w/ Wolfgang Hörmann (IE 508)
-*	Statistical Learning For Data Mining w/ Mustafa Gökçe Baydoğan (IE 582)			
+*	Statistical Learning For Data Mining w/ Mustafa Gökçe Baydoğan ([IE 582](IE_582_Syllabus.pdf))			
 
 ### Stochastic Modeling & Optimization:
 *	Stochastic Models In Operations Research w/ Refik Güllü (IE 450)
