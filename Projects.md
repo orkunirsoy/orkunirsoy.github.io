@@ -25,7 +25,7 @@
             <p> <a href="IE_588_Project_Report.pdf"> Project report</a>  </p>
             <p> <a href="IE_588_Project_code.nlogo"> NetLogo Code</a>  </p>
                 </div>
-        <div class="container">
+<div class="container">
             <h2> <a href="http://web.boun.edu.tr/ali.saysel/ESc578.html">ESC 578 Systems and Sustainability</a>  </h2>
           <dl>                   
             <dt> Instructor: </dt> 
@@ -39,7 +39,7 @@
             <p> <a href="ESC_578_Project_Writeup.pdf"> Project report</a>  </p>
             <p> <a href="ESC_578_Project_Model.stmx"> Stella Model</a>  </p>
                 </div>
-        <div class="container">
+<div class="container">
             <h2> <a href="IE_456_Syllabus.pdf">IE 456 Graph Algorithms and Applications</a>  </h2>
           <dl>
             <dt> Instructor: </dt> 
@@ -53,7 +53,7 @@
             <p> <a href="IE_456_Project_Report.pdf"> Project report</a>  </p>
             <p> <a href="https://github.com/orkunirsoy/oirsoy/tree/main/IE%20_456_Project_Code"> C++ Code Repository </a>  </p>
                 </div>
-        <div class="container">
+<div class="container">
                  <h2> <a href="IE_582_Syllabus.pdf">IE 582 Statistical Learning for Data Mining</a>  </h2>
           <dl>
             <dt> Instructor: </dt> 
