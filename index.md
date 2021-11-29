@@ -31,5 +31,3 @@ This page is created to provide examplary work from selected graduate coursework
 *	Social Psychology w/ Adil Sarıbay ([PSY 241](https://registration.boun.edu.tr/scripts/instructor/coursedescriptions/2017-2018-1/PSY_24101.PDF))
 *	Psychology of Close Relationships w/ Gizem Sürenkök ([PSY 48G](https://registration.boun.edu.tr/scripts/instructor/coursedescriptions/2017-2018-3/PSY_48G01.PDF))	
 
-## Selected Projects From Coursework
-
