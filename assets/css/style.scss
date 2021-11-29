@@ -17,9 +17,11 @@ padding-right: 40px;
 }
 
 .nav {
-  background: #333;
+  background: #171717;
+  box-sizing: border-box;
+  border-radius: 16px;
   margin:0;
-	padding: 0;
+  padding: 0;
   position: relative;
 }
 .nav li {
@@ -30,7 +32,6 @@ padding-right: 40px;
 .nav li a {
 	color: #ddd;
 	display: block;
-	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	font-size:0.8em;
 	padding: 10px 20px;
 	text-decoration: none;
