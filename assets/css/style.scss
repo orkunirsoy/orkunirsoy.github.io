@@ -23,7 +23,7 @@ padding-right: 40px;
 .nav {
   background: #171717;
   box-sizing: border-box;
-  border-radius: 16px;
+  border-radius: 4px;
   margin:0;
   padding: 0;
   position: relative;
@@ -36,12 +36,15 @@ padding-right: 40px;
 .nav li a {
 	color: #ddd;
 	display: block;
+	
 	font-size:1em;
 	padding: 10px 20px;
 	text-decoration: none;
 	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.5);
 }
 .nav li a:hover {
+	box-sizing: border-box;
+  	border-radius: 4px;
 	background: #db7e7e;
 	color: #fff;
 }
