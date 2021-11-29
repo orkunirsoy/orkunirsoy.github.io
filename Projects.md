@@ -1,5 +1,4 @@
   <h1>Selected Projects From Coursework</h1> 
-
   <div class="container">
   <h2> <a href="IE_550_Syllabus.pdf">IE 550 Dynamics of Socio Economic Systems</a>  </h2>
                   <dl>
@@ -12,7 +11,6 @@
                   <p> <a href="IE_550_Report.pdf"> Project report</a>  </p>
                   <p> <a href="IE_550_Model.STMX"> Stella Model</a>  </p>
                   </div>
-
 <div class="container">
             <h2> <a href="IE_588_Syllabus.PDF">IE 588 Agent-based Modeling and Simulation</a>  </h2>      
           <dl>       
