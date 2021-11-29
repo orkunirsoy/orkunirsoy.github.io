@@ -1,19 +1,4 @@
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-{% seo %}
-    <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
-    <script src="{{ '/assets/js/scale.fix.js' | relative_url }}"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    {% include head-custom.html %}
-  </head>
-  
   <h1>Selected Projects From Coursework</h1> 
-       <div class="container">
                  <h2> <a href="IE_550_Syllabus.pdf">IE 550 Dynamics of Socio Economic Systems</a>  </h2>
                   <dl>
                   <dt>Instructor:</dt> 
@@ -24,7 +9,6 @@
                     <h3> Links </h3>
                   <p> <a href="IE_550_Report.pdf"> Project report</a>  </p>
                   <p> <a href="IE_550_Model.STMX"> Stella Model</a>  </p>
-                </div>
         <div class="container">
             <h2> <a href="IE_588_Syllabus.PDF">IE 588 Agent-based Modeling and Simulation</a>  </h2>      
           <dl>       
