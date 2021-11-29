@@ -29,23 +29,21 @@
       
         </ul>
         {% if site.github.is_user_page %}
-          <ul>
-	<p style="text-align:center; color:SteelBlue"><font size="+1"><a href="https://orkunirsoy.github.io/" style="color: SteelBlue">About</a></font></p>
-        <p style="text-align:center; color:SteelBlue"><font size="+1"><a href="/Projects.html" style="color: SteelBlue">Research</a></font></p>          
-	      </ul>
+          <ul class="nav">
+	<li><a href="https://orkunirsoy.github.io/">Home</a></li>
+	<li><a href="/Projects.html">Projects</a></li>
+	<li><a href="#">Menu item 2</a></li>
+	<li><a href="#">Menu item 3</a></li>
+	<li><a href="#">Menu item 4</a></li>
+	</ul>
+	      
+	      
         {% endif %}
       </header>
 
       <section>
         
-<ul class="nav">
-	<li><a href="#">Home</a></li>
-	<li><a href="#">Menu item 1</a></li>
-	<li><a href="#">Menu item 2</a></li>
-	<li><a href="#">Menu item 3</a></li>
-	<li><a href="#">Menu item 4</a></li>
-</ul>
-        
+	      
        {{ content }}
                 
       </section>
