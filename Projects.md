@@ -1,5 +1,7 @@
   <h1>Selected Projects From Coursework</h1> 
-        <div class="container">
+  <h2> <a href="IE_550_Syllabus.pdf">IE 550 Dynamics of Socio Economic Systems</a>  </h2>
+
+  <div class="container">
   <h2> <a href="IE_550_Syllabus.pdf">IE 550 Dynamics of Socio Economic Systems</a>  </h2>
                   <dl>
                   <dt>Instructor:</dt> 
