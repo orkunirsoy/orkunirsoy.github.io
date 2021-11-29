@@ -21,9 +21,7 @@
         <p class="header">{{ site.description | default: site.github.project_tagline }}</p>
 
         <ul>
-          <li><a class="buttons github" href="https://orkunirsoy.github.io/">Home</a></li>
-	<li><a class="buttons github" href="/Projects.html">Selected Projects</a></li>
-	<li><a class="buttons github" href="Resume.pdf">Resume</a></li>
+	<li><a class="button" href="Resume.pdf">Resume</a></li>
       
         </ul>
         {% if site.github.is_user_page %}
@@ -34,7 +32,12 @@
       </header>
 
       <section>
-        
+<ul class="nav">
+	<li><a href="https://orkunirsoy.github.io/">Home</a></li>
+	<li><a href="/Projects.html">Selected Projects</a></li>
+	<li><a href="Resume.pdf">Resume</a></li>
+</ul>
+
 	      
        {{ content }}
                 
