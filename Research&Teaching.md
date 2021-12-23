@@ -14,7 +14,7 @@ I am working in [Socio-Economic System Dynamics Lab (SESDYN)](http://sesdyn.ie.b
 #### Other
 - See our [blog post](https://systemdynamics.org/using-system-dynamics-to-improve-patient-care/) "Using System Dynamics to Improve Patient Care" on WISDOM Blog.
 - Watch our presentation [video](https://systemdynamics.org/system-dynamics-biomedical-modeling/) in SDS Biomedical Modeling Seminar Series.
-
+- See our [Regime & Flight Simulator](https://exchange.iseesystems.com/public/oirsoy/dynamic-g-csf-treatment-of-chemotherapy-induced-neutropenia/index.html#page1) based on the paper "Dynamic trade‐offs in granulocyte colony‐stimulating factor (G‐CSF) administration during chemotherapy."
 
 ## Teaching
 Since February 2020, I am working as a teaching assistant in Industrial Engineering Department at Boğaziçi University. My responsibilities include conducting problem sessions (usually weekly or bi-weekly administered example solving and Q&A sessions), preparing / grading term projects, quizes, homeworks, and other miscellenous tasks related to the organization of the courses. So far, I've worked as TA for several courses which requires some subset of the aformentioned tasks:
