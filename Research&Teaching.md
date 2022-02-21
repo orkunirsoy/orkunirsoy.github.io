@@ -22,6 +22,8 @@ Since February 2020, I am working as a teaching assistant in Industrial Engineer
 - [Operations Research II](https://ie.boun.edu.tr/courses/ie-203-operations-research-ii) (w/Zeki Caner Taşkın, Necati Aras)
 - [Quality Engineering](https://ie.boun.edu.tr/sites/ie.boun.edu.tr/files/IE423_Fall16_Syllabus.pdf) (w/Könül Bayramoğlu Kavlak)
 - [Systems Science & Engineering](https://ie.boun.edu.tr/courses/ie-350-systems-science-and-engineering) (w/Yaman Barlas)
+- [Graph Algorithms & Applications](IE_456_Syllabus.pdf) (w/Tınaz Ekim)
+- [Dynamics of Socio-Economic Systems](https://ie.boun.edu.tr/sites/ie.boun.edu.tr/files/IE550_Fall15_syllabus.pdf) (w/Yaman Barlas)
 - [Agent Based Simulation](https://ie.boun.edu.tr/courses/ie-588-agent-based-modelling-and-simulation) (w/Gönenç Yücel)
 - [Discrete Event Simulation](https://ie.boun.edu.tr/courses/ie-306-systems-simulation) (w/Yaman Barlas)
 - [Optimal Control Theory](https://registration.boun.edu.tr/scripts/instructor/coursedescriptions/2020-2021-2/IE__58701.TXT) (w/Mustafa Akan)
