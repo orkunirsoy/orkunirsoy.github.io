@@ -9,14 +9,21 @@ The main objective is to build a formal dynamic simulation model to i) identify 
 
 
 ### References:
-Ammara, U., Bukhari, H., & Qadir, J. (2020). Analyzing Misinformation Through The Lens of Systems Thinking. Tto, 55–63.
-Lee Howell et al. (2013). Digital wildfires in a hyperconnected world. WEFReport, 3:15–94.
-Lewandowsky, S., Ecker, U. K. H., Seifert, C. M., Schwarz, N., & Cook, J. (2012). Misinformation and Its Correction: Continued Influence and Successful Debiasing. Psychological Science in the Public Interest, Supplement, 13(3), 106–131. https://doi.org/10.1177/1529100612451018
-Shin J, Jian L, Driscoll K, Bar F. (2018). The diffusion of misinformation on social media: Temporal pattern, mes- sage, and source. Computers in Human Behavior. 83:278–287. https://doi.org/10.1016/j.chb. 2018.02.008 
-Pennycook, G., McPhetres, J., Zhang, Y., Lu, J. G., & Rand, D. G. (2020). Fighting COVID-19 Misinformation on Social Media: Experimental Evidence for a Scalable Accuracy-Nudge Intervention. Psychological Science, 31(7), 770–780. https://doi.org/10.1177/0956797620939054
-Pennycook, G., & Rand, D. G. (2019). Fighting misinformation on social media using crowdsourced judgments of news source quality. Proceedings of the National Academy of Sciences, 116(7), 2521 LP – 2526. https://doi.org/10.1073/pnas.1806781116
-Varol, O., et al. (2017) in Proceedings of the 11th AAAI Conference on Web and Social Media (Association for the Advancement of Artificial Intelligence, Montreal), pp. 280–289.
-Ingram, M. (2017). Facebook fact checking can make news spread even faster. Available at: http://fortune.com/2017/05/16/facebook-fact-checking.
+* Ammara, U., Bukhari, H., & Qadir, J. (2020). Analyzing Misinformation Through The Lens of Systems Thinking. Tto, 55–63.
+
+* Ingram, M. (2017). Facebook fact checking can make news spread even faster. Available at: http://fortune.com/2017/05/16/facebook-fact-checking.
+
+* Lee Howell et al. (2013). Digital wildfires in a hyperconnected world. WEFReport, 3:15–94.
+
+* Lewandowsky, S., Ecker, U. K. H., Seifert, C. M., Schwarz, N., & Cook, J. (2012). Misinformation and Its Correction: Continued Influence and Successful Debiasing. Psychological Science in the Public Interest, Supplement, 13(3), 106–131. https://doi.org/10.1177/1529100612451018
+
+* Pennycook, G., McPhetres, J., Zhang, Y., Lu, J. G., & Rand, D. G. (2020). Fighting COVID-19 Misinformation on Social Media: Experimental Evidence for a Scalable Accuracy-Nudge Intervention. Psychological Science, 31(7), 770–780. https://doi.org/10.1177/0956797620939054
+
+* Pennycook, G., & Rand, D. G. (2019). Fighting misinformation on social media using crowdsourced judgments of news source quality. Proceedings of the National Academy of Sciences, 116(7), 2521 LP – 2526. https://doi.org/10.1073/pnas.1806781116
+
+* Shin J, Jian L, Driscoll K, Bar F. (2018). The diffusion of misinformation on social media: Temporal pattern, mes- sage, and source. Computers in Human Behavior. 83:278–287. https://doi.org/10.1016/j.chb. 2018.02.008 
+
+* Varol, O., et al. (2017) in Proceedings of the 11th AAAI Conference on Web and Social Media (Association for the Advancement of Artificial Intelligence, Montreal), pp. 280–289.
 
 
 [Thesis Proposal](orkunirsoy-proposal.pdf)
