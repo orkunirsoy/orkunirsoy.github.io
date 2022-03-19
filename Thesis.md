@@ -27,4 +27,4 @@ The main objective is to build a formal dynamic simulation model to i) identify 
 * Varol, O., et al. (2017) in Proceedings of the 11th AAAI Conference on Web and Social Media (Association for the Advancement of Artificial Intelligence, Montreal), pp. 280–289.
 
 
-### [Thesis Proposal](ISDC-2022-Submission.pdf)
+### [Conference Paper](ISDC-2022-Submission.pdf)
