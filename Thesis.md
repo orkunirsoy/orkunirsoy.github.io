@@ -1,4 +1,4 @@
-## Dynamic Analysis of False Information Spread Over Social Media
+## Dynamic Analysis of False Information Spread Over Social Media: 5G-COVID 19 Conspiracy Theory
  
 ### Short Problem Description
 False information spread is classified as one of the current threats to modern society according to the World Economic Forum (Lee Howell et al., 2013). Perhaps the most recent example demonstrating the potential harms of misinformation is the “infodemic” during the COVID-19 crisis, with results such as various ineffective and possibly harmful remedies, to outright rejection of the existence of the virus (Pennycook et al, 2020). It can misguide people where collective action is needed, such as corruption, vaccination, or climate action. Large masses of people can be manipulated by the false accusations of people with ulterior motives (Varol et al., 2017). Even in situations where false information spread is transient and followed by a corrective action such as retractions, in some cases its influence over people continues, often referred to as the “stickiness” of the misinformation (Lewandowsky et al., 2012). 
