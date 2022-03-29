@@ -77,6 +77,7 @@
             <dd> Comparing degree sequence generation algorithms for graphs with different degree distribution</dd>
             <dt> Languages Used:</dt> 
             <dd> C++ (Algorithm Implementation & Simulation), R (Analysis, Visualization)  </dd>
+	  </dl>
                 </div>
 <div class="container">
                  <h2> <a href="IE_582_Syllabus.pdf">IE 582 Statistical Learning for Data Mining</a>  </h2>
