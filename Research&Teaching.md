@@ -1,5 +1,5 @@
 ## Research
-I am working in [Socio-Economic System Dynamics Lab (SESDYN)](http://sesdyn.ie.boun.edu.tr/index_en.php), Boğaziçi University and I am also a research fellow in [Karanfil Lab](http://www.karanfillab.com/).
+I am working in [Socio-Economic System Dynamics Lab (SESDYN)](http://sesdyn.ie.boun.edu.tr/index_en.php), Boğaziçi University and recently I started working with [DiaPols](https://diapols.com/) group on social movements in social media. I am also a part-time research fellow in [Karanfil Lab](http://www.karanfillab.com/).
 
 ### Publications & Presentations
 #### Journal Article
