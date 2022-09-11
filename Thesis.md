@@ -30,3 +30,4 @@ The main objective is to build a formal dynamic simulation model to i) identify 
 
 
 ### [Conference Paper](ISDC-2022-Barry-Richmond-Application.pdf)
+### [Thesis (in progress)](Thesis-First_Draft.pdf)
