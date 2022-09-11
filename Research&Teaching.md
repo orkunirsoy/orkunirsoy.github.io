@@ -1,11 +1,13 @@
 ## Research
-I am working in [Socio-Economic System Dynamics Lab (SESDYN)](http://sesdyn.ie.boun.edu.tr/index_en.php), Boğaziçi University and recently I started working with [DiaPols](https://diapols.com/) group on social movements in social media. I am also a part-time research fellow in [Karanfil Lab](http://www.karanfillab.com/).
+I am working in [Socio-Economic System Dynamics Lab (SESDYN)](http://sesdyn.ie.boun.edu.tr/index_en.php), Boğaziçi University and recently I started working with [DiaPols](https://diapols.com/) group about social movements on social media. I am also a part-time research fellow in [Karanfil Lab](http://www.karanfillab.com/).
 
 ### Publications & Presentations
 #### Journal Article
 - İrsoy, O., Güz, Ş., Akan, N. B., & Yücel, G. (2021). Dynamic trade‐offs in granulocyte colony‐stimulating factor (G‐CSF) administration during chemotherapy. System Dynamics Review, 36(4), 397–446. [Link](https://onlinelibrary.wiley.com/doi/abs/10.1002/sdr.1671)
 
 #### Conferences
+- İrsoy, O., Barlas, Y. (2022). Dynamic Analysis of False Information Spread Over Social Media: 5-GCOVID 19 Conspiracy Theory. 40th International Conference of the System Dynamics Society. [Link](https://systemdynamics.org/conference-schedule/)
+- Taraktaş, B., Duran, C., İrsoy, O., Üsküdarlı, S., Karaduman, D. (2022). What differentiates countermovements of Black Lives Matter?. Sunbelt 2022, Cairn. [Link](https://static1.squarespace.com/static/60c9503dcaf858285d42c5e1/t/62c2cd15edc7b10960759459/1656933654669/sunbelt_2022_agenda_FINAL.pdf)
 - Karanfil, Ö., Güz, Ş., İrsoy, O., & Hashemian, M. (2021). Stakeholder Effect in the Formation of Policy/Practice Guidelines: An Experimental Study for Medical Screening. 40th National Operations Research and Industrial Engineering Congress (ORIE2021 Congress). [Link](https://www.yaem2021.org/static/Yaem2021_BildiriKitabi.pdf)
 - Karanfil, Ö., Güz, Ş., İrsoy, O., & Hashemian, M. (2021). What is the Stakeholder Effect on Clinical Guideline Formation Process: An Experimental Study. Proceedings of 2021 International System Dynamics Conference. [Link](https://proceedings.systemdynamics.org/2021/papers/P1084.pdf)
 - Güz, Ş., İrsoy, O., Akan, N. B., & Yücel, G. (2020). Managing Chemotherapy-Induced Neutropenia using Exogenous Granulocyte Colony-Stimulating Factor. Proceedings of 2020 International System Dynamics Conference. [Link](https://proceedings.systemdynamics.org/2020/papers/P1152.pdf)
