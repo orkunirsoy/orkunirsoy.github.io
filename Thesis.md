@@ -23,6 +23,8 @@ plan to expand our analysis by the inclusion of other user profiles, experiment 
 other mitigation strategies, and discuss the potential similarities and differences of our
 case with other types of false information dynamics.
 
+### Presentation at System Dynamics Society Security, Stability, and Resillience Special Interest Group Meeting
+
 {% include youtube.html id="13XmXhQ8wTU" %}
 
 
