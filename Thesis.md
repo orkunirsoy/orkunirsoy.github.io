@@ -23,7 +23,7 @@ plan to expand our analysis by the inclusion of other user profiles, experiment 
 other mitigation strategies, and discuss the potential similarities and differences of our
 case with other types of false information dynamics.
 
-{% include youtube.html id="GJoXh589Mso" %}
+{% include youtube.html id="13XmXhQ8wTU" %}
 
 
 ### [Conference Paper](ISDC-2022-Barry-Richmond-Application.pdf)
