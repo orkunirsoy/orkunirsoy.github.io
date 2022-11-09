@@ -78,7 +78,11 @@
             <dt> Languages Used:</dt> 
             <dd> C++ (Algorithm Implementation & Simulation), R (Analysis, Visualization)  </dd>
 	  </dl>
-                </div>
+		<h3> Links </h3>
+            	<p> <a href="IE_456_Project_Report.pdf"> Project report</a>  </p>
+            	<p> <a href="https://github.com/orkunirsoy/orkunirsoy.github.io/tree/main/IE456ProjectCode"> Project Code</a>  </p>
+                	</div>
+                	</div>
 <div class="container">
                  <h2> <a href="IE_582_Syllabus.pdf">IE 582 Statistical Learning for Data Mining</a>  </h2>
           <dl>
