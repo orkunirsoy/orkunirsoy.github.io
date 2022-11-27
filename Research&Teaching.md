@@ -26,7 +26,7 @@ Since February 2020, I am working as a teaching assistant in Industrial Engineer
 - [Intermediate Programming](https://ie.boun.edu.tr/courses/ie-201-intermediate-programming) (w/Ali Tamer Ünal)
 - [Operations Research I](https://ie.boun.edu.tr/sites/ie.boun.edu.tr/files/IE202_Fall17_Syllabus.pdf) (w/İlhan Or)
 - [Operations Research II](https://ie.boun.edu.tr/courses/ie-203-operations-research-ii) (w/Zeki Caner Taşkın, Necati Aras)
-- [Quality Engineering](https://ie.boun.edu.tr/sites/ie.boun.edu.tr/files/IE423_Fall16_Syllabus.pdf) (w/Könül Bayramoğlu Kavlak)
+- [Quality Engineering](https://ie.boun.edu.tr/sites/ie.boun.edu.tr/files/IE423_Fall16_Syllabus.pdf) (w/Ali Rıza Kaylan, Könül Bayramoğlu Kavlak)
 - [Systems Science & Engineering](https://ie.boun.edu.tr/courses/ie-350-systems-science-and-engineering) (w/Yaman Barlas)
 - [Graph Algorithms & Applications](IE_456_Syllabus.pdf) (w/Tınaz Ekim)
 - [Dynamics of Socio-Economic Systems](https://ie.boun.edu.tr/sites/ie.boun.edu.tr/files/IE550_Fall15_syllabus.pdf) (w/Yaman Barlas)
