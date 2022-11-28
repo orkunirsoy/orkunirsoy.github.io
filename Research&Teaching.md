@@ -15,7 +15,7 @@ I am working in [Socio-Economic System Dynamics Lab (SESDYN)](http://sesdyn.ie.b
 
 
 #### Other
-- Watch my [presentation] and a short discussion (https://www.youtube.com/watch?v=13XmXhQ8wTU) at monthly meeting of Security, Stability, and Reslience Special Interest Group of System Dynamics Society. 
+- Watch my [presentation](https://www.youtube.com/watch?v=13XmXhQ8wTU) and a short discussion at monthly meeting of Security, Stability, and Reslience Special Interest Group of System Dynamics Society. 
 - See my [presentation](https://uzay00.github.io/kahve/calistay/) at "KAVE - 5. Karmaşık Sistemler ve Veri Bilimi Çalıştayı" (5th Workshop on Complex Systems and Data Science).
 - See our [blog post](https://systemdynamics.org/using-system-dynamics-to-improve-patient-care/) "Using System Dynamics to Improve Patient Care" on WISDOM Blog.
 - Watch our presentation [video](https://systemdynamics.org/system-dynamics-biomedical-modeling/) in SDS Biomedical Modeling Seminar Series.
