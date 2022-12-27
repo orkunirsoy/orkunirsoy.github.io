@@ -22,7 +22,7 @@ I am working in [Socio-Economic System Dynamics Lab (SESDYN)](http://sesdyn.ie.b
 - See our [Regime & Flight Simulator](https://exchange.iseesystems.com/public/oirsoy/dynamic-g-csf-treatment-of-chemotherapy-induced-neutropenia/index.html#page1) based on the paper "Dynamic trade‐offs in granulocyte colony‐stimulating factor (G‐CSF) administration during chemotherapy."
 
 ## Teaching
-Since February 2020, I am working as a teaching assistant in Industrial Engineering Department at Boğaziçi University. My responsibilities include conducting problem sessions (usually weekly or bi-weekly administered example solving and Q&A sessions), preparing / grading term projects, quizes, homeworks, and other miscellenous tasks related to the organization of the courses. So far, I've worked as TA for several courses which requires some subset of the aformentioned tasks:
+Since February 2020, I have been serving as a teaching assistant in the Industrial Engineering Department at Boğaziçi University. In this role, my responsibilities have included leading problem sessions (typically weekly or biweekly sessions focused on example solving and question and answer sessions), preparing and grading term projects, quizzes, homeworks, and other miscellaneous tasks related to the organization of courses. To date, I have worked as a TA for a number of courses that have required some combination of these tasks.
 - [Intermediate Programming](https://ie.boun.edu.tr/courses/ie-201-intermediate-programming) (w/Ali Tamer Ünal)
 - [Operations Research I](https://ie.boun.edu.tr/sites/ie.boun.edu.tr/files/IE202_Fall17_Syllabus.pdf) (w/İlhan Or)
 - [Operations Research II](https://ie.boun.edu.tr/courses/ie-203-operations-research-ii) (w/Zeki Caner Taşkın, Necati Aras)
