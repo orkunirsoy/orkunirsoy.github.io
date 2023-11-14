@@ -1,5 +1,6 @@
 ## Research
-I am working in [Socio-Economic System Dynamics Lab (SESDYN)](https://sesdyn.ie.boun.edu.tr/index_en.php), Boğaziçi University and working with [DiaPols](https://diapols.com/) group about social movements on social media. I am also a part-time research fellow in [Karanfil Lab](http://www.karanfillab.com/).
+I am currently working with Osman Yağan on multiple topic opinion diffusion on social networks. I also hava an ongoing collaboration with  [DiaPols](https://diapols.com/) group about social movements on social media.
+In my masters, I worked in [Socio-Economic System Dynamics Lab (SESDYN)](https://sesdyn.ie.boun.edu.tr/index_en.php), Boğaziçi University and worked as a part-time research fellow in [Karanfil Lab](http://www.karanfillab.com/).
 
 ### Publications & Presentations
 #### Journal Article
@@ -15,6 +16,7 @@ I am working in [Socio-Economic System Dynamics Lab (SESDYN)](https://sesdyn.ie.
 
 
 #### Other
+- I've completed [Complexity Interactive 2023](https://www.santafe.edu/engage/learn/programs/complexity-interactive) that focuses on modeling humans and social systems organized by Santa Fe Institute.
 - Watch my [presentation](https://www.youtube.com/watch?v=13XmXhQ8wTU) and a short discussion at monthly meeting of Security, Stability, and Reslience Special Interest Group of System Dynamics Society. 
 - See my [presentation](https://uzay00.github.io/kahve/calistay/) at "KAVE - 5. Karmaşık Sistemler ve Veri Bilimi Çalıştayı" (5th Workshop on Complex Systems and Data Science).
 - See our [blog post](https://systemdynamics.org/using-system-dynamics-to-improve-patient-care/) "Using System Dynamics to Improve Patient Care" on WISDOM Blog.
@@ -22,7 +24,7 @@ I am working in [Socio-Economic System Dynamics Lab (SESDYN)](https://sesdyn.ie.
 - See our [Regime & Flight Simulator](https://exchange.iseesystems.com/public/oirsoy/dynamic-g-csf-treatment-of-chemotherapy-induced-neutropenia/index.html#page1) based on the paper "Dynamic trade‐offs in granulocyte colony‐stimulating factor (G‐CSF) administration during chemotherapy."
 
 ## Teaching
-Since February 2020, I have been serving as a teaching assistant in the Industrial Engineering Department at Boğaziçi University. In this role, my responsibilities have included leading problem sessions (typically weekly or biweekly sessions focused on example solving and question and answer sessions), preparing and grading term projects, quizzes, homeworks, and other miscellaneous tasks related to the organization of courses. To date, I have worked as a TA for a number of courses that have required some combination of these tasks.
+Between February 2020 - August 2023, I have been serving as a teaching assistant in the Industrial Engineering Department at Boğaziçi University. In this role, my responsibilities have included leading problem sessions (typically weekly or biweekly sessions focused on example solving and question and answer sessions), preparing and grading term projects, quizzes, homeworks, and other miscellaneous tasks related to the organization of courses. To date, I have worked as a TA for a number of courses that have required some combination of these tasks.
 - [Intermediate Programming](https://ie.boun.edu.tr/courses/ie-201-intermediate-programming) (w/Ali Tamer Ünal)
 - [Operations Research I](https://ie.boun.edu.tr/sites/ie.boun.edu.tr/files/IE202_Fall17_Syllabus.pdf) (w/İlhan Or)
 - [Operations Research II](https://ie.boun.edu.tr/courses/ie-203-operations-research-ii) (w/Zeki Caner Taşkın, Necati Aras)
