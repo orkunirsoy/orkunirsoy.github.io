@@ -1,5 +1,15 @@
   <h1>Selected Projects From Coursework</h1> 
   <div class="container">
+  <h2> <a href="DNA_Syllabus_Spring_2024.pdf">17-801 Dynamic Network Analysis</a>  </h2>
+                  <dl>
+                  <dt>Instructor:</dt> 
+                  <dd>Prof. Kathleen Carley</dd> 
+                  <dt>Project Description:</dt> <dd>Digital Traces of Conspiracy Theories and Resulting Offline
+Violence </dd>
+                  <dt>Softwares Used:</dt> <dd> ORA (Social Network Analysis), NetMapper (Text Analysis), Python (Analysis,Visualization) </dd>
+                 </dl>
+                  </div>
+  <div class="container">
   <h2> <a href="IE_550_Syllabus.pdf">IE 550 Dynamics of Socio Economic Systems</a>  </h2>
                   <dl>
                   <dt>Instructor:</dt> 
