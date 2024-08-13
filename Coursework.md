@@ -1,5 +1,7 @@
 # Selected Coursework
 ## Simulation, Complex Systems and Dynamic Modeling:
+* Networks in the Real World w/ Osman Yağan ([18-755](18755_F24_Syllabus.pdf))	
+* Dynamic Network Analysis w/ Kathleen Carley ([17-801](DNA_Syllabus_Spring_2024.pdf))
 * Systems Simulation w/ Ali Rıza Kaylan ([IE 306](https://ie.boun.edu.tr/sites/ie.boun.edu.tr/files/IE306Syllabus18.pdf))	
 * Systems Science and Engineering w/ Yaman Barlas ([IE 350](https://ie.boun.edu.tr/sites/ie.boun.edu.tr/files/IE350_Spring17_syllabus.pdf))	
 * Graph Algorithms & Applications w/ Tınaz Ekim Aşıcı ([IE 456](IE_456_Syllabus.pdf))		
@@ -9,7 +11,7 @@
 * Systems and Sustainability w/ Ali Kerem Saysel ([ESC 578](http://web.boun.edu.tr/ali.saysel/ESc578.html))				
 	
 ## Statistics & Data Science:
-*	Statistics for Industrial Engineers w/ Mustafa Gökçe Baydoğan ([IE 256](https://ie.boun.edu.tr/sites/ie.boun.edu.tr/files/IE256_Fall17_syllabus.pdf))	
+*	Advanced Probability and Statistics for Engineers w/ Osman Yağan ([18-665](https://courses.ece.cmu.edu/18665))	
 *	Statistical Forecasting & Time Series	w/ Refik Güllü ([IE 360](https://ie.boun.edu.tr/sites/ie.boun.edu.tr/files/IE360_Spring17_syllabus_1.pdf))
 *	Quality Engineering w/ Mustafa Gökçe Baydoğan ([IE 423](https://ie.boun.edu.tr/sites/ie.boun.edu.tr/files/IE423_Fall16_Syllabus.pdf))
 *	Statistical Inference w/ Wolfgang Hörmann ([IE 508](https://ie.boun.edu.tr/sites/ie.boun.edu.tr/files/IE__50801_1.PDF))
@@ -22,6 +24,7 @@
 *	Supply Chain Management w/ Ali Tamer Ünal ([IE 413](https://ie.boun.edu.tr/sites/ie.boun.edu.tr/files/IE413_Fall14_syllabus_0.pdf))
 
 ## Human Behavior Focus:
+*	Computational Social Science Research Design and Data Analytics w/ Patrick Park ([17-756](CSS_17756_spring2023-8.pdf))	
 *	Introduction to Sociology w/ Taylan Acar ([SOC 101](https://registration.boun.edu.tr/scripts/schedule/coursedescription.asp?course=SOC%20101&section=01&term=2017/2018-3))
 *	Introduction to Psychology w/ Gaye Soley ([PSY 101](https://registration.boun.edu.tr/scripts/instructor/coursedescriptions/2016-2017-1/PSY_10101.PDF))
 *	Social Psychology w/ Adil Sarıbay ([PSY 241](https://registration.boun.edu.tr/scripts/instructor/coursedescriptions/2017-2018-1/PSY_24101.PDF))
