@@ -41,8 +41,6 @@ Violence </dd>
                   <dt>Softwares Used:</dt> <dd> ORA (Social Network Analysis), NetMapper (Text Analysis), Python (Analysis,Visualization) </dd>
                  </dl>
                   </div>
-  <div class="container">
-<div class="container">
 <div class="container">
   <h2> <a href="18755_F24_Syllabus.pdf">18-755 Networks in the Real World</a>  </h2>
                   <dl>
@@ -52,7 +50,6 @@ Violence </dd>
                   <dt>Softwares Used:</dt> <dd> Python (Social Network Analysis), Gephi (Visualization) </dd>
                  </dl>
                   </div>
-  <div class="container">
 <div class="container">
 <h2> <a href="IE_550_Syllabus.pdf">IE 550 Dynamics of Socio Economic Systems</a>  </h2>
                   <dl>
