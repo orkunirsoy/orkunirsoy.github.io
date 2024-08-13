@@ -1,6 +1,6 @@
 ## Research
-I am currently working with [Osman Yağan](http://users.ece.cmu.edu/~oyagan/) on multiple topic opinion diffusion on social networks. I also hava an ongoing collaboration with  [DiaPols](https://diapols.com/) group about social movements on social media.
-In my masters, I worked in [Socio-Economic System Dynamics Lab (SESDYN)](https://sesdyn.ie.boun.edu.tr/index_en.php), Boğaziçi University and worked as a part-time research fellow in [Karanfil Lab](http://www.karanfillab.com/).
+I am currently working with [Osman Yağan](http://users.ece.cmu.edu/~oyagan/) on topics such as cascading failures, multiple topic opinion diffusion on social networks, early indicators of offline violence in online conspiracy theories. 
+In my masters, I worked in [Socio-Economic System Dynamics Lab (SESDYN)](https://sesdyn.ie.boun.edu.tr/index_en.php), Boğaziçi University and collaborated with [DiaPols](https://diapols.com/) group about social movements on social media.
 
 ### Publications & Presentations
 #### Journal Article
