@@ -1,5 +1,11 @@
 ## Hello,
-I am a first year PhD student in Electrical and Computer Engineering department at Carnegie Mellon University. I received my Bachelor's and Master's degree in Industrial Engineering from Boğaziçi University in Turkey. During my studies, I was exposed to a wide range of application areas, but I am particularly passionate about addressing social issues from a complex systems perspective. In terms of methodology, my research interests intersect data science, network science, and simulation whereas I focus on problems prevalent in social sciences such as polarization, misinformation, opinion dynamics. I am currently working on topics such as cascading failures, multiple topic opinion diffusion on social networks, and early indicators of offline violence in online conspiracy theories with my advisor Osman Yağan. This page showcases exemplars of my Master's and Bachelor's work. You may use the navigation bar at the top to access further information. Please do not hesitate to contact me with any inquiries.
+I am a PhD student in Electrical and Computer Engineering at Carnegie Mellon University, specializing in AI/ML applications for complex systems analysis. I received my Bachelor's and Master's degrees in Industrial Engineering from Boğaziçi University in Turkey.
+
+My research focuses on applying machine learning and network science to address social challenges, including polarization, misinformation, and opinion dynamics. I work on topics such as cascading failures, multi-topic opinion diffusion on social networks, and early indicators of offline violence in online conspiracy theories under the guidance of Prof. Osman Yağan.
+
+I am currently seeking summer internship opportunities in AI/ML, data science, and software engineering roles where I can apply my research skills to real-world problems. My technical expertise spans Python, machine learning frameworks, network analysis, and simulation modeling.
+
+Please feel free to explore my research, projects, and publications using the navigation above. I welcome inquiries about potential collaborations or internship opportunities.
 
 Orkun.
 
