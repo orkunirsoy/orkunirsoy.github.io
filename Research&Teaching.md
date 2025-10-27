@@ -59,10 +59,6 @@ My research combines:
 - **Social Network & Sentiment Analysis**: Building cross-platform network and NLP pipelines (Reddit, Voat, Parler) to analyze temporal evolution and sentiment in conspiratorial communities
 - **GPU-Accelerated Transformers**: Integrating Transformers for fear/violence/conspiracy sentiment tracking
 
-### Chain-of-Thought Sentiment Classification (2024)
-- **Reasoning Frameworks for NLP**: Applied THOR-based multi-hop reasoning to Yelp Reviews using Flan-T5 models to enhance implicit sentiment classification
-- **Achievement**: Approximately 10% accuracy gain on long reviews via structured CoT prompting and model-size tuning
-
 ## Previous Research Experience
 
 ### Master's Research (2019-2023)

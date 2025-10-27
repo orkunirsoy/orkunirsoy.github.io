@@ -4,6 +4,13 @@ This page showcases selected projects from my academic coursework, demonstrating
 
 ## Machine Learning & Data Science Projects
 
+### Chain-of-Thought Sentiment Classification
+**Course**: 10-701 Introduction to Machine Learning (PhD)  
+**Institution**: Carnegie Mellon University  
+**Description**: Applied THOR-based multi-hop reasoning to Yelp Reviews using Flan-T5 models to enhance implicit sentiment classification  
+**Technologies**: Python, PyTorch, Transformers (Hugging Face), Flan-T5  
+**Achievement**: Approximately 10% accuracy gain on long reviews via structured CoT prompting and model-size tuning
+
 ### Soccer Game Outcome Prediction
 **Course**: IE 582 Statistical Learning for Data Mining  
 **Instructor**: Asst. Prof. Mustafa Gökçe Baydoğan  
