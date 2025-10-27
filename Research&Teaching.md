@@ -1,20 +1,5 @@
 # Research & Professional Development
 
-## Current Research
-
-I am currently working with [Prof. Osman Yağan](http://users.ece.cmu.edu/~oyagan/) at Carnegie Mellon University on research projects in network science, combining both theoretical and applied approaches.
-
-### Primary Research Areas
-- **Cascading Failures in Social Networks**: Investigating failure propagation mechanisms in complex social systems and developing ML models for early detection and mitigation strategies
-- **Early Indicators of Offline Violence**: Analyzing online conspiracy theories to predict offline violent events and developing computational methods for early warning systems
-
-### Research Methodology
-My research combines:
-- **Machine Learning**: Deep learning, predictive modeling, and pattern recognition
-- **Network Science**: Social network analysis, graph theory, and network dynamics
-- **Simulation Modeling**: Agent-based modeling and system dynamics
-- **Data Science**: Large-scale data analysis, visualization, and statistical modeling
-
 ## Publications & Conference Presentations
 
 ### Publications
