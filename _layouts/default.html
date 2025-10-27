@@ -12,11 +12,21 @@
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
     {% include head-custom.html %}
+    <style>
+      .profile-image {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin: 0 auto 20px auto;
+        display: block;
+      }
+    </style>
   </head>
   <body>
      <div class="wrapper">
       <header>
-	<img src="Vesikalık square.jpeg" alt="Orkun İrsoy" />
+	<img src="Vesikalık square.jpeg" alt="Orkun İrsoy" class="profile-image" />
         <h1 class="header">{{ site.title | default: site.github.repository_name }}</h1>
         <p class="header">{{ site.description | default: site.github.project_tagline }}</p>
 
