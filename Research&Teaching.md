@@ -14,9 +14,9 @@
 ### Conference Presentations
 
 #### 2025
-- **İrsoy, O.**, & Yağan, O. (2025). *Analysis and Optimization of Robustness in Multiplex Flow Networks Against Cascading Failures*. Annual INFORMS Meeting, Atlanta, GA.
+- **İrsoy, O.**, & Yağan, O. (2025). *Analysis and Optimization of Robustness in Multiplex Flow Networks Against Cascading Failures*. [Annual INFORMS Meeting](https://meetings.informs.org/wordpress/annual/), Atlanta, GA.
 
-- **İrsoy, O.** (2025). *Early Warning Signals of Online Harms: Phase Transitions in Textual and Network Characteristics*. 18th International Conference on Social Computing, Behavioral-Cultural Modeling, & Prediction and Behavior Representation in Modeling and Simulation, Pittsburgh, PA.
+- **İrsoy, O.**, & Yağan, O. (2025). *Early Warning Signals of Online Harms: Phase Transitions in Textual and Network Characteristics*. [18th International Conference on Social Computing, Behavioral-Cultural Modeling, & Prediction and Behavior Representation in Modeling and Simulation](https://sbp-brims.org/2025/program/Day%2002.pdf), Pittsburgh, PA.
 
 #### 2022
 - **İrsoy, O.**, Barlas, Y. (2022). [Dynamic Analysis of False Information Spread Over Social Media: 5G-COVID 19 Conspiracy Theory](https://systemdynamics.org/conference-schedule/). International System Dynamics Conference, Frankfurt.
