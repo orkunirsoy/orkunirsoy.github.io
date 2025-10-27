@@ -6,7 +6,6 @@ I am currently working with [Prof. Osman Yağan](http://users.ece.cmu.edu/~oyaga
 
 ### Primary Research Areas
 - **Cascading Failures in Social Networks**: Investigating failure propagation mechanisms in complex social systems and developing ML models for early detection and mitigation strategies
-- **Multi-topic Opinion Diffusion**: Modeling how multiple topics interact and spread across social networks using advanced network science and machine learning techniques
 - **Early Indicators of Offline Violence**: Analyzing online conspiracy theories to predict offline violent events and developing computational methods for early warning systems
 
 ### Research Methodology
@@ -45,19 +44,25 @@ My research combines:
 
 ## Teaching Experience
 
-### Teaching Assistant (February 2020 - August 2023)
-**Institution**: Industrial Engineering Department, Boğaziçi University
+### Carnegie Mellon University (Fall 2024)
+**Course**: Networks in the Real World (18-755)  
+**Institution**: Electrical and Computer Engineering Department  
+**Role**: Teaching Assistant  
+**Description**: Assisted with course focusing on the application of network science to various real-world systems
+
+### Boğaziçi University (February 2020 - August 2023)
+**Institution**: Industrial Engineering Department
 
 **Responsibilities**: Led problem sessions, prepared and graded assignments, managed course organization
 
 **Courses Taught**:
-- Intermediate Programming (w/Ali Tamer Ünal)
-- Operations Research I & II (w/İlhan Or, Zeki Caner Taşkın, Necati Aras)
-- Quality Engineering (w/Ali Rıza Kaylan, Könül Bayramoğlu Kavlak)
+- Agent-Based Modeling & Simulation (w/Gönenç Yücel)
 - Systems Science & Engineering (w/Yaman Barlas)
-- Graph Algorithms & Applications (w/Tınaz Ekim)
+- Graph Theory & Applications (w/Tınaz Ekim)
 - Dynamics of Socio-Economic Systems (w/Yaman Barlas)
-- Agent Based Simulation (w/Gönenç Yücel)
+- Operations Research I & II (w/İlhan Or, Zeki Caner Taşkın, Necati Aras)
+- Intermediate Programming (w/Ali Tamer Ünal)
+- Quality Engineering (w/Ali Rıza Kaylan, Könül Bayramoğlu Kavlak)
 - Discrete Event Simulation (w/Yaman Barlas)
 - Stochastic Models in Operations Research (w/Refik Güllü)
 - Optimal Control Theory (w/Mustafa Akan)
