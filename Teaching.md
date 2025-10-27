@@ -12,11 +12,12 @@ title: Teaching Experience
 **Description**: Assisted with course focusing on the application of network science to various real-world systems
 
 ## Boğaziçi University (February 2020 - August 2023)
-**Institution**: Industrial Engineering Department
+**Institution**: Industrial Engineering Department  
+**Role**: Teaching Assistant
 
 **Responsibilities**: Led problem sessions, prepared and graded assignments, managed course organization
 
-**Courses Taught**:
+**Courses Assisted**:
 - Agent-Based Modeling & Simulation (w/Gönenç Yücel)
 - Systems Science & Engineering (w/Yaman Barlas)
 - Graph Theory & Applications (w/Tınaz Ekim)
