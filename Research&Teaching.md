@@ -20,9 +20,9 @@ My research combines:
 ### Publications
 
 #### Journal Articles
-- **İrsoy, O.**, & Yağan, O. (2025). [Analysis and Optimization of Robustness in Multiplex Flow Networks Against Cascading Failures](https://ieeexplore.ieee.org/document/XXXXXXX). *IEEE Transactions on Network Science and Engineering*.
+- **İrsoy, O.**, & Yağan, O. (2025). [Analysis and Optimization of Robustness in Multiplex Flow Networks Against Cascading Failures](https://ieeexplore.ieee.org/abstract/document/11129154). *IEEE Transactions on Network Science and Engineering*.
 
-- Taraktaş, B., **İrsoy, O.**, Duran, C., & Üsküdarlı, S. (2024). [A Comparative Analysis of Online Mobilization Through Slogan Specificity: The Case of Countermovements to #BlackLivesMatter](https://journals.sagepub.com/doi/10.1177/14614448241234567). *New Media & Society*.
+- Taraktaş, B., **İrsoy, O.**, Duran, C., & Üsküdarlı, S. (2024). [A Comparative Analysis of Online Mobilization Through Slogan Specificity: The Case of Countermovements to #BlackLivesMatter](https://journals.sagepub.com/doi/full/10.1177/14614448251336421). *New Media & Society*.
 
 - **İrsoy, O.**, Güz, Ş., Akan, N. B., & Yücel, G. (2021). [Dynamic Trade-offs in G-CSF Administration During Chemotherapy](https://onlinelibrary.wiley.com/doi/abs/10.1002/sdr.1671). *System Dynamics Review*, 36(4), 397–446.
 
