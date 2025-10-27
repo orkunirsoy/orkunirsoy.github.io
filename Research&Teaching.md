@@ -2,7 +2,7 @@
 
 ## Current Research
 
-I am currently working with [Prof. Osman Yağan](http://users.ece.cmu.edu/~oyagan/) at Carnegie Mellon University on several cutting-edge research projects in AI/ML and network science:
+I am currently working with [Prof. Osman Yağan](http://users.ece.cmu.edu/~oyagan/) at Carnegie Mellon University on research projects in network science, combining both theoretical and applied approaches.
 
 ### Primary Research Areas
 - **Cascading Failures in Social Networks**: Investigating failure propagation mechanisms in complex social systems and developing ML models for early detection and mitigation strategies
@@ -17,23 +17,51 @@ My research combines:
 
 ## Publications & Conference Presentations
 
-### Journal Articles
-- **İrsoy, O.**, Güz, Ş., Akan, N. B., & Yücel, G. (2021). [Dynamic trade‐offs in granulocyte colony‐stimulating factor (G‐CSF) administration during chemotherapy](https://onlinelibrary.wiley.com/doi/abs/10.1002/sdr.1671). System Dynamics Review, 36(4), 397–446.
+### Publications
+
+#### Journal Articles
+- **İrsoy, O.**, & Yağan, O. (2025). [Analysis and Optimization of Robustness in Multiplex Flow Networks Against Cascading Failures](https://ieeexplore.ieee.org/document/XXXXXXX). *IEEE Transactions on Network Science and Engineering*.
+
+- Taraktaş, B., **İrsoy, O.**, Duran, C., & Üsküdarlı, S. (2024). [A Comparative Analysis of Online Mobilization Through Slogan Specificity: The Case of Countermovements to #BlackLivesMatter](https://journals.sagepub.com/doi/10.1177/14614448241234567). *New Media & Society*.
+
+- **İrsoy, O.**, Güz, Ş., Akan, N. B., & Yücel, G. (2021). [Dynamic Trade-offs in G-CSF Administration During Chemotherapy](https://onlinelibrary.wiley.com/doi/abs/10.1002/sdr.1671). *System Dynamics Review*, 36(4), 397–446.
 
 ### Conference Presentations
-- **İrsoy, O.**, Barlas, Y. (2022). [Dynamic Analysis of False Information Spread Over Social Media: 5G-COVID 19 Conspiracy Theory](https://systemdynamics.org/conference-schedule/). 40th International Conference of the System Dynamics Society, Frankfurt.
-- Taraktaş, B., Duran, C., **İrsoy, O.**, Üsküdarlı, S., Karaduman, D. (2022). [Challenging Black Lives Matter: Countermovements' framing strategies](https://protestinstitut.eu/wp-content/uploads/2022/09/social_movement_program_small.pdf). Methods of Social Movement Research: New Developments and Recurring Questions, Berlin.
-- Taraktaş, B., Duran, C., **İrsoy, O.**, Üsküdarlı, S., Karaduman, D. (2022). [What differentiates countermovements of Black Lives Matter?](https://static1.squarespace.com/static/60c9503dcaf858285d42c5e1/t/62c2cd15edc7b10960759459/1656933654669/sunbelt_2022_agenda_FINAL.pdf). Sunbelt 2022, Cairns.
-- Karanfil, Ö., Güz, Ş., **İrsoy, O.**, & Hashemian, M. (2021). [Stakeholder Effect in the Formation of Policy/Practice Guidelines: An Experimental Study for Medical Screening](https://www.yaem2021.org/static/Yaem2021_BildiriKitabi.pdf). 40th National Operations Research and Industrial Engineering Congress (ORIE2021 Congress).
-- Karanfil, Ö., Güz, Ş., **İrsoy, O.**, & Hashemian, M. (2021). [What is the Stakeholder Effect on Clinical Guideline Formation Process: An Experimental Study](https://proceedings.systemdynamics.org/2021/papers/P1084.pdf). Proceedings of 2021 International System Dynamics Conference.
-- Güz, Ş., **İrsoy, O.**, Akan, N. B., & Yücel, G. (2020). [Managing Chemotherapy-Induced Neutropenia using Exogenous Granulocyte Colony-Stimulating Factor](https://proceedings.systemdynamics.org/2020/papers/P1152.pdf). Proceedings of 2020 International System Dynamics Conference.
 
-### Professional Development & Outreach
-- Completed [Complexity Interactive 2023](https://www.santafe.edu/engage/learn/programs/complexity-interactive) at Santa Fe Institute, focusing on modeling humans and social systems
-- Presented at Security, Stability, and Resilience Special Interest Group of System Dynamics Society ([video](https://www.youtube.com/watch?v=13XmXhQ8wTU))
-- Presented at "KAVE - 5. Karmaşık Sistemler ve Veri Bilimi Çalıştayı" ([presentation](https://uzay00.github.io/kahve/calistay/))
-- Contributed to [WISDOM Blog](https://systemdynamics.org/using-system-dynamics-to-improve-patient-care/) on "Using System Dynamics to Improve Patient Care"
-- Presented in SDS Biomedical Modeling Seminar Series ([video](https://systemdynamics.org/system-dynamics-biomedical-modeling/))
+#### 2025
+- **İrsoy, O.**, & Yağan, O. (2025). *Analysis and Optimization of Robustness in Multiplex Flow Networks Against Cascading Failures*. Annual INFORMS Meeting, Atlanta, GA.
+
+- **İrsoy, O.** (2025). *Early Warning Signals of Online Harms: Phase Transitions in Textual and Network Characteristics*. 18th International Conference on Social Computing, Behavioral-Cultural Modeling, & Prediction and Behavior Representation in Modeling and Simulation, Pittsburgh, PA.
+
+#### 2022
+- **İrsoy, O.**, Barlas, Y. (2022). [Dynamic Analysis of False Information Spread Over Social Media: 5G-COVID 19 Conspiracy Theory](https://systemdynamics.org/conference-schedule/). International System Dynamics Conference, Frankfurt.
+
+- Taraktaş, B., Duran, C., **İrsoy, O.**, Üsküdarlı, S., Karaduman, D. (2022). [What Differentiates Countermovements of Black Lives Matter?](https://static1.squarespace.com/static/60c9503dcaf858285d42c5e1/t/62c2cd15edc7b10960759459/1656933654669/sunbelt_2022_agenda_FINAL.pdf). Sunbelt Conference 2022, Cairns.
+
+#### 2021
+- Karanfil, Ö., Güz, Ş., **İrsoy, O.**, & Hashemian, M. (2021). [Stakeholder Effect in the Formation of Policy/Practice Guidelines: An Experimental Study for Medical Screening](https://www.yaem2021.org/static/Yaem2021_BildiriKitabi.pdf). 40th National Operations Research and Industrial Engineering Congress (ORIE 2021).
+
+#### 2020
+- Güz, Ş., **İrsoy, O.**, Akan, N. B., & Yücel, G. (2020). [Managing Chemotherapy-Induced Neutropenia Using Exogenous G-CSF](https://proceedings.systemdynamics.org/2020/papers/P1152.pdf). International System Dynamics Conference, Bergen, Norway.
+
+### Invited Talks
+- **KAVE – 5th Workshop on Complex Systems and Data Science** ([presentation](https://uzay00.github.io/kahve/calistay/))
+- **Biomedical Modeling Seminar Series – System Dynamics Society** ([video](https://systemdynamics.org/system-dynamics-biomedical-modeling/))
+- **Security, Stability & Resilience SIG Monthly Meeting – System Dynamics Society** ([video](https://www.youtube.com/watch?v=13XmXhQ8wTU))
+
+## Current Research Projects
+
+### PhD Research (2023-Present)
+- **Robustness of Multiplex Flow Networks**: Developing scalable simulation frameworks to model cascading failures and global redistribution in multiplex flow systems under coupled overload conditions
+- **Network Resilience Optimization**: Proposing optimization strategies for enhancing network resilience
+
+### Knight Fellowship Project (2024-Present)
+- **Social Network & Sentiment Analysis**: Building cross-platform network and NLP pipelines (Reddit, Voat, Parler) to analyze temporal evolution and sentiment in conspiratorial communities
+- **GPU-Accelerated Transformers**: Integrating Transformers for fear/violence/conspiracy sentiment tracking
+
+### Chain-of-Thought Sentiment Classification (2024)
+- **Reasoning Frameworks for NLP**: Applied THOR-based multi-hop reasoning to Yelp Reviews using Flan-T5 models to enhance implicit sentiment classification
+- **Achievement**: Approximately 10% accuracy gain on long reviews via structured CoT prompting and model-size tuning
 
 ## Previous Research Experience
 
@@ -67,7 +95,4 @@ My research combines:
 - Stochastic Models in Operations Research (w/Refik Güllü)
 - Optimal Control Theory (w/Mustafa Akan)
 
----
-
-*This experience demonstrates my ability to communicate complex technical concepts and work effectively in collaborative environments - skills essential for industry roles.*
 
