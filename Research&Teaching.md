@@ -24,7 +24,7 @@
 - Taraktaş, B., Duran, C., **İrsoy, O.**, Üsküdarlı, S., Karaduman, D. (2022). [What Differentiates Countermovements of Black Lives Matter?](https://static1.squarespace.com/static/60c9503dcaf858285d42c5e1/t/62c2cd15edc7b10960759459/1656933654669/sunbelt_2022_agenda_FINAL.pdf). Sunbelt Conference 2022, Cairns.
 
 #### 2021
-- Karanfil, Ö., Güz, Ş., **İrsoy, O.**, & Hashemian, M. (2021). [Stakeholder Effect in the Formation of Policy/Practice Guidelines: An Experimental Study for Medical Screening](https://www.yaem2021.org/static/Yaem2021_BildiriKitabi.pdf). 40th National Operations Research and Industrial Engineering Congress (ORIE 2021).
+- Karanfil, Ö., Güz, Ş., **İrsoy, O.**, & Hashemian, M. (2021). [Stakeholder Effect in the Formation of Policy/Practice Guidelines: An Experimental Study for Medical Screening](https://proceedings.systemdynamics.org/2021/papers/P1084.pdf). 40th National Operations Research and Industrial Engineering Congress (ORIE 2021).
 
 #### 2020
 - Güz, Ş., **İrsoy, O.**, Akan, N. B., & Yücel, G. (2020). [Managing Chemotherapy-Induced Neutropenia Using Exogenous G-CSF](https://proceedings.systemdynamics.org/2020/papers/P1152.pdf). International System Dynamics Conference, Bergen, Norway.
