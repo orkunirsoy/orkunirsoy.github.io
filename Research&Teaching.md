@@ -55,7 +55,6 @@
 - **Institution**: Koc University
 - **Collaboration**: Karanfil Lab on healthcare policy simulation and clinical guideline formation
 - **Focus**: Stakeholder effect analysis, medical screening policies, and experimental studies
-- **Publications**: Co-authored papers on stakeholder effects in clinical guideline formation and medical screening policies
 
 ## Past Projects
 
