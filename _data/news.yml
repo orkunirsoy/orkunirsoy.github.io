@@ -1,0 +1,13 @@
+# Short updates shown on the home page, newest first.
+# Markdown is allowed in "text". Add a new line at the top to post news.
+
+- date: 2026
+  text: "*TANGCO*, our work with Prof. Leman Akoglu on learning capacity allocations against cascading failures, was accepted at **ACM SIGKDD 2027**."
+- date: 2026
+  text: Received the David Barakat and LaVerne Owen-Barakat Fellowship from the CMU College of Engineering.
+- date: 2026
+  text: Paper on improving XRP Ledger network robustness via edge augmentation to appear at **IEEE GLOBECOM 2026**.
+- date: 2025
+  text: Multiplex flow network robustness paper published in *IEEE Transactions on Network Science and Engineering*.
+- date: 2025
+  text: Presented at the INFORMS Annual Meeting (Atlanta) and SBP-BRiMS 2025 (Pittsburgh).

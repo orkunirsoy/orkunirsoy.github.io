@@ -1,0 +1,107 @@
+# Publications & talks. Newest first within each list.
+# Fields: authors, year, title, venue, details (optional), links (label: url)
+# Your name is bolded automatically wherever "İrsoy, O." appears.
+
+papers:
+  - authors: İrsoy, O., Akoglu, L., & Yağan, O.
+    year: 2027
+    title: "TANGCO: Learning Topology-Aware Capacity Allocation for Overload-driven Cascading Failures"
+    venue: ACM SIGKDD 2027
+    details: accepted
+    selected: true
+    links:
+      arXiv: https://arxiv.org/abs/2608.13212
+
+  - authors: İrsoy, O., & Yağan, O.
+    year: 2026
+    title: Overload-Based Cascades in Multiplex Flow Networks with Partial Functionality
+    venue: Physical Review E
+    details: under review (final editorial phase)
+    selected: true
+    links:
+      arXiv: https://arxiv.org/abs/2607.02844
+
+  - authors: Vilalonga, A., İrsoy, O., Resende, J. S., Domingos, H., & Yağan, O.
+    year: 2026
+    title: Improving the Robustness of the XRP Ledger Network via Edge Augmentation Strategies
+    venue: IEEE GLOBECOM 2026
+    selected: true
+    links:
+      arXiv: https://arxiv.org/abs/2608.26380
+
+  - authors: İrsoy, O., & Yağan, O.
+    year: 2025
+    title: Analysis and Optimization of Robustness in Multiplex Flow Networks Against Cascading Failures
+    venue: IEEE Transactions on Network Science and Engineering
+    selected: true
+    links:
+      Paper: https://ieeexplore.ieee.org/abstract/document/11129154
+
+  - authors: Taraktaş, B., İrsoy, O., Duran, C., & Üsküdarlı, S.
+    year: 2024
+    title: "A Comparative Analysis of Online Mobilization Through Slogan Specificity: The Case of Countermovements to #BlackLivesMatter"
+    venue: New Media & Society
+    links:
+      Paper: https://journals.sagepub.com/doi/full/10.1177/14614448251336421
+
+  - authors: İrsoy, O., Güz, Ş., Akan, N. B., & Yücel, G.
+    year: 2021
+    title: Dynamic Trade-offs in G-CSF Administration During Chemotherapy
+    venue: System Dynamics Review
+    details: 36(4), 397–446
+    links:
+      Paper: https://onlinelibrary.wiley.com/doi/abs/10.1002/sdr.1671
+
+conferences:
+  - authors: İrsoy, O., & Yağan, O.
+    year: 2025
+    title: Analysis and Optimization of Robustness in Multiplex Flow Networks Against Cascading Failures
+    venue: INFORMS Annual Meeting, Atlanta, GA
+    links:
+      Conference: https://meetings.informs.org/wordpress/annual/
+
+  - authors: İrsoy, O., & Yağan, O.
+    year: 2025
+    title: "Early Warning Signals of Online Harms: Phase Transitions in Textual and Network Characteristics"
+    venue: SBP-BRiMS 2025, Pittsburgh, PA
+    links:
+      Program: https://sbp-brims.org/2025/program/Day%2002.pdf
+
+  - authors: İrsoy, O., & Barlas, Y.
+    year: 2022
+    title: "Dynamic Analysis of False Information Spread Over Social Media: 5G-COVID 19 Conspiracy Theory"
+    venue: International System Dynamics Conference, Frankfurt
+    links:
+      Program: https://systemdynamics.org/conference-schedule/
+
+  - authors: Taraktaş, B., Duran, C., İrsoy, O., Üsküdarlı, S., & Karaduman, D.
+    year: 2022
+    title: What Differentiates Countermovements of Black Lives Matter?
+    venue: Sunbelt Conference 2022, Cairns
+    links:
+      Program: https://static1.squarespace.com/static/60c9503dcaf858285d42c5e1/t/62c2cd15edc7b10960759459/1656933654669/sunbelt_2022_agenda_FINAL.pdf
+
+  - authors: Karanfil, Ö., Güz, Ş., İrsoy, O., & Hashemian, M.
+    year: 2021
+    title: "Stakeholder Effect in the Formation of Policy/Practice Guidelines: An Experimental Study for Medical Screening"
+    venue: 40th National Operations Research and Industrial Engineering Congress (ORIE 2021)
+    links:
+      Paper: https://proceedings.systemdynamics.org/2021/papers/P1084.pdf
+
+  - authors: Güz, Ş., İrsoy, O., Akan, N. B., & Yücel, G.
+    year: 2020
+    title: Managing Chemotherapy-Induced Neutropenia Using Exogenous G-CSF
+    venue: International System Dynamics Conference, Bergen, Norway
+    links:
+      Paper: https://proceedings.systemdynamics.org/2020/papers/P1152.pdf
+
+talks:
+  - title: KAVE – 5th Workshop on Complex Systems and Data Science
+    links:
+      Slides: https://uzay00.github.io/kahve/calistay/
+  - title: Biomedical Modeling Seminar Series – System Dynamics Society
+    links:
+      Video: https://systemdynamics.org/system-dynamics-biomedical-modeling/
+  - title: Security, Stability & Resilience SIG Monthly Meeting – System Dynamics Society
+    links:
+      Video: https://www.youtube.com/watch?v=13XmXhQ8wTU

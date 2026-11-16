@@ -1,62 +1,48 @@
 <!doctype html>
-<html lang="{{ site.lang | default: "en-US" }}">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<html lang="{{ site.lang | default: 'en-US' }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% seo %}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}?v={{ site.time | date: '%s' }}">
+  <link rel="icon" href="{{ site.author.photo | relative_url }}">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="{{ '/' | relative_url }}">{{ site.author.name }}</a>
+      <nav class="site-nav" aria-label="Main">
+        {%- for item in site.nav %}
+        {%- assign active = false -%}
+        {%- if page.url == item.url -%}{%- assign active = true -%}{%- endif -%}
+        {%- if item.url == '/' and page.url == '/index.html' -%}{%- assign active = true -%}{%- endif %}
+        <a href="{{ item.url | relative_url }}"{% if active %} class="active" aria-current="page"{% endif %}>{{ item.title }}</a>
+        {%- endfor %}
+        <a href="{{ site.author.cv | relative_url }}" class="nav-cv">CV</a>
+      </nav>
+    </div>
+  </header>
 
-{% seo %}
-    <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
-    <script src="{{ '/assets/js/scale.fix.js' | relative_url }}"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    {% include head-custom.html %}
-    <style>
-      .profile-image {
-        width: 150px;
-        height: 150px;
-        border-radius: 50%;
-        object-fit: cover;
-        margin: 0 auto 20px auto;
-        display: block;
-      }
-    </style>
-  </head>
-  <body>
-     <div class="wrapper">
-      <header>
-	<img src="Vesikalık square.jpeg" alt="Orkun İrsoy" class="profile-image" />
-        <h1 class="header">{{ site.title | default: site.github.repository_name }}</h1>
-        <p class="header">{{ site.description | default: site.github.project_tagline }}</p>
+  <main class="container">
+    {%- if page.layout == 'home' %}
+    {{ content }}
+    {%- else %}
+    <article class="page">
+      {%- if page.title %}<h1 class="page-title">{{ page.title }}</h1>{% endif %}
+      {%- if page.subtitle %}<p class="page-subtitle">{{ page.subtitle }}</p>{% endif %}
+      {{ content }}
+    </article>
+    {%- endif %}
+  </main>
 
-        <ul>
-	<li><a class="button" href="Resume_2025.pdf">Resume</a></li>
-	<li><a class="button" href="mailto:oirsoy@andrew.cmu.edu">Contact</a></li>
-        </ul>
-        {% if site.github.is_user_page %}
-        	</ul>
-	      
-	      
-        {% endif %}
-      </header>
-
-      <section>
-<ul class="nav">
-	<li><a href="https://orkunirsoy.github.io/">Home</a></li>
-	<li><a href="/Research&Teaching.html">Research</a></li>
-	<li><a href="/Teaching.html">Teaching</a></li>
-</ul>
-
-	      
-       {{ content }}
-                
-      </section>
-
-      <footer>
-      </footer>
-     </div>
-
-    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
-  </body>
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <span>© {{ site.time | date: '%Y' }} {{ site.author.name }}</span>
+      {% include social.html %}
+    </div>
+  </footer>
+</body>
 </html>

@@ -1,0 +1,18 @@
+{%- comment -%} Usage: {% include pub-list.html items=site.data.publications.papers %} {%- endcomment -%}
+<ol class="pubs">
+{%- for p in include.items %}
+  <li class="pub{% unless p.year %} no-year{% endunless %}">
+    {%- if p.year %}<span class="pub-year">{{ p.year }}</span>{% endif %}
+    <div class="pub-body">
+      <div class="pub-title">{{ p.title }}</div>
+      {%- if p.authors %}<div class="pub-authors">{{ p.authors | replace: "İrsoy, O.", "<strong>İrsoy, O.</strong>" }}</div>{% endif %}
+      {%- if p.venue %}<div class="pub-venue"><em>{{ p.venue }}</em>{% if p.details %}, {{ p.details }}{% endif %}</div>{% endif %}
+      {%- if p.links %}
+      <div class="pub-links">
+        {%- for l in p.links %}<a class="chip" href="{{ l[1] }}">{{ l[0] }}</a>{% endfor %}
+      </div>
+      {%- endif %}
+    </div>
+  </li>
+{%- endfor %}
+</ol>

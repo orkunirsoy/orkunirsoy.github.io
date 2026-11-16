@@ -1,0 +1,43 @@
+---
+layout: default
+---
+{%- assign a = site.author -%}
+<section class="hero">
+  <img class="hero-photo" src="{{ a.photo | relative_url }}" alt="Photo of {{ a.name }}" width="180" height="180">
+  <div class="hero-text">
+    <h1>{{ a.name }}</h1>
+    <p class="hero-role">{{ a.role }}<br><span>{{ a.affiliation }}</span></p>
+    {% include social.html %}
+  </div>
+</section>
+
+<section class="bio">
+  {{ content }}
+</section>
+
+{%- if site.data.news %}
+<section class="news">
+  <h2>News</h2>
+  <ul class="news-list">
+    {%- for n in site.data.news limit: 6 %}
+    <li><span class="news-date">{{ n.date }}</span><span>{{ n.text | markdownify | remove: '<p>' | remove: '</p>' | strip }}</span></li>
+    {%- endfor %}
+  </ul>
+</section>
+{%- endif %}
+
+<section class="selected">
+  <h2>Selected publications</h2>
+  {%- assign selected = site.data.publications.papers | where: "selected", true %}
+  {% include pub-list.html items=selected %}
+  <p class="more"><a href="{{ '/research.html' | relative_url }}">All research, talks & projects →</a></p>
+</section>
+
+<section class="edu">
+  <h2>Education</h2>
+  <ul class="edu-list">
+    <li><span class="edu-date">2023 – 2028 (exp.)</span><span><strong>Ph.D., Electrical and Computer Engineering</strong><br><span class="muted">Carnegie Mellon University · Advisor: Prof. Osman Yağan</span></span></li>
+    <li><span class="edu-date">2022</span><span><strong>M.S., Industrial Engineering</strong><br><span class="muted">Boğaziçi University, Istanbul</span></span></li>
+    <li><span class="edu-date">2019</span><span><strong>B.S., Industrial Engineering</strong><br><span class="muted">Boğaziçi University, Istanbul</span></span></li>
+  </ul>
+</section>
