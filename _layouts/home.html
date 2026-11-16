@@ -11,6 +11,14 @@ layout: default
   </div>
 </section>
 
+{%- if site.availability.show %}
+<aside class="availability">
+  <span class="pulse" aria-hidden="true"></span>
+  <span class="availability-text">{{ site.availability.text | markdownify | remove: '<p>' | remove: '</p>' | strip }}</span>
+  <a class="availability-cta" href="mailto:{{ a.email }}?subject=Internship%20opportunity">Get in touch →</a>
+</aside>
+{%- endif %}
+
 <section class="bio">
   {{ content }}
 </section>

@@ -201,3 +201,28 @@ h2::after {
 .site-nav .nav-cv { border-color: rgba(245, 184, 92, .45); color: var(--amber); }
 .site-nav .nav-cv:hover { background: rgba(245, 184, 92, .14); color: var(--amber); }
 .more a { color: var(--teal); }
+
+/* ---------- Availability banner ---------- */
+.availability {
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  margin: 0 0 32px; padding: 14px 18px;
+  background: linear-gradient(90deg, rgba(79, 209, 197, .14), rgba(108, 182, 255, .08));
+  border: 1px solid rgba(79, 209, 197, .4); border-radius: var(--radius);
+  color: var(--heading);
+}
+.availability-text { flex: 1 1 260px; }
+.availability strong { color: var(--teal); }
+.pulse {
+  width: 10px; height: 10px; flex: none; border-radius: 50%; background: var(--teal);
+  box-shadow: 0 0 0 0 rgba(79, 209, 197, .6); animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  70% { box-shadow: 0 0 0 10px rgba(79, 209, 197, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(79, 209, 197, 0); }
+}
+@media (prefers-reduced-motion: reduce) { .pulse { animation: none; } }
+.availability-cta {
+  flex: none; padding: 6px 14px; border-radius: 999px; font-weight: 600; font-size: .9rem;
+  background: var(--teal); color: var(--bg);
+}
+.availability-cta:hover { text-decoration: none; filter: brightness(1.1); }

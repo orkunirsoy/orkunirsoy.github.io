@@ -12,8 +12,13 @@ author:
   email: oirsoy@andrew.cmu.edu
   cv: /Resume_Nov2026.pdf
   github: orkunirsoy
-  scholar: ""      # e.g. https://scholar.google.com/citations?user=XXXX
+  scholar: https://scholar.google.com/citations?user=5fn8EEcAAAAJ
   linkedin: https://www.linkedin.com/in/orkunirsoy
+
+# Highlighted banner on the home page. Set show: false to hide it.
+availability:
+  show: true
+  text: "Seeking **Summer 2027 internships** in Network Science, AI/ML (GNNs, RL, Deep Learning)."
 
 nav:
   - title: Home

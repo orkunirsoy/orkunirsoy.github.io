@@ -109,7 +109,7 @@ redirect_from:
   <p class="meta">IE 456 Graph Algorithms and Applications · Assoc. Prof. Tınaz Ekim Aşıcı</p>
   <p>Implemented and compared degree sequence generation algorithms for graphs with different degree distributions.</p>
   <div class="tags"><span>C++</span><span>R</span></div>
-  <div class="pub-links"><a class="chip" href="{{ '/IE_456_Project_Report.pdf' | relative_url }}">Report</a><a class="chip" href="https://github.com/orkunirsoy/oirsoy/tree/main/IE%20_456_Project_Code">Code</a></div>
+  <div class="pub-links"><a class="chip" href="{{ '/IE_456_Project_Report.pdf' | relative_url }}">Report</a><a class="chip" href="https://github.com/orkunirsoy/orkunirsoy.github.io/tree/main/archived_projects/IE456ProjectCode">Code</a></div>
 </div>
 
 ## Honors & fellowships

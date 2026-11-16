@@ -96,12 +96,15 @@ conferences:
       Paper: https://proceedings.systemdynamics.org/2020/papers/P1152.pdf
 
 talks:
-  - title: KAVE – 5th Workshop on Complex Systems and Data Science
-    links:
-      Slides: https://uzay00.github.io/kahve/calistay/
-  - title: Biomedical Modeling Seminar Series – System Dynamics Society
-    links:
-      Video: https://systemdynamics.org/system-dynamics-biomedical-modeling/
-  - title: Security, Stability & Resilience SIG Monthly Meeting – System Dynamics Society
+  - year: 2022
+    title: Security, Stability & Resilience SIG Monthly Meeting – System Dynamics Society
     links:
       Video: https://www.youtube.com/watch?v=13XmXhQ8wTU
+  - year: 2022
+    title: KAVE – 5th Workshop on Complex Systems and Data Science
+    links:
+      Slides: https://uzay00.github.io/kahve/calistay/
+  - year: 2021
+    title: Biomedical Modeling Seminar Series – System Dynamics Society
+    links:
+      Video: https://systemdynamics.org/system-dynamics-biomedical-modeling/
