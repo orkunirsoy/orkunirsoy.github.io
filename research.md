@@ -63,7 +63,7 @@ redirect_from:
 <div class="card">
   <h3>Generative Diffusion for Flexible Job-Shop Scheduling</h3>
   <p class="meta">11-785 Introduction to Deep Learning · Carnegie Mellon University · Fall 2026</p>
-  <p>Co-developed a heterogeneous GNN with a categorical diffusion model to generate optimal schedules for problem instances; led ideation, model training, and experimental design. Non-delay decoding reduced makespan gaps by about 50% in team experiments.</p>
+  <p>Co-developed a heterogeneous GNN with a categorical diffusion model to generate feasible schedules for flexible job-shop scheduling problems; led ideation, model training, and experimental design. Non-delay decoding reduced makespan gaps by about 50% in team experiments.</p>
   <div class="tags"><span>Diffusion models</span><span>GNNs</span><span>PyTorch</span></div>
 </div>
 
